@@ -1,0 +1,33 @@
+
+
+/* ---- Border ---- */
+
+.popup-style-plain_white .popup-element-body{ background-image: url(images/back.png); border: 1px solid #ddd; border-radius: 10px; box-shadow: 1px 1px 6px 0 #ddd;}
+
+.popup-style-plain_white .popup-element-body div.inner{ color: #444; padding: 15px 20px; position: relative;}
+.popup-style-plain_white .popup-element-body div.inner a{ color: #222; text-decoration: none;}
+.popup-style-plain_white .popup-element-body div.inner a:hover{ color: #000; text-decoration: underline;}
+
+.popup-style-plain_white .popup-element-body a.popup-close-button{ background: url('images/close.png') left top; display: block; height: 9px; position: absolute; top: 7px; right: 7px; width: 9px;}
+.popup-style-plain_white .popup-element-body a.popup-close-button:active{ background-position: left 9px;}
+.popup-style-plain_white .popup-element-body a.popup-close-button span{ display: none;}
+
+/* ---- Arrows ---- */
+
+
+
+/* ---- Menus ---- */
+
+.popup-style-plain_white .popup-element-body .popup-menu-branch,
+.popup-style-plain_white .popup-element-body .popup-menu-item{ display: block;}
+
+.popup-style-plain_white .popup-element-body .popup-menu-branch div.inner{ width: 150px;}
+
+.popup-style-plain_white .popup-element-body div.inner .popup-menu-leaf-title,
+.popup-style-plain_white .popup-element-body div.inner .popup-menu-branch-title{ color: #444; margin: 0 0 0 -15px; padding: 0 0 0 15px; text-decoration: none !important;}
+.popup-style-plain_white .popup-element-body .popup-menu-branch-title{ background: url('images/menu-arrow.png') no-repeat right 5px;}
+
+.popup-style-plain_white .popup-element-body div.inner .popup-menu-leaf-title:hover,
+.popup-style-plain_white .popup-element-body div.inner .popup-menu-branch-title.popup-title-active{ color: #fff; background-color: #888; background-position: right -17px;}
+
+

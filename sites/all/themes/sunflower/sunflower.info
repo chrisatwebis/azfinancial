@@ -1,0 +1,42 @@
+name = Sunflower
+description = Please provide a description for your theme.
+base theme = omega
+screenshot = screenshot.png
+engine = phptemplate
+core = 7.x
+
+; ========================================
+; Stylesheets
+; ========================================
+stylesheets[all][] = css/sunflower.normalize.css
+stylesheets[all][] = css/sunflower.hacks.css
+stylesheets[all][] = css/sunflower.styles.css
+stylesheets[all][] = css/sunflower.no-query.css
+
+; ========================================
+; Scripts
+; ========================================
+scripts[] = js/sunflower.behaviors.js
+
+; ========================================
+; Regions
+; ========================================
+regions[user_bar] 						= User Bar
+regions[branding] 						= Branding
+regions[header] 							= Header
+regions[navigation] 					= Navigation
+regions[overlay]   						= Overlay
+regions[hero]     						= Hero
+regions[highlighted] 					= Highlighted
+regions[help] 								= Help
+regions[content] 							= Content
+regions[sidebar_first] 				= First Sidebar
+regions[sidebar_second] 			= Second Sidebar
+regions[below_content]   			= Below content
+regions[above_postscript]   	= Above postscript
+regions[postscript_first]   	= Postscript First
+regions[postscript_second]   	= Postscript Second
+regions[postscript_third]   	= Postscript Third
+regions[postscript_fourth]   	= Postscript Fourth
+regions[below_postscript]   	= Below postscript
+regions[footer] 							= Footer

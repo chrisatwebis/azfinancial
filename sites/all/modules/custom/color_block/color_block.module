@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Color Block feature.
+ */
+
+include_once 'color_block.features.inc';

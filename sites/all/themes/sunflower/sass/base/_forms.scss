@@ -1,0 +1,51 @@
+input[type=text]{
+	padding: 5px;
+	border: 1px solid $med_light_grey;
+	border-radius: 4px;
+	height: 32px;
+}
+input[type=password]{
+	@extend input[type=text];
+}
+input[type=email]{
+	@extend input[type=text];
+}
+input[type=submit]{
+	@extend .standard_yellow;
+}
+textarea{
+	@extend input[type=text];
+}
+.form-item label{
+	margin-bottom: 2px;
+	font-size: 16px;
+	color: $dark_grey;
+}
+
+select{
+	-webkit-appearance: none;
+	text-indent: 0.01px;
+	text-overflow: "";
+	-moz-appearance: none;
+	box-shadow: 0px 0px 0px transparent;
+	border: 1px solid $extra_light_grey;
+	border-radius: 5px;
+	color: #333;
+	font-size: 14px;
+	line-height: 18px;
+	margin: 0px;
+	padding: 6px 30px 6px 10px;
+	border: 1px solid $med_light_grey;
+	height: 32px;
+	background: image-url('select_icon.png') no-repeat right center white !important;
+	option{
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		padding: 4px;
+	}
+}
+@-moz-document url-prefix() {
+	select{
+		background-image: none;
+	}
+}

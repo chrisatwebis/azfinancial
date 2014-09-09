@@ -1,0 +1,5 @@
+core          = "7.x"
+description   = "Webis Site custom helper function"
+name          = "Webis Site Helper"
+package       = Webis
+version = "7.x-1.0"

@@ -1,0 +1,17 @@
+Mobile sliding menu 7.x-1.1, 2014-01-09
+---------------------------------------
+- Added block template suggestions for rendering mmenu block content.
+  e.g. you can use following templates to re-format the search form content:
+  - block--search--form--mmenu.tpl.php
+  - block--search--form--mmenu_mmenu_left.tpl.php
+  - block--search--form--mmenu_mmenu_right.tpl.php
+- Fixed mm-white styles.
+- Fixed lots of issues.
+
+Mobile sliding menu 7.x-1.0, 2014-01-07
+---------------------------------------
+- Initial release of Mobile sliding menu module.
+- Mmenu can be positioned at the top, right, bottom or left.
+- Adds an admin page to config Mmenu settings at /admin/config/mmenu.
+- Supports "drag to open" event by using Hammer.js.
+- Supports icomoon styles. See http://icomoon.io.

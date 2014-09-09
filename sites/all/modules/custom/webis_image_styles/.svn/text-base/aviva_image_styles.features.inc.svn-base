@@ -1,0 +1,83 @@
+<?php
+/**
+ * @file
+ * aviva_image_styles.features.inc
+ */
+
+/**
+ * Implements hook_image_default_styles().
+ */
+function aviva_image_styles_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: aviva_banner.
+  $styles['aviva_banner'] = array(
+    'name' => 'aviva_banner',
+    'label' => 'Aviva Banner',
+    'effects' => array(
+      3 => array(
+        'label' => 'Scale and crop',
+        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
+        'effect callback' => 'image_scale_and_crop_effect',
+        'dimensions callback' => 'image_resize_dimensions',
+        'form callback' => 'image_resize_form',
+        'summary theme' => 'image_resize_summary',
+        'module' => 'image',
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 1280,
+          'height' => 463,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: aviva_icon.
+  $styles['aviva_icon'] = array(
+    'name' => 'aviva_icon',
+    'label' => 'Aviva Icon',
+    'effects' => array(
+      4 => array(
+        'label' => 'Scale and crop',
+        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
+        'effect callback' => 'image_scale_and_crop_effect',
+        'dimensions callback' => 'image_resize_dimensions',
+        'form callback' => 'image_resize_form',
+        'summary theme' => 'image_resize_summary',
+        'module' => 'image',
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 50,
+          'height' => 50,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: aviva_icon_30.
+  $styles['aviva_icon_30'] = array(
+    'name' => 'aviva_icon_30',
+    'label' => 'Aviva Icon 30',
+    'effects' => array(
+      5 => array(
+        'label' => 'Scale and crop',
+        'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
+        'effect callback' => 'image_scale_and_crop_effect',
+        'dimensions callback' => 'image_resize_dimensions',
+        'form callback' => 'image_resize_form',
+        'summary theme' => 'image_resize_summary',
+        'module' => 'image',
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 30,
+          'height' => 30,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}

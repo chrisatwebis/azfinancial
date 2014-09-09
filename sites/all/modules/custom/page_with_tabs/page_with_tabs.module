@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Page With Tabs feature.
+ */
+
+include_once 'page_with_tabs.features.inc';

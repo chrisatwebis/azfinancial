@@ -1,0 +1,88 @@
+#popup-active-overlay{
+	z-index: 2 !important;
+}
+
+#popup-active-overlay{
+	.popup-style-plain_white{
+		.popup-element-body{
+			background: $extra_light_grey;
+			box-shadow: none;
+			border: 1px solid $light_grey;
+			border-radius: 0px;
+			top: 7px !important;
+			left: -14px !important;
+			.inner{
+				width: 320px !important;
+				padding: 20px 30px 20px 20px;
+				form{
+					input[type=text]{
+						padding: 6px;
+					}
+					.form-submit{
+						@extend .standard_yellow;
+						margin-left: 0px;
+					}
+				}
+				.popup-close-button{
+					background: image-url("close_icon.png") center center no-repeat transparent;
+					width: 20px;
+					height: 20px;
+					display: block;
+					top: 5px;
+					right: 5px;
+				}
+			}
+		}
+	}
+}
+
+.get_a_quick_quote{
+	.popup-element-body{
+		top: 10px !important;
+		left: -20px !important;
+		border: 0px;
+		box-shadow: none;
+		.inner{
+			width: 379px !important;
+			padding: 0px;
+			form{
+				padding: 15px 15px 10px;
+				width: 100%;
+				.form-actions{
+					text-align: center;
+					margin-top: 10px;
+					margin-bottom: 7px;
+					.form-submit{
+						margin-left: 0px;
+						font-size: 20px;
+						font-weight: $font_weight_bold;
+						text-transform: uppercase;
+					}						
+				}
+			}
+			.popup-close-button{
+				display: none;
+			}
+		}
+	}
+}
+.logged-in{
+	#popup-element-0-active{
+		.form-actions{
+			margin-left: 10px;
+		}		
+	}
+	#popup-element-1-active{
+		@extend .get_a_quick_quote;
+	}	
+}
+.not-logged-in{
+	#popup-element-1-active{
+		.form-actions{
+			margin-left: 10px;
+		}
+	}
+	#popup-element-2-active{
+		@extend .get_a_quick_quote;
+	}	
+}

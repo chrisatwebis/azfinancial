@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Install and uninstall functions for the mobile sliding menu module.
+ */
+
+/**
+ * Removes variables on uninstall.
+ */
+function mmenu_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'mmenu_%'");
+  cache_clear_all('variables', 'cache');
+}

@@ -1,0 +1,54 @@
+input.webform-calendar{
+	width: 0px;
+	height: 0px;
+	padding: 16px;
+	display: block;
+	background: image-url("calendar_icon.png")	center center no-repeat transparent;
+}
+
+#webform-client-form-76{
+	.form-item{
+		margin-bottom: 5px;
+		label{
+			margin-bottom: 2px;
+			font-weight: $font_weight_normal;
+		}
+		&.webform-component--steps{
+			margin: -15px -15px 15px;
+			background: $dark_grey;
+			ol{
+				padding: 10px 30px;
+				list-style: none;
+				margin: 0px;
+				overflow: hidden;
+				width: 100%;
+				li{
+					list-style: none;
+					width: 27%;
+					float: left;
+					margin: 0 3%;
+					color: white;
+					font-size: 15px;
+					font-weight: $font_weight_semi_bold;
+					text-align: center;
+				}
+			}
+		}
+	}
+}
+.page-node-76{
+	.node--webform--full{
+		#webform-client-form-76{
+			width: 380px;
+			background: $extra_light_grey;
+			padding: 15px;
+			.form-item{
+				&.webform-component--steps{
+					margin: -15px -15px 15px;
+					ol{
+					}
+				}
+			}
+		}
+	}	
+}

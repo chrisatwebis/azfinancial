@@ -1,0 +1,41 @@
+<?php
+
+
+
+/**
+ * Implementation of hook_popup_styles
+ *
+ * This hook allows modules to provide popup display styles. Note that the
+ * templates of these styles cannot be overridden by the theme.
+ *
+ * @return a keyed array
+ *
+ * in the form:
+ *
+ * array(
+ *  'Style name 1' => 'path/to/style-1',
+ *  'Style label 2' => 'path/to/style-2',
+ *  ...
+ * )
+ *
+ * For style-1 the following files must exist in the path/to/style-1 directory:
+ *
+ *   popup-element-body.tpl.php
+ *   popup-element-title.tpl.php
+ *   popup-element.tpl.php
+ *
+ * For style-1 the following files may exist in the path/to/style-1 directory,
+ * and will be included if present:
+ *
+ *   popup-element.css
+ *   popup-element.js
+ *
+ */
+function plain_popups_popup_styles(){
+
+  $path = drupal_get_path('module', 'plain_popups') . '/styles';
+
+  return array(
+    'Plain white' => $path . '/plain_white',
+  );
+}

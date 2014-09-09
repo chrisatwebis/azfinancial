@@ -1,0 +1,5 @@
+name = Plain Popups
+description = "Plain popup styles"
+package = User interface
+version = 7.0
+core = 7.x

@@ -1,0 +1,156 @@
+/**This is for element only***/
+/*
+*	Standardlize the tag.
+**/
+@font-face {
+    font-family: 'open_sansbold';
+    src: url('../fonts/opensans-bold-webfont.eot');
+    src: url('../fonts/opensans-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/opensans-bold-webfont.woff') format('woff'),
+         url('../fonts/opensans-bold-webfont.ttf') format('truetype'),
+         url('../fonts/opensans-bold-webfont.svg#open_sansbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('../fonts/opensans-regular-webfont.eot');
+    src: url('../fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/opensans-regular-webfont.woff') format('woff'),
+         url('../fonts/opensans-regular-webfont.ttf') format('truetype'),
+         url('../fonts/opensans-regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'TrajanProBold';
+    src: url('../fonts/trajanpro-bold.eot');
+    src: url('../fonts/trajanpro-bold.eot') format('embedded-opentype'),
+         url('../fonts/trajanpro-bold.woff') format('woff'),
+         url('../fonts/trajanpro-bold.ttf') format('truetype'),
+         url('../fonts/trajanpro-bold.svg#TrajanProBold') format('svg');
+}
+
+@font-face {
+    font-family: 'TrajanProRegular';
+    src: url('../fonts/trajanpro-regular.eot');
+    src: url('../fonts/trajanpro-regular.eot') format('embedded-opentype'),
+         url('../fonts/trajanpro-regular.woff') format('woff'),
+         url('../fonts/trajanpro-regular.ttf') format('truetype'),
+         url('../fonts/trajanpro-regular.svg#TrajanProRegular') format('svg');
+}
+
+a,
+a:link, 
+a:visited{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
+
+body{
+    font-family: FrutigerBold, Frutiger, Istok Web, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+    background: #0079c1;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: FrutigerBold, Frutiger, Istok Web, Arial, Helvetica, sans-serif;
+}
+h1{
+    margin: 10px 0;
+}
+table{
+
+}
+tr:hover td{
+    background: transparent;
+}
+table, tbody, tfoot, thead, tr, th, td{
+    border: 1px solid silver;
+}
+img{
+    max-width: 100%;
+    height: auto;
+}
+a{
+    color: #035cb6;
+}
+.item-list ul li {
+    margin: 0;
+    padding: 0;
+}
+.node ol, .node ul {
+    padding-left: 10px;
+    margin-left: 20px;
+}
+.breadcrumb {
+    padding-bottom: 0.5em;
+    padding: 5px;
+    font-size: 12px;
+    margin: 5px 0;
+}
+/**
+*   Image block
+*/
+.block.image_block{
+    background: #fff; 
+    border: 2px solid #fff;
+/*    -webkit-border-radius: 4px; 
+    -moz-border-radius: 4px; 
+    -o-border-radius: 4px; 
+    border-radius: 4px; */
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.2); 
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.2); 
+    -o-box-shadow: 0 1px 4px rgba(0,0,0,.2); 
+    box-shadow: 0 1px 4px rgba(0,0,0,.2);
+}
+/**
+*   Title Bar Block
+*/
+.block.blue_block{
+    background: url(../images/block_bg_blue.png) no-repeat center center transparent !important;
+}
+.block.blue_block h2.block-title{
+    background: transparent !important;
+    padding: 15px 15px 0 !important;
+    text-transform: capitalize;
+}
+.block.blue_block .content{
+    background: transparent !important;
+}
+/**
+*
+*/
+.block.title_bar,
+#region-sidebar-second .block{
+    border: 1px solid #addaf5;
+    margin-bottom: 10px;
+}
+.block.title_bar h2.block-title,
+#region-sidebar-second .block h2.block-title{
+    background: url(../images/block_title_bg.png) repeat 0 0px;
+    line-height: 18px;
+    padding: 8px 10px;
+    font-size: 14px;
+    color: #0079C1;
+}
+.block.title_bar .content,
+#region-sidebar-second .block .content{
+    padding: 10px;
+    background: white;
+}
+#region-sidebar-second .block.image .content{
+    padding: 0px;
+}
+/**
+*   Graphic Bg block
+*/
+.block.graphic_bg .content{
+    background: url("../images/graphic_bg.png") right bottom white !important;
+}

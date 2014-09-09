@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Travel Insurance Price Entity Type feature.
+ */
+
+include_once 'travel_insurance_price_entity_type.features.inc';

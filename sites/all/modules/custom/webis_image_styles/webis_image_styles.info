@@ -1,0 +1,11 @@
+name = Webis Image Styles
+description = Create Webis image styles
+core = 7.x
+package = Webis
+version = 7.x-1.0
+project = webis_image_styles
+dependencies[] = image
+features[features_api][] = api:2
+features[image][] = webis_banner
+features[image][] = webis_icon
+features[image][] = webis_icon_30

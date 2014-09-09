@@ -1,0 +1,8 @@
+core          = "7.x"
+description   = "Provide extra settings for blocks"
+name          = "Block settings extra"
+package       = Webis
+version = "7.x-1.0"
+project = "block_settings_extra"
+dependencies[] = block
+files[] = block_settings_extra.module

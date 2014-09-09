@@ -1,0 +1,36 @@
+.owl-theme{
+	.owl-controls{
+		.owl-buttons{
+			div{
+				position: absolute;
+				width: 25px;
+				height: 40px;
+				top: 10%;
+				font-size: 0px;
+				text-indent: -9999px;
+				&.owl-prev{
+					background: image-url('carousel_arrow_left.png') no-repeat center center transparent;
+					left: -45px;
+				}
+				&.owl-next{
+					background: image-url('carousel_arrow_right.png') no-repeat center center transparent;
+					right: -45px;
+				}
+			}
+		}
+		.owl-pagination{
+			.owl-page{
+				span{
+					background: image-url('carousel_navigator.png') no-repeat center center transparent;
+					width: 17px;
+					height: 17px;
+				}
+				&.active{
+					span{
+						background: image-url('carousel_navigator_active.png') no-repeat center center transparent;					
+					}
+				}
+			}
+		}
+	}
+}

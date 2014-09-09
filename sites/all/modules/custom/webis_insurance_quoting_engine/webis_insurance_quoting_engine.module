@@ -1,0 +1,159 @@
+<?php
+
+require_once('webis_insurance_quoting_engine.api.inc');
+
+define('INSURANCE_PRICE_ENTITY_NAME', "insurance_price");
+define('VISITOR_INSURANCE_BUNDLE_NAME', "visitor_to_canada_insurance_price");
+define('LIFE_INSURANCE_BUNDLE_NAME', "life_insurance_price");
+define('VISITOR_INSURANCE', "visitor_insurance");
+define('LIFE_INSURANCE', "life_insurance");
+/**
+ * @file
+ */
+function webis_insurance_quoting_engine_menu(){
+	$items = array();
+  $items['get-a-quote/visitor-to-canada-insurance'] = array(
+    'title' => 'Visitor to canada insurance plan and price search',
+    'description' => "Visitor to canada insurance plan and price search",
+    'page callback' => 'webis_insurance_quoting_engine_visitor_canada_price_search',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+  );
+/*  $items['get-a-quote/result'] = array(
+    'title' => 'Get A Quote - Result',
+    'description' => "Get an Aviva Home Insurance or Auto Insurance quote from a broker near you.",
+    'page callback' => 'aviva_lead_gen_get_a_quote_result',
+    'access arguments' => array('access content'),
+  );
+  $items['find-a-broker'] = array(
+    'title' => 'Find a Broker',
+    'description' => "Find an Aviva broker near you.",
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('aviva_lead_gen_find_a_broker_result'),
+    'access arguments' => array('access content'),
+    'file' => 'aviva_lead_gen.ap_bpms.inc',
+  );
+  $items['find-a-broker/branch/%'] = array(
+    'title' => 'Branch',
+    'description' => "Branch detail page",
+    'page callback' => 'ap_bpms_get_branch',
+    'page arguments' => array(2),
+    'access arguments' => array('access content'),
+    'file' => 'aviva_lead_gen.ap_bpms.inc',
+  );
+  $items['admin/aviva_dashboard/aviva_lead_gen'] = array(
+    'title' => 'Aviva Lead Gen Settings',
+    'description' => "Configure the lead gen form settings.",
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('aviva_lead_gen_configure_form'),
+    'access arguments' => array('access administration pages'),
+  );*/
+  return $items;
+}
+
+function webis_insurance_quoting_engine_visitor_canada_price_search(){
+
+	if(!isset($_GET['start']) || !isset($_GET['end']) || !isset($_GET['birthday']) || !isset($_GET['coverage']))
+	{
+		$msg = "";
+		if(!isset($_GET['start'])){
+      $msg .= t("Please chose your insurance policy 'Start Date'!")."<br>";
+    }
+		if(!isset($_GET['end'])){
+      $msg .= t("Please chose your insurance policy 'End Date'!")."<br>";
+    }		
+		if(!isset($_GET['birthday'])){
+      $msg .= t("Please chose your 'Birthday'!")."<br>";
+    }
+    if(!isset($_GET['coverage'])){
+      $msg .= t("Please chose your insurance policy 'Coverage'!")."<br>";
+    }
+    return $msg;
+	}
+	//Get the birthday
+	$birthday = $_GET['birthday'];
+  $birthday_time = strtotime( $birthday );
+	//Insurance Amount
+	$coverage = $_GET['coverage'];	
+	$start = $_GET['start'];
+	$end = $_GET['end'];
+	$start_time = strtotime( $start );
+	$end_time = strtotime( $end );
+  //get age from birthday and start time
+  $effective_date_age = webis_insurance_quoting_engine_age_from_dob($birthday, $start);
+  //get age from birthday
+  $current_age = webis_insurance_quoting_engine_age_from_dob($birthday);  
+	//total days
+	$days = (($end_time - $start_time)/(60*60*24))+1;
+	$days = round($days);
+
+	global $language;
+	$content = '
+		<div class="search_result_summary">
+			<span class="item"><span class="label">'.t("Current age:").'</span><span class="value">'.$current_age.'</span></span>
+		  <span class="item"><span class="label">'.t("Effective date age:").'</span><span class="value">'.$effective_date_age.'</span></span>
+			<span class="item"><span class="label">'.t("Coverage:").'</span><span class="value">'.$coverage.'</span></span>
+			<span class="item"><span class="label">'.t("Total days:").'</span><span class="value">'.$days.'</span></span>
+		</div>
+	';
+  $plans = webis_insurance_quoting_engine_get_plans(VISITOR_INSURANCE);
+  dpm($plans);
+  $age = $current_age;
+  $deductiables = array();
+  $deductiables_no_spmcc = array();
+  $prices = array();
+  //$key = entity id, $value = entity;
+  foreach ($plans as $key => $value) {
+    $which_age = webis_insurance_quoting_engine_get_tip_age_to_cal_premium($value);
+    switch ($which_age) {
+      case 'purchase_date_age':
+        $age = $current_age;        
+        break;
+      case 'effective_date_age':
+        $age = $effective_date_age;
+        break;
+      default:
+        break;
+    }
+    $price = webis_insurance_quoting_engine_get_tip_total_price($value, $age, $coverage, TRUE, $days);
+    $price_no_spmcc = webis_insurance_quoting_engine_get_tip_total_price($value, $age, $coverage, FALSE, $days);
+    if (!empty($price) || !empty($price_no_spmcc)) {
+      $prices[$key]["title"] = $value->title;
+      $prices[$key]["id"] = $key;
+      if (!empty($price)) {
+        $prices[$key]["prices"] = $price;
+        $deductiables = array_unique (array_merge ($deductiables, array_keys($price)));
+      }
+      if (!empty($price_no_spmcc)) {
+        $prices[$key]["prices_no_spmcc"] = $price_no_spmcc;        
+        $deductiables_no_spmcc = array_unique (array_merge ($deductiables_no_spmcc, array_keys($price_no_spmcc)));
+      }
+
+    }
+  }
+  sort($deductiables);
+  sort($deductiables_no_spmcc);
+  dpm($prices);
+  dpm($deductiables);
+  dpm($deductiables_no_spmcc);
+	return $content;
+}
+
+/**
+*	Helper function - calculate the age bases on the dob and policy_start_date(optional).
+* @Arguments
+* dob - birthday
+* 
+**/
+function webis_insurance_quoting_engine_age_from_dob($dob, $policy_start_date = null) {
+  $birthday_time = strtotime($dob);
+  //If there is no start date, then use current time.
+  if(!empty($policy_start_date)){
+    $start_time = strtotime($policy_start_date);
+    $age = ( date("md", $birthday_time) > date("md",$start_time) ? ( ( date("Y",$start_time)- date("Y", $birthday_time) )-1 ) : ( date("Y",$start_time) - date("Y", $birthday_time) ) );
+  }else{
+    $age = ( date("md", $birthday_time) > date("md") ? ( ( date("Y") - date("Y", $birthday_time) ) - 1 ) : ( date("Y") - date("Y", $birthday_time) ) );    
+  }
+  $age = $age > 0 ? $age : 0;
+  return $age;
+}

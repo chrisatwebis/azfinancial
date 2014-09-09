@@ -1,0 +1,11 @@
+name = Aviva Image Styles
+description = Create aviva image styles
+core = 7.x
+package = Aviva
+version = 7.x-1.0
+project = aviva_image_styles
+dependencies[] = image
+features[features_api][] = api:2
+features[image][] = aviva_banner
+features[image][] = aviva_icon
+features[image][] = aviva_icon_30

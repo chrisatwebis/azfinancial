@@ -1,0 +1,34 @@
+@import "_color.scss";
+
+.standard_button {
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 7px 20px;
+  color: white;
+  text-decoration: none;
+  border: 0px;
+  &:visited {
+
+  }
+  &:hover{
+
+  }
+  a:hover{
+
+  }
+}
+
+.standard_yellow {
+  @extend .standard_button;
+  background: $yellow;
+  box-shadow: 3px 3px 2px 0px $yellow_grey;
+}
+
+.standard_blue {
+  @extend .standard_button;
+  background: $dark_blue;
+  box-shadow: 3px 3px 2px 0px #000;
+}

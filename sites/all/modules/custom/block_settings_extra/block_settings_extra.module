@@ -1,0 +1,178 @@
+<?php
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * Adds extra settings to the block configure page.
+ */
+function block_settings_extra_form_block_admin_configure_alter( &$form, &$form_state, $form_id ) {
+
+  $block_id = $form['module']['#value'] . '-' . $form['delta']['#value'];
+  $settings = block_settings_extra_get_settings(array($block_id));
+  $block_setting = array();
+  if(!empty($settings[$block_id])){
+    $block_setting = $settings[$block_id];
+  }
+  $form['settings']['block_settings_extra'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Block Settings Extra'),
+    '#weight' => -18,
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#attributes' => array(
+      'class' => array('block-settings-extra'),
+    ),
+  );
+  $form['settings']['block_settings_extra']['anchor'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Anchor'),
+    '#weight' => -19,
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#attributes' => array(
+      'class' => array('block-settings-extra-anchor'),
+    ),
+    '#description' => t("Insert anchor link before the block title. For example, it will insert <a id='about-us'></a> before the block title."),
+  );
+  $form['settings']['block_settings_extra']['anchor']['anchor_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Anchor ID'),
+    '#required' => FALSE,
+    '#description' => t("Anchor link id, for example: @anchor, about-us is the anchor id.", array("@anchor" => "<a id='about-us' href='#'></a>")),
+    '#default_value' => isset($block_setting['anchor_id']) ? $block_setting['anchor_id'] : '',
+  );
+  $form['settings']['block_settings_extra']['anchor']['anchor_class'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Anchor Class'),
+    '#required' => FALSE,
+    '#description' => t("Anchor link class, for example: @anchor, anchor-link is the anchor class. Multiple classes need to be seperated by space.", array('@anchor' => "<a id='about-us' class='anchor-link' href='#'></a>")),
+    '#default_value' => isset($block_setting['anchor_class']) ? $block_setting['anchor_class'] : '',
+  );
+  $form['settings']['block_settings_extra']['anchor']['anchor_wrapper'] = array(
+    '#type' => 'select',
+    '#title' => t('Anchor Wrapper'),
+    '#options' => block_settings_extra_anchor_wrapper_options(),
+    '#required' => FALSE,
+    '#description' => t("Choose HTML element as anchor wrapper, for example, choose 'span' will create a anchor like this @anchor.", array("@anchor" => "<span><a id='about-us' class='anchor-link' href='#'></a></span>")),
+    '#default_value' => isset($block_setting['anchor_wrapper']) ? $block_setting['anchor_wrapper'] : '',
+  );
+  $form['settings']['block_settings_extra']['anchor']['anchor_wrapper_class'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Anchor wrapper class'),
+    '#required' => FALSE,
+    '#description' => t("Add the classes to the anchor wrapper, for example: @anchor, anchor-link-wrapper is the wrapper class. Multiple classes need to be seperated by space.", array("@anchor" => "<span class='anchor-link-wrapper'><a id='about-us' class='anchor-link' href='#'></a></span>")),
+    '#default_value' => isset($block_setting['anchor_wrapper_class']) ? $block_setting['anchor_wrapper_class'] : '',
+  );
+  $form['settings']['block_settings_extra']['block_custom_class'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Custom Class'),
+    '#required' => FALSE,
+    '#description' => t("Add custom classes to the block. Multiple classes need to be seperated by space."),
+    '#default_value' => isset($block_setting['block_custom_class']) ? $block_setting['block_custom_class'] : '',
+  );
+  $form['#submit'][] = 'block_settings_extra_save_settings';
+
+}
+
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function block_settings_extra_preprocess_block(&$variables) {
+
+  $id = $variables['block']->module . '-' . $variables['block']->delta;
+  
+  $settings = block_settings_extra_get_settings($id);
+  if(!empty($settings[$id])){
+    $block_setting = $settings[$id];
+    $anchor_id = !empty($block_setting['anchor_id']) ? $block_setting['anchor_id'] : "";
+    $anchor_class = !empty($block_setting['anchor_class']) ? $block_setting['anchor_class'] : "";
+    $anchor_wrapper = !empty($block_setting['anchor_wrapper']) ? $block_setting['anchor_wrapper'] : "";
+    $anchor_wrapper_class = !empty($block_setting['anchor_wrapper_class']) ? $block_setting['anchor_wrapper_class'] : "";
+    $block_custom_class = !empty($block_setting['block_custom_class']) ? $block_setting['block_custom_class'] : "";
+    //add anchor
+    if(!empty($anchor_id)){
+      $anchor = "<a href='#' id='".$anchor_id."' class='block_anchor ".$anchor_class."'></a>";
+      if(!empty($anchor_wrapper)){
+        $wrapper_prefix = "<".$anchor_wrapper." class='block_anchor_wrapper ".$anchor_wrapper_class."'>";
+        $wrapper_suffix = "</".$anchor_wrapper.">";
+        $anchor = $wrapper_prefix.$anchor.$wrapper_suffix;
+      }
+      $variables['title_prefix'] = array(
+        '#type' => 'markup',
+        '#markup' => $anchor,
+      );
+    }
+    //Add block custom class
+    if(!empty($block_custom_class)){
+      $variables['classes_array'][] = $block_custom_class;
+    }
+  }
+}
+
+
+/**
+ * Additional submit handler for block settings form. Saves block settings extra for the block.
+ */
+function block_settings_extra_save_settings($form, &$form_state) {
+  db_merge('block_settings_extra')
+    ->key(array('block_id' => $form_state['values']['module'] . '-' . $form_state['values']['delta']))
+    ->fields(array(
+      'anchor_id' => $form_state['values']['anchor_id'],
+      'anchor_class' => $form_state['values']['anchor_class'],
+      'anchor_wrapper' => $form_state['values']['anchor_wrapper'],
+      'anchor_wrapper_class' => $form_state['values']['anchor_wrapper_class'],
+      'block_custom_class' => $form_state['values']['block_custom_class'],
+    ))
+    ->execute();
+}
+
+
+/**
+ * Get the block extra settings from the database.
+ */
+function block_settings_extra_get_settings( $block_ids = NULL ) {
+
+  $block_settings_extra = array();
+
+  if(empty($block_ids)){
+    //if the block id is empty, then fetch all.
+    foreach (db_query('SELECT * FROM {block_settings_extra}', array(), array('fetch' => PDO::FETCH_ASSOC)) as $data) {
+      $bid = $data['block_id'];
+      $block_settings_extra[$bid] = $data;
+    }
+  }else{
+    if(is_array($block_ids)){
+      //if the block id is an array, then fetch the block array.
+      foreach (db_query('SELECT * FROM {block_settings_extra} WHERE block_id IN (:block_ids)', array(':block_ids' => $block_ids), array('fetch' => PDO::FETCH_ASSOC)) as $data) {
+        $bid = $data['block_id'];
+        $block_settings_extra[$bid] = $data;
+      }
+    }else{
+      //if the block id is a string, then fetch by the block id.
+      foreach (db_query('SELECT * FROM {block_settings_extra} WHERE block_id IN (:block_ids)', array(':block_ids' => array($block_ids) ), array('fetch' => PDO::FETCH_ASSOC)) as $data) {
+        $bid = $data['block_id'];
+        $block_settings_extra[$bid] = $data;
+      }
+    }
+  }
+
+  return $block_settings_extra;
+}
+
+/**
+* Anchor wrapper options array
+**/
+function block_settings_extra_anchor_wrapper_options(){
+  $options = array(
+    '0' => t('- None- '),
+    'span' => 'SPAN',
+    'div' => 'DIV',
+    'h1' => 'H1',
+    'h2' => 'H2',
+    'h3' => 'H3',
+    'h4' => 'H4',
+    'h5' => 'H5',
+    'h6' => 'H6',
+  );
+  return $options;
+}

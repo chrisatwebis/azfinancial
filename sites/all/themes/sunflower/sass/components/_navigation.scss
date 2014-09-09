@@ -1,0 +1,86 @@
+#block-superfish-1{
+	ul.sf-menu{
+		display: table;
+		width: 100%;
+		position: relative;
+		> li.sf-depth-1{
+			display: table-cell;
+			float: none;
+			padding: 15px;
+			position: initial;
+			a{
+				text-decoration: none;
+				color: black;
+				&:hover{
+					color: $yellow;
+				}
+			}
+			> a{
+				font-size: 18px;
+				font-weight: $font_weight_bold;
+				color: $dark_grey;
+				float: left;
+			}
+			&.active-trail{
+				> a{
+					color: $yellow;				
+				}
+			}
+			&.first{
+				padding-left: 0px;
+			}
+			&.last{
+				padding-right: 0px;
+			}
+			&.menuparent{
+				> a{
+						background: image-url("arrow_down.png") no-repeat right center transparent;
+						padding-right: 26px;
+					}
+				ul.sf-megamenu{
+					background: $extra_light_grey;
+					top: 48px;
+					padding: 15px 15px 15px !important;
+					border-radius: 0px;
+					border-top: 5px solid $dark_blue;
+					width: 100%;
+					li.sf-depth-1{
+						&.active-trail{
+							> a{
+								color: white;
+							}
+						}
+					}
+					li.sf-depth-2{
+						&.menuparent{
+							width: 300px;
+							padding: 20px;
+							font-weight: $font_weight_semi_bold;
+						}
+						span.menuparent{
+							margin-bottom: 10px;
+							display: block;
+							font-size: 16px;
+						}
+						li.sf-depth-3{
+							margin-bottom: 5px;
+							font-size: 14px;
+							padding: 5px 0;
+							font-weight: $font_weight_normal;
+							a{
+								color: $dark_grey;
+								&:hover{
+									color: white;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@include breakpoint($tab, true){
+	
+}

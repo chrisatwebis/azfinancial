@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the block_settings_extra module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function block_settings_extra_schema() {
+  $schema = array();
+  $schema['block_settings_extra'] = array(
+    'description' => 'Stores extra settings for blocks.',
+    'fields' => array(
+      'block_id' => array(
+        'description' => 'The primary identifier for a block.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'anchor_id' => array(
+        'description' => 'The anchor id tag.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+      ),
+      'anchor_class' => array(
+        'description' => 'The anchor link class.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+      ),
+      'anchor_wrapper' => array(
+        'description' => 'The anchor link html wrapper.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+      ),
+      'anchor_wrapper_class' => array(
+        'description' => 'The anchor link html wrapper class attribtue.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+      ),
+      'block_custom_class' => array(
+        'description' => 'The custom classes for the block.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+      ),
+    ),
+    'primary key' => array('block_id'),
+  );
+
+  return $schema;
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function block_settings_extra_uninstall() {
+  cache_clear_all('block_settings_extra', 'cache');
+}

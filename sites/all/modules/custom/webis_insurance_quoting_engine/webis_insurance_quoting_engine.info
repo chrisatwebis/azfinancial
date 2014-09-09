@@ -1,0 +1,5 @@
+core          = "7.x"
+name          = "Webis Insurance Quoting Engine"
+description   = "Webis Insurance Quoting Engine"
+package       = Webis
+version				= "7.x-1.0"

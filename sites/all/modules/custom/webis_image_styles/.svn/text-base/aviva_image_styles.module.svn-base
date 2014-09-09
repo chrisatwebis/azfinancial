@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Aviva Image Styles feature.
+ */
+
+include_once 'aviva_image_styles.features.inc';

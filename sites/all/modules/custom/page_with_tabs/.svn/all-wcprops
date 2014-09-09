@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/avivacanada/!svn/ver/1946/branches/ACD7Upgrade/sites/all/modules/features/page_with_tabs
+END
+page_with_tabs.features.field_base.inc
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/avivacanada/!svn/ver/1946/branches/ACD7Upgrade/sites/all/modules/features/page_with_tabs/page_with_tabs.features.field_base.inc
+END
+page_with_tabs.strongarm.inc
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/avivacanada/!svn/ver/1946/branches/ACD7Upgrade/sites/all/modules/features/page_with_tabs/page_with_tabs.strongarm.inc
+END
+page_with_tabs.module
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/avivacanada/!svn/ver/1946/branches/ACD7Upgrade/sites/all/modules/features/page_with_tabs/page_with_tabs.module
+END
+page_with_tabs.features.inc
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/avivacanada/!svn/ver/1946/branches/ACD7Upgrade/sites/all/modules/features/page_with_tabs/page_with_tabs.features.inc
+END
+page_with_tabs.views_default.inc
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/avivacanada/!svn/ver/1946/branches/ACD7Upgrade/sites/all/modules/features/page_with_tabs/page_with_tabs.views_default.inc
+END
+page_with_tabs.info
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/avivacanada/!svn/ver/1946/branches/ACD7Upgrade/sites/all/modules/features/page_with_tabs/page_with_tabs.info
+END
+page_with_tabs.features.field_instance.inc
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/avivacanada/!svn/ver/1946/branches/ACD7Upgrade/sites/all/modules/features/page_with_tabs/page_with_tabs.features.field_instance.inc
+END
+page_with_tabs.ds.inc
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/avivacanada/!svn/ver/1946/branches/ACD7Upgrade/sites/all/modules/features/page_with_tabs/page_with_tabs.ds.inc
+END

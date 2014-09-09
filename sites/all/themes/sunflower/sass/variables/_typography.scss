@@ -1,0 +1,19 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
+$opensans: 'Open Sans';
+
+/* Base font size */
+$base_font_size: 14px;
+$font_weight_light: 300;
+$font_weight_normal: 400;
+$font_weight_semi_bold: 600;
+$font_weight_bold: 700;
+$font_weight_extra_bold: 800;
+
+html{
+	font-family: $opensans;
+	font-size: $base_font_size;
+}
+
+ul{
+	padding-left: 20px;
+}

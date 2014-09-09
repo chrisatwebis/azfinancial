@@ -1,0 +1,210 @@
+// Import external libraries.
+@import "compass";
+@import "breakpoint";
+@import "singularitygs";
+@import "toolkit-no-css";
+
+// Import variables, abstractions, base styles and components using globbing.
+//
+// Globbing will always import files alphabetically. Optimally, all your
+// components should be self-contained and explicit enough to not have any
+// contained styles leak into unrelated components: The import order should not
+// affect the result.
+//
+// If there are variables, functions or mixins that depend on each other and
+// therefore need to be imported in a specific order you can import them
+// directly. Variables-, function- or mixin providing partials should never
+// output any styles themselves: Importing them multiple times to resolve
+// dependencies shouldn't be a problem.
+@import "variables/**/*";
+@import "abstractions/**/*";
+@import "base/**/*";
+@import "components/**/*";
+
+.l-page{
+	position: relative;
+	z-index: 1;
+}
+.l-user{
+	background: $dark_grey;
+	.l-region--user-bar{
+		text-align: right;
+		.block{
+			border-right: 1px solid $light_grey;
+			padding: 10px 10px;
+			display: inline-block;
+			a{
+				color: white;
+				text-decoration: none;
+				font-size: 14px;
+				&:hover{
+					text-decoration: underline;
+				}
+			}
+			.block__content{
+				ul{
+					list-style: none;
+					margin: 0px;
+					padding: 0px;
+					li{
+						list-style: none;
+						display: inline-block;
+						margin-right: 10px;
+					}
+				}
+			}
+			ul.menu{
+				list-style: none;
+				margin: 0px;
+				padding: 0px;
+				li{
+					list-style: none;
+					display: inline-block;
+					margin-right: 10px;
+				}
+			}
+		}
+	}
+}
+.section-wrapper-header{
+	border-bottom: 5px solid $yellow;
+	.l-header{
+		margin-bottom: 0px;
+		.l-branding{
+			.site-logo{
+				float: left;
+				margin-right: 15px;
+				img{
+					height: 52px;				
+				}
+			}
+			.site-name{
+				margin: 0px;
+				padding: 0px;
+				font-size: 24px;
+				line-height: 24px;
+				a{
+					text-decoration: none;
+					text-transform: uppercase;
+					color: $yellow;
+				}
+			}
+			.site-slogan{
+				margin: 10px 0 0;
+				padding: 0px;
+				font-size: 20px;
+				color: $dark_blue;
+				line-height: 20px;
+				text-transform: uppercase;
+			}
+		}
+		.l-region--header{
+			text-align: right;
+			.block{
+				padding: 10px 10px;
+				display: inline-block;
+				vertical-align: middle;
+			}
+		}
+		.l-region--navigation{
+			padding-top: 20px;
+		}
+	}	
+}
+
+.section-wrapper-main{
+	.l-main{
+		margin-bottom: 0px;
+		.main_content_header{
+			background: $tab_blue;
+			padding: 15px;
+		}
+		h1#page_title{
+			font-size: 24px;
+			color: white;
+		}
+		.feed-icon{
+			display: none;
+		}
+		.l-region--sidebar-second{
+			margin-bottom: 0px;
+		}
+	}	
+}
+
+.section-wrapper-above-postscript{
+	padding: 15px;
+	background: $dark_blue;
+	color: $extra_light_grey;
+	font-size: 20px;
+	text-align: center;
+	.l-above-postscript{
+		margin-bottom: 0px;
+	}
+}
+.l-postscript{
+	.block{
+		ul.menu{
+			padding: 0px;
+			margin: 0px;
+			list-style: none;
+			li{
+				color: $dark_grey;
+				padding: 0px;
+				margin: 0px;
+				list-style: none;
+				&.expanded{
+					font-size: 16px;
+					font-weight: $font_weight_semi_bold;
+					margin-bottom: 10px;
+					ul.menu{
+						margin-top: 5px;
+						font-size: 13px;
+						font-weight: $font_weight_light;
+						li{
+							margin-bottom: 3px;
+						}
+					}
+				}
+				a{
+					text-decoration: none;
+					color: $dark_grey;
+					&:hover{
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+}
+.section-wrapper-below-postscript{
+	.l-below-postscript{
+		display: block;
+		overflow: hidden;
+		border-top: 1px solid $light_blue;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		margin-bottom: 0px;
+		.block{
+	    float: left;
+	    margin: 10px 0px;
+	    width: 25%;
+	    padding: 0 10px 0 0;
+	    .block__content{
+	    	text-align: center;
+	    }
+		}
+	}
+}
+.section-wrapper-footer{
+	overflow: hidden;
+	background: $light_blue;
+	padding: 20px;
+	.l-footer{
+		margin-bottom: 0px;
+	}
+}
+
+@include breakpoint($tab, true) {
+	
+}
