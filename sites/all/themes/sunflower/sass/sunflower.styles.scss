@@ -21,6 +21,9 @@
 @import "base/**/*";
 @import "components/**/*";
 
+$tab: 44em 12; // At 44em use 12 columns.
+$desk: 70em 16; // At 70em use 16 columns.
+
 .l-page{
 	position: relative;
 	z-index: 1;
@@ -28,7 +31,7 @@
 .l-user{
 	background: $dark_grey;
 	.l-region--user-bar{
-		text-align: right;
+		text-align: left;
 		.block{
 			border-right: 1px solid $light_grey;
 			padding: 10px 10px;
@@ -63,6 +66,9 @@
 					margin-right: 10px;
 				}
 			}
+			&:last-child{
+				border: 0px;
+			}
 		}
 	}
 }
@@ -71,6 +77,8 @@
 	.l-header{
 		margin-bottom: 0px;
 		.l-branding{
+			margin: 0px auto;
+			width: 250px;
 			.site-logo{
 				float: left;
 				margin-right: 15px;
@@ -99,9 +107,8 @@
 			}
 		}
 		.l-region--header{
-			text-align: right;
 			.block{
-				padding: 10px 10px;
+				padding: 10px;
 				display: inline-block;
 				vertical-align: middle;
 			}
@@ -118,6 +125,7 @@
 		.main_content_header{
 			background: $tab_blue;
 			padding: 15px;
+			margin-bottom: 25px;
 		}
 		h1#page_title{
 			font-size: 24px;
@@ -186,9 +194,7 @@
 		padding-bottom: 10px;
 		margin-bottom: 0px;
 		.block{
-	    float: left;
 	    margin: 10px 0px;
-	    width: 25%;
 	    padding: 0 10px 0 0;
 	    .block__content{
 	    	text-align: center;
@@ -199,12 +205,115 @@
 .section-wrapper-footer{
 	overflow: hidden;
 	background: $light_blue;
-	padding: 20px;
+	padding: 10px 20px;
 	.l-footer{
 		margin-bottom: 0px;
+		color: white;
+		text-align: center;
+		.block{
+			margin: 10px 0;
+		}
 	}
 }
 
-@include breakpoint($tab, true) {
-	
+@include at-breakpoint($tab){
+	.section-wrapper-below-postscript{
+		.l-below-postscript{
+			.block{
+		    .block__content{
+		    	text-align: center;
+		    }
+			}
+		}
+	}
+	.section-wrapper-header{
+		.l-header{
+			.l-branding{
+				width: 230px;
+				margin: 0px;
+				display: inline-block;
+				.site-name{
+					font-size: 20px;
+				}
+				.site-slogan{
+					font-size: 16px;
+				}
+			}
+			.l-region--header{
+				text-align: right;	
+				display: inline-block;		
+				vertical-align: top;
+			}
+		}
+	}
 }
+
+@include at-breakpoint($desk){
+	.l-user{
+		.l-region--user-bar{
+			text-align: right;
+		}
+	}
+	.section-wrapper-below-postscript{
+		.l-below-postscript{
+			.block{
+		    float: left;
+		    width: 25%;
+			}
+		}
+	}
+	.section-wrapper-footer{
+		.l-footer{
+			.block{
+				margin: 10px 0;
+			}
+		}
+	}
+	.section-wrapper-header{
+		border-bottom: 5px solid $yellow;
+		.l-header{
+			margin-bottom: 0px;
+			.l-branding{
+				width: 350px;
+				.site-logo{
+					float: left;
+					margin-right: 15px;
+					img{
+						height: 52px;				
+					}
+				}
+				.site-name{
+					margin: 0px;
+					padding: 0px;
+					font-size: 24px;
+					line-height: 24px;
+					a{
+						text-decoration: none;
+						text-transform: uppercase;
+						color: $yellow;
+					}
+				}
+				.site-slogan{
+					margin: 10px 0 0;
+					padding: 0px;
+					font-size: 20px;
+					color: $dark_blue;
+					line-height: 20px;
+					text-transform: uppercase;
+				}
+			}
+			.l-region--header{
+				text-align: right;
+				.block{
+					padding: 10px;
+					display: inline-block;
+					vertical-align: middle;
+				}
+			}
+			.l-region--navigation{
+				padding-top: 20px;
+			}
+		}	
+	}
+}
+

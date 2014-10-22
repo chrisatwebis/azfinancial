@@ -1,35 +1,40 @@
-#popup-active-overlay{
-	z-index: 2 !important;
-}
+$grid-padding: 5px;
 
 #popup-active-overlay{
+	z-index: 2 !important;
+  width: 100%;
 	.popup-style-plain_white{
-		.popup-element-body{
-			background: $extra_light_grey;
-			box-shadow: none;
-			border: 1px solid $light_grey;
-			border-radius: 0px;
-			top: 7px !important;
-			left: -14px !important;
-			.inner{
-				width: 320px !important;
-				padding: 20px 30px 20px 20px;
-				form{
-					input[type=text]{
-						padding: 6px;
+
+		.popup-element-origin{
+	    @include span-columns(12 omega, 12); // Span 12 out of 12 columns.
+	    left: 0px !important;
+			.popup-element-body{
+				background: $extra_light_grey;
+				box-shadow: none;
+				border: 1px solid $light_grey;
+				border-radius: 0px;
+				top: 13px !important;
+				left: 0px !important;
+				.inner{
+					width: 100% !important;
+					padding: 20px 30px 20px 20px;
+					form{
+						input[type=text]{
+							padding: 6px;
+						}
+						.form-submit{
+							@extend .standard_yellow;
+							margin-left: 0px;
+						}
 					}
-					.form-submit{
-						@extend .standard_yellow;
-						margin-left: 0px;
+					.popup-close-button{
+						background: image-url("close_icon.png") center center no-repeat transparent;
+						width: 20px;
+						height: 20px;
+						display: block;
+						top: 5px;
+						right: 5px;
 					}
-				}
-				.popup-close-button{
-					background: image-url("close_icon.png") center center no-repeat transparent;
-					width: 20px;
-					height: 20px;
-					display: block;
-					top: 5px;
-					right: 5px;
 				}
 			}
 		}
@@ -37,31 +42,34 @@
 }
 
 .get_a_quick_quote{
-	.popup-element-body{
-		top: 10px !important;
-		left: -20px !important;
-		border: 0px;
-		box-shadow: none;
-		.inner{
-			width: 379px !important;
-			padding: 0px;
-			form{
-				padding: 15px 15px 10px;
-				width: 100%;
-				.form-actions{
-					text-align: center;
-					margin-top: 10px;
-					margin-bottom: 7px;
-					.form-submit{
-						margin-left: 0px;
-						font-size: 20px;
-						font-weight: $font_weight_bold;
-						text-transform: uppercase;
-					}						
+	width: 100%;
+	.popup-element-origin{
+		width: 100%;
+		.popup-element-body{
+
+			border: 0px;
+			box-shadow: none;
+			.inner{
+				width: 100% !important;
+				padding: 0px;
+				form{
+					padding: 15px 15px 10px;
+					width: 100%;
+					.form-actions{
+						text-align: center;
+						margin-top: 10px;
+						margin-bottom: 7px;
+						.form-submit{
+							margin-left: 0px;
+							font-size: 20px;
+							font-weight: $font_weight_bold;
+							text-transform: uppercase;
+						}						
+					}
 				}
-			}
-			.popup-close-button{
-				display: none;
+				.popup-close-button{
+					display: none;
+				}
 			}
 		}
 	}
@@ -72,17 +80,66 @@
 			margin-left: 10px;
 		}		
 	}
+	//get a quote popup
 	#popup-element-1-active{
 		@extend .get_a_quick_quote;
 	}	
 }
 .not-logged-in{
+	//search block
 	#popup-element-1-active{
 		.form-actions{
 			margin-left: 10px;
 		}
 	}
+	//get a quote popup
 	#popup-element-2-active{
 		@extend .get_a_quick_quote;
+	}	
+}
+//Tablet
+@include at-breakpoint($tab){
+	.logged-in{
+		//get a quote popup
+		#popup-element-1-active{
+			.popup-element-body{
+				.inner{
+					width: 331px !important;
+				}
+			}
+		}	
+	}
+	.not-logged-in{
+		//get a quote popup
+		#popup-element-2-active{
+			.popup-element-body{
+				.inner{
+					width: 331px !important;
+				}
+			}
+		}	
+	}	
+}
+//Desk
+@include at-breakpoint($desk){
+	.logged-in{
+		//get a quote popup
+		#popup-element-1-active{
+			.popup-element-body{
+				.inner{
+					width: 379px !important;
+				}
+			}
+		}	
+	}
+	.not-logged-in{
+		//get a quote popup
+		#popup-element-2-active{
+			.popup-element-body{
+				.inner{
+					width: 379px !important;
+				}
+			}
+		}	
 	}	
 }

@@ -51,23 +51,20 @@
     </div>
   </div>
   <?php endif; ?>
-  
   <div class='section-wrapper section-wrapper-main'>
     <div class="l-main">
+    <?php if ($title || $breadcrumb): ?>
+    <div class='main_content_header'>
+      <?php print $breadcrumb; ?>
+      <a id="main-content"></a>
+      <?php print render($title_prefix); ?>
+      <?php if ($title): ?>
+        <h1 id="page_title"><?php print $title; ?></h1>
+      <?php endif; ?>
+      <?php print render($title_suffix); ?>
+    </div>
+    <?php endif; ?>  
       <div class="l-content" role="main">
-        
-        <?php if ($title || $breadcrumb): ?>
-        <div class='main_content_header'>
-          <?php print $breadcrumb; ?>
-          <a id="main-content"></a>
-          <?php print render($title_prefix); ?>
-          <?php if ($title): ?>
-            <h1 id="page_title"><?php print $title; ?></h1>
-          <?php endif; ?>
-          <?php print render($title_suffix); ?>
-        </div>
-        <?php endif; ?>
-
         <?php print $messages; ?>
         <?php print render($tabs); ?>
         <?php print render($page['help']); ?>

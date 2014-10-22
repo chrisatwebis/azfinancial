@@ -50,6 +50,22 @@
         var more = $(this).find(".more-link");
         $(this).find(".block__title").append(more);
       });
+      $('#block-webform-client-block-76', context).once('get_a_quote_accordion', function () {
+        var block = $(this);
+        var header = $(this).find(".block__title");
+        var content = $(this).find(".block__content");
+        header.append("<span class='arrow'></span>");
+        header.click(function(){
+          if (block.hasClass("expanded")) {
+            block.removeClass("expanded");
+            content.slideUp();
+          }
+          else {
+            block.addClass("expanded");
+            content.slideDown();
+          }
+        });
+      });
     }
   };
 
@@ -68,7 +84,6 @@
               var width = prev + next + $(this).outerWidth();
               $(this).children(".sf-megamenu").css({"left": -prev, width: width});*/
               $(this).children(".sf-megamenu").css({"left": 0, width: menu_width});
-
             }
           });
         }
@@ -92,8 +107,38 @@
     }
   };
 
+  Drupal.behaviors.sunflowerPriceSearchResultAccordion = {
+    attach: function (context, settings) {
+      /**
+      * Price search result accordion
+      **/
+      $('.plan_result_wrapper', context).once('resultAccordion', function () {
+        $(this).find(".deductible").each(function(){
+          var accordion = $(this);
+          var header = $(this).find(".deductible_header");
+          var content = $(this).find(".deductible_content");
+          var handler = $("<span class='accordion_btn'></span>");
+          header.append(handler);
+          handler.click(function(){
+            if (accordion.hasClass("collapsed")) {
+              accordion.removeClass("collapsed");
+              content.slideDown();
+            }
+            else {
+              accordion.addClass("collapsed");
+              content.slideUp();
+            }          
+          });
+        });
+      });
+    }
+  };
+  
   $( document ).ready(function() {
-    
+    //Add close button for mobile menu
+    $("<span class='close_btn'></span>").appendTo(".mm-menu").click(function(){
+      $(".mm-menu").trigger("close");
+    });
   });
 
 })(jQuery);

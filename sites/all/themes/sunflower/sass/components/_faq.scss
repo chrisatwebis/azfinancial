@@ -1,0 +1,43 @@
+//faq page - views
+.view-id-custom_content.view-display-id-page_2{
+	.view-filters{
+		margin-bottom: 20px;
+	}
+	.view-content{
+		&.ui-accordion{
+			.views-row{
+				margin-bottom: 10px;
+				.views-field-title{
+					background: $tab_blue;
+					padding: 0px;
+					margin: 0;
+					border: none;
+					a{
+						color: white;
+						font-size: 16px;
+						font-weight: $font_weight_semi_bold;
+						text-decoration: none;
+						display: block;
+						padding: 10px 40px 10px 20px;
+						text-align: left;
+					}
+					.ui-accordion-header-icon{
+						left: auto;
+						right: 20px;
+						background: image-url("accordion_arrow_down_white.png") no-repeat center center transparent;
+					}
+					&:hover, &.ui-state-active{
+						background-color: $yellow;
+						.ui-accordion-header-icon{
+							background-image: image-url("accordion_arrow_up_white.png");
+						}
+					}				
+				}
+				.ui-accordion-content{
+					height: auto !important;
+					padding: 15px 30px;
+				}
+			}
+		}
+	}
+}

@@ -22,8 +22,8 @@ $container-style: magic;
 $container-width: 1200px;
 
 // Susy Media Layouts @see http://susy.oddbird.net/guides/reference/#ref-media-layouts
-$tab: 44em 12; // At 44em use 12 columns.
-$desk: 70em 16; // At 70em use 16 columns.
+$tab: 740px 12; // At 44em use 12 columns.
+$desk: 960px 16; // At 70em use 16 columns.
 
 .l-user-bar,
 .l-header,
@@ -46,6 +46,15 @@ $desk: 70em 16; // At 70em use 16 columns.
   margin-bottom: $vert-spacing-unit;
 }
 
+.l-overlay{
+  position: relative;
+  z-index: 100;
+  @include span-columns(12 omega, 12); // Span 8 out of 12 columns.
+  .l-region--overlay{
+
+  }
+} 
+
 @include at-breakpoint($tab) { // At a given Susy Media Layout, use a given amount of columns.
   .l-user-bar,
   .l-header,
@@ -61,10 +70,10 @@ $desk: 70em 16; // At 70em use 16 columns.
   }
 
   .l-branding {
-    @include span-columns(4, 12); // Span 4 out of 12 columns.
+    @include span-columns(6, 16); // Span 4 out of 12 columns.
   }
   .l-region--header{
-    @include span-columns(8 omega, 12); // Span the last (omega) 8 columns of 12.
+    @include span-columns(10 omega, 16); // Span the last (omega) 8 columns of 12.
   }
   .l-region--navigation {
     clear: both;
@@ -96,14 +105,15 @@ $desk: 70em 16; // At 70em use 16 columns.
   .l-header{
     position: relative;
     .l-overlay{
-      position: absolute;
+      position: relative;
       z-index: 100;
-      right: 5px;
+      @include span-columns(5 omega, 12); // Span 8 out of 12 columns.
       .l-region--overlay{
-//        @include span-columns(4 omega, 12); // Span 8 out of 12 columns.
+        position: absolute;
+        width: 100%;
       }
     } 
-  } 
+  }
 }
 
 @include at-breakpoint($desk) {
@@ -161,5 +171,13 @@ $desk: 70em 16; // At 70em use 16 columns.
       @include omega; // This element spans the last (omega) column.
       clear: none;
     }
+  }
+  .l-header{
+    position: relative;
+    .l-overlay{
+      @include span-columns(4 omega, 12); // Span 8 out of 12 columns.
+      .l-region--overlay{
+      }
+    } 
   }
 }

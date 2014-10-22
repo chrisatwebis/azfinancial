@@ -1,0 +1,213 @@
+//blog teaser
+.node--blog--teaser{
+	overflow: hidden;
+	padding: 40px 0;
+	border-bottom: 1px solid $med_light_grey;	
+	.field--name-title{
+		a{
+			text-decoration: none;
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+	}
+	.field--name-field-image{
+		width: 50%;
+		float: left;
+		margin-right: 20px;
+		img{
+			width: 100%;
+			max-width: 100%;
+			height: auto;
+		}
+	}
+	.field--name-field-blog-category{
+		.field__label{
+			display: inline-block;
+			margin-right: 10px;
+		}
+		.field__items{
+			display: inline-block;
+			a{
+				color: $yellow;
+				text-decoration: none;
+				&:hover{
+					color: $dark_blue;
+					text-decoration: underline;
+				}
+			}
+		}
+		margin: 10px 0;
+	}
+	.field--name-node-link{
+		a{
+			background: image-url("narrow_arrow_right_yellow.png") no-repeat right center transparent;
+			padding-right: 26px;
+			color: $yellow;
+			font-size: 16px;
+			text-decoration: none;
+			&:hover{
+				text-decoration: underline;
+				background-image: image-url("narrow_arrow_right_blue.png");
+				color: $dark_blue;
+			}
+		}
+	}
+}
+//recent blog - carousel - home page
+.view-id-custom_content.view-display-id-page_1{
+	.views-row{
+		overflow: hidden;
+		padding: 40px 0;
+		border-bottom: 1px solid $med_light_grey;
+		.views-field-field-image{
+			width: 100%;
+			img{
+				width: 100%;
+				max-width: 100%;
+			}
+		}
+		.views-field-nothing{
+			width: 100%;
+			text-align: left;
+			.field-content{
+				padding: 0px;
+				display: block;
+				.field_title{
+					margin-top: 15px;
+					margin-bottom: 15px;
+					a{
+						color: $yellow;
+						text-decoration: none;
+						font-size: 24px;
+						font-weight: $font_weight_normal;
+						&:hover{
+							text-decoration: underline;
+						}
+					}
+				}
+				.field_created{
+					margin: 15px 0;
+					color: $light_grey;
+				}
+				.field_body{
+					margin-bottom: 20px;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					line-height: 130%;
+					color: $dark_grey;
+					p{
+						margin: 0 0 10px;
+					}
+				}
+				.field_link{
+					a{
+						background: image-url("narrow_arrow_right_yellow.png") no-repeat right center transparent;
+						padding-right: 26px;
+						color: $yellow;
+						font-size: 16px;
+						text-decoration: none;
+						&:hover{
+							text-decoration: underline;
+							background-image: image-url("narrow_arrow_right_blue.png");
+							color: $dark_blue;
+						}
+					}
+				}
+			}
+		}
+		&.views-row-first{
+			padding-top: 0px;
+		}
+		&.views-row-last{
+			border-bottom: 0px;
+		}
+	}
+	.pager{
+		list-style: none;
+		padding: 0px;
+		margin: 0px;
+		text-align: right;
+		li{
+			display: inline-block;
+			margin: 0 10px;
+			&.pager-previous{
+				a{
+					@extend .pager_previous;				
+				}
+			}
+			&.pager-current{
+				float: left;
+			}
+			&.pager-next{
+				a{
+					@extend .pager_next;
+				}
+			}		
+		}
+	}
+}
+
+.node--blog--full{
+	.field--name-post-date{
+		margin-bottom: 10px;
+	}
+	.field--name-field-image{
+
+	}
+	.field--name-field-blog-category{
+		margin-bottom: 10px;
+		.field__label{
+			margin-right: 10px;
+		}
+		.field__item{
+			color: $yellow;
+			a{
+				color: $yellow;
+				text-decoration: none;
+				&:hover{
+					text-decoration: underline;
+					color: $dark_blue;
+				}
+			}
+		}
+	}	
+}
+@include at-breakpoint($tab){
+	.node--blog--full{
+		.field--name-field-image{
+			width: 300px;
+			float: left;
+			margin-right: 20px;
+			margin-bottom: 10px;
+		}
+	}
+}
+@include at-breakpoint($desk){
+	.view-id-custom_content.view-display-id-page_1{
+		.views-row{
+			.views-field-field-image{
+				float: left;
+				width: 50%;
+			}
+			.views-field-nothing{
+				float: left;
+				width: 50%;
+				.field-content{
+					padding: 0px 20px;
+					.field_title{
+						margin-top: 0px;
+					}
+				}
+			}
+		}
+	}
+	.node--blog--full{
+		.field--name-field-image{
+			width: auto;
+			float: left;
+			margin-right: 20px;
+			margin-bottom: 10px;
+		}
+	}
+}

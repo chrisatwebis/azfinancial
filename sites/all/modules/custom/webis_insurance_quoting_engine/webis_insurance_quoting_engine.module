@@ -74,7 +74,7 @@ function webis_insurance_quoting_engine_visitor_canada_price_search(){
 	$birthday = $_GET['birthday'];
   $birthday_time = strtotime( $birthday );
 	//Insurance Amount
-	$coverage = $_GET['coverage'];	
+	$coverage = $_GET['coverage'];
 	$start = $_GET['start'];
 	$end = $_GET['end'];
 	$start_time = strtotime( $start );
@@ -86,22 +86,57 @@ function webis_insurance_quoting_engine_visitor_canada_price_search(){
 	//total days
 	$days = (($end_time - $start_time)/(60*60*24))+1;
 	$days = round($days);
+  setlocale(LC_MONETARY, 'en_US');
+
+  $previous_level_amount = webis_insurance_quoting_engine_vtc_get_previous_coverage($coverage);
+  $next_level_amount = webis_insurance_quoting_engine_vtc_get_next_coverage($coverage);;
+  $current_path = current_path();
+
+  $previous_link = l(t("Compare with @amount", array("@amount" => $previous_level_amount)), $current_path, array(
+    'query' => array(
+      "start" => $_GET['start'], 
+      "end" => $_GET['end'], 
+      "birthday" => $_GET['birthday'], 
+      "coverage" => $previous_level_amount,
+    )
+  ));
+  $next_link = l(t("Compare with @amount", array("@amount" => $next_level_amount)), $current_path, array(
+    "query" => array(
+      "start" => $_GET["start"], 
+      "end" => $_GET["end"], 
+      "birthday" => $_GET["birthday"], 
+      "coverage" => $next_level_amount,
+    )
+  ));
 
 	global $language;
 	$content = '
-		<div class="search_result_summary">
-			<span class="item"><span class="label">'.t("Current age:").'</span><span class="value">'.$current_age.'</span></span>
-		  <span class="item"><span class="label">'.t("Effective date age:").'</span><span class="value">'.$effective_date_age.'</span></span>
-			<span class="item"><span class="label">'.t("Coverage:").'</span><span class="value">'.$coverage.'</span></span>
-			<span class="item"><span class="label">'.t("Total days:").'</span><span class="value">'.$days.'</span></span>
-		</div>
+    <div class="price_search_result_header">
+  		<div class="price_search_result_summary">
+        <span class="item first-item summary_label">'.t("Plans For:").'</span>
+  			<span class="item age"><span class="label">'.t("Age:").'</span><span class="value">'.$current_age.'</span></span>
+  		  <span class="item effective_date_age"><span class="label">'.t("Effective Date Age:").'</span><span class="value">'.$effective_date_age.'</span></span>
+        <span class="item duration"><span class="label">'.t("Trip Duration:").'</span><span class="value">'.format_plural($days, "1 day", "@count days").'</span></span>
+  			<span class="item last-item coverage"><span class="label">'.t("Coverage:").'</span><span class="value">'.money_format('%.0n', $coverage).'</span></span>
+  		</div>
+      <div class="price_search_compare_btns">
+        <span class="compare_btn previous_level">'.$previous_link.'</span>
+        <span class="compare_btn next_level">'.$next_link.'</span>
+      </div>
+    </div>
 	';
   $plans = webis_insurance_quoting_engine_get_plans(VISITOR_INSURANCE);
   dpm($plans);
   $age = $current_age;
-  $deductiables = array();
-  $deductiables_no_spmcc = array();
-  $prices = array();
+  $deductibles = array();
+  $deductibles_no_spmcc = array();
+  $plan_prices = array();
+  $available_plan_ids = "";
+  //Initalize the tab;
+  $has_price = false;
+  $has_price_no_spmcc = false;
+  $search_price_result = "";
+  $search_price_result_no_spmcc = "";  
   //$key = entity id, $value = entity;
   foreach ($plans as $key => $value) {
     $which_age = webis_insurance_quoting_engine_get_tip_age_to_cal_premium($value);
@@ -117,26 +152,128 @@ function webis_insurance_quoting_engine_visitor_canada_price_search(){
     }
     $price = webis_insurance_quoting_engine_get_tip_total_price($value, $age, $coverage, TRUE, $days);
     $price_no_spmcc = webis_insurance_quoting_engine_get_tip_total_price($value, $age, $coverage, FALSE, $days);
+
     if (!empty($price) || !empty($price_no_spmcc)) {
-      $prices[$key]["title"] = $value->title;
-      $prices[$key]["id"] = $key;
+      $plan_prices[$key]["title"] = $value->title;
+      $plan_prices[$key]["id"] = $key;
+      $available_plan_ids .= $key."+";
       if (!empty($price)) {
-        $prices[$key]["prices"] = $price;
-        $deductiables = array_unique (array_merge ($deductiables, array_keys($price)));
+        $has_price = true;
+        $plan_prices[$key]["prices"] = $price;
+        $deductibles = array_unique (array_merge ($deductibles, array_keys($price)));
       }
       if (!empty($price_no_spmcc)) {
-        $prices[$key]["prices_no_spmcc"] = $price_no_spmcc;        
-        $deductiables_no_spmcc = array_unique (array_merge ($deductiables_no_spmcc, array_keys($price_no_spmcc)));
+        $has_price_no_spmcc = true;        
+        $plan_prices[$key]["prices_no_spmcc"] = $price_no_spmcc;        
+        $deductibles_no_spmcc = array_unique (array_merge ($deductibles_no_spmcc, array_keys($price_no_spmcc)));
       }
-
     }
   }
-  sort($deductiables);
-  sort($deductiables_no_spmcc);
-  dpm($prices);
-  dpm($deductiables);
-  dpm($deductiables_no_spmcc);
+  $available_plan_ids .= "0";
+  $plan_carousel = views_embed_view('custom_content', 'block_7', $available_plan_ids);
+  $content .= $plan_carousel;
+  sort($deductibles);
+  sort($deductibles_no_spmcc);
+  dpm($available_plan_ids);
+  dpm($plan_prices);
+  dpm($deductibles);
+  dpm($deductibles_no_spmcc);
+
+  $search_price_result = webis_insurance_quoting_engine_build_price_search_result($plan_prices, $deductibles, $days, true);
+  $search_price_result_no_spmcc = webis_insurance_quoting_engine_build_price_search_result($plan_prices, $deductibles, $days, false);
+
+  //Build the quicktab.
+  $tabs = array(
+    'spmcc' => array(
+      'title' => t("With Stable Pre-Existing Medical Condition Coverage"),
+      'contents' => array('#markup' => $search_price_result, 'weight' => 1),
+    ),
+    'nospmcc' => array(
+      'title' => t("Without Stable Pre-Existing Medical Condition Coverage"),
+      'contents' => array('#markup' => $search_price_result_no_spmcc, 'weight' => 2),
+    ),
+  );
+
+  $qt_name = 'price_search_result';
+
+  $qt_options = array(
+    'style' => 'nostyle',
+    'ajax' => FALSE,
+    'default_tab' => 'spmcc',
+  );
+
+  $quicktabs_renderrable = quicktabs_build_quicktabs($qt_name, $qt_options, $tabs);
+  dpm($quicktabs_renderrable);
+  $quicktabs_render = drupal_render($quicktabs_renderrable['content']);
+  $quicktabs_content = "
+    <div class='price_search_result_wrapper'>
+    ".$quicktabs_render."
+    </div>
+  ";
+
+  $content .= $quicktabs_content;
 	return $content;
+}
+
+/**
+* Build the price search result table
+**/
+function webis_insurance_quoting_engine_build_price_search_result($plan_prices, $deductibles, $days, $has_spmcc = true) {
+  //Set up the search result wrapper
+  if ($has_spmcc) {
+    $search_price_result = "<div class='plan_result_wrapper spmcc'>";
+  }
+  else {
+    $search_price_result = "<div class='plan_result_wrapper no_spmcc'>";
+  }
+  //Setup the search result header
+  $search_price_result .= "<div class='plan_result_header'>";
+  foreach ($plan_prices as $key => $plan_price) {
+    $search_price_result .= "<span class='plan_item'><span class='price_per_day'>".t("<span class='part_1'>Price</span><span class='part_2'>/Day</span>")."</span><span class='price_total'>".t("Total")."</span></span>";
+  }
+  $search_price_result .= "</div>";
+  //Setup the search result content.
+  $search_price_result .= "<div class='plan_result_content'>";
+  foreach ($deductibles as $key => $deductible) {
+    $search_price_result .= "<div class='deductible deductible_".$deductible."'>";
+    $search_price_result .= "<div class='deductible_header'><span class='label'>".t("Deductiable").":</span><span class='value'>".money_format('%.0n', $deductible)."</span></div>";
+    $search_price_result .= "<div class='deductible_content'>";
+    dpm($plan_prices);
+    foreach ($plan_prices as $key => $plan_price) {
+      if ($key == count($plan_prices)) {
+        $search_price_result .= "<span class='plan_price last'>";        
+      }
+      else {
+        $search_price_result .= "<span class='plan_price'>";
+      }
+      if (isset($plan_price['prices'][$deductible])) {
+        $deductible_price = round($plan_price['prices'][$deductible], 2);
+        $search_price_result .= "<span class='price_per_day'>".round($deductible_price/$days, 2)."</span><span class='price_total'>".$deductible_price."</span>";
+      }
+      else {
+        $search_price_result .= "<span class='price_per_day'>".t("N/A")."</span><span class='price_total'>".t("N/A")."</span>";
+      }
+      $search_price_result .= "</span>";
+    }
+    $search_price_result .= "</div>";
+    //end of <!--div class='deductible_content'-->
+    $search_price_result .= "</div>";
+    //end of <!--div class='deductible'-->
+  }
+  $search_price_result .= "</div>";
+  //End of <!--div class='plan_result_content'-->
+
+  //Buy this plan / View plan details
+  $search_price_result .= "<div class='plan_result_footer'>";
+  foreach ($plan_prices as $key => $plan_price) {
+    $search_price_result .= "<span class='plan_item'><span class='buy_plan cta'>".l(t("Buy This Plan"), "buy-plan", array("query" => array("id" => $plan_price['id'])))."</span><span class='view_plan cta'>".l(t("View Details"), "view-plan", array("query" => array("id" => $plan_price['id'])) )."</span></span>";
+  }
+  $search_price_result .= "</div>";
+
+
+  $search_price_result .= "</div>";
+  //End of <--div class='plan_result_wrapper'-->
+  return $search_price_result;
 }
 
 /**

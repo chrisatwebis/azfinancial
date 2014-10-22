@@ -45,8 +45,18 @@
 .l-region--sidebar-second {
   margin-bottom: 20px; }
 
-@media (min-width: 44em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000359}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000349}}
+.l-overlay {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  float: right;
+  margin-right: 0;
+  *margin-left: -1em;
+  display: inline; }
+
+@media (min-width: 740px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000368}}
   .l-user-bar,
   .l-header,
   .l-hero,
@@ -59,23 +69,23 @@
   .l-footer {
     max-width: 1190px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000363}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000372}}
   .l-branding {
-    width: 32.20339%;
+    width: 36.70886%;
     float: left;
-    margin-right: 1.69492%; }
+    margin-right: 1.26582%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000366}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000375}}
   .l-region--header {
-    width: 66.10169%;
+    width: 62.02532%;
     float: right;
     margin-right: 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000369}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000378}}
   .l-region--navigation {
     clear: both; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000375}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000384}}
   .l-region--postscript-first,
   .l-region--postscript-second,
   .l-region--postscript-third {
@@ -83,20 +93,20 @@
     float: left;
     margin-right: 1.69492%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000378}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000387}}
   .l-region--postscript-fourth {
     width: 23.72881%;
     float: right;
     margin-right: 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000385}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000394}}
   .has-sidebar-first .l-content,
   .has-sidebar-second .l-content,
   .has-two-sidebars .l-content {
     width: 66.10169%;
     float: left;
     margin-right: 1.69492%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000389}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000398}}
   .has-sidebar-first .l-region--sidebar-first,
   .has-sidebar-first .l-region--sidebar-second,
   .has-sidebar-second .l-region--sidebar-first,
@@ -106,22 +116,28 @@
     width: 32.20339%;
     float: right;
     margin-right: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000392}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003101}}
   .has-sidebar-first .l-region--sidebar-second,
   .has-sidebar-second .l-region--sidebar-second,
   .has-two-sidebars .l-region--sidebar-second {
     clear: right; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000396}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003105}}
   .l-header {
     position: relative; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\0000398}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003107}}
     .l-header .l-overlay {
-      position: absolute;
+      position: relative;
       z-index: 100;
-      right: 5px; } }
-@media (min-width: 70em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003119}}
+      width: 40.67797%;
+      float: right;
+      margin-right: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003111}}
+      .l-header .l-overlay .l-region--overlay {
+        position: absolute;
+        width: 100%; } }
+@media (min-width: 960px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003129}}
   .l-user-bar,
   .l-header,
   .l-hero,
@@ -134,58 +150,67 @@
   .l-footer {
     max-width: 1190px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003123}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003133}}
   .l-branding {
     width: 36.70886%;
     float: left;
     margin-right: 1.26582%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003126}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003136}}
   .l-region--header {
     width: 62.02532%;
     float: right;
     margin-right: 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003131}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003141}}
   .has-sidebar-first .l-content {
     width: 74.68354%;
     float: right;
     margin-right: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003134}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003144}}
   .has-sidebar-first .l-region--sidebar-first {
     width: 24.05063%;
     float: left;
     margin-right: 1.26582%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003139}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003149}}
   .has-sidebar-second .l-content {
     width: 74.68354%;
     float: left;
     margin-right: 1.26582%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003142}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003152}}
   .has-sidebar-second .l-region--sidebar-second {
     width: 24.05063%;
     float: right;
     margin-right: 0;
     clear: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003149}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003159}}
   .has-two-sidebars .l-content {
     width: 49.36709%;
     float: left;
     margin-right: 1.26582%;
     margin-left: 25.31646%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003154}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003164}}
   .has-two-sidebars .l-region--sidebar-first,
   .has-two-sidebars .l-region--sidebar-second {
     width: 24.05063%;
     float: left;
     margin-right: 1.26582%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003157}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003167}}
   .has-two-sidebars .l-region--sidebar-first {
     margin-left: -75.94937%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003160}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003170}}
   .has-two-sidebars .l-region--sidebar-second {
     float: right;
     margin-right: 0;
-    clear: none; } }
+    clear: none; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003175}}
+  .l-header {
+    position: relative; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/layouts\/unlimited\/unlimited\.layout\.scss}line{font-family:\00003177}}
+    .l-header .l-overlay {
+      width: 32.20339%;
+      float: right;
+      margin-right: 0; } }

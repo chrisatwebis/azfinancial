@@ -25,10 +25,71 @@
   @extend .standard_button;
   background: $yellow;
   box-shadow: 3px 3px 2px 0px $yellow_grey;
+  &:hover{
+    background-color: $dark_blue;
+    box-shadow: 3px 3px 2px 0px $extra_dark_blue;
+  }
 }
-
+.standard_yellow_left_arrow {
+  @extend .standard_yellow;
+  background: image-url("left_arrow_white.png") no-repeat left center $yellow;
+  padding-left: 35px;
+  &:hover{
+    background-color: $dark_blue;
+  }
+}
+.standard_yellow_right_arrow {
+  @extend .standard_yellow;
+  background: image-url("right_arrow_white.png") no-repeat right center $yellow;
+  padding-right: 35px;
+  &:hover{
+    background-color: $dark_blue;
+  }
+}
 .standard_blue {
   @extend .standard_button;
   background: $dark_blue;
-  box-shadow: 3px 3px 2px 0px #000;
+  box-shadow: 3px 3px 2px 0px $extra_dark_blue;
+  &:hover{
+    background-color: $yellow;  
+    box-shadow: 3px 3px 2px 0px $yellow_grey;
+  }
+}
+.standard_blue_left_narrow_arrow {
+  @extend .standard_blue;
+  background: image-url("narrow_arrow_left_white.png") no-repeat 10px center $extra_dark_blue;
+  padding-left: 45px;
+  &:hover{
+    background-color: $yellow;
+  }
+}
+.standard_blue_right_narrow_arrow {
+  @extend .standard_blue;
+  background: image-url("narrow_arrow_right_white_10.png") no-repeat right center $extra_dark_blue;
+  padding-right: 45px;
+  &:hover{
+    background-color: $yellow;
+  }
+}
+.pager_next {
+  @extend .standard_blue_right_narrow_arrow;
+  border-radius: 2px;
+  background-color: $tab_blue;
+}
+.pager_previous {
+  @extend .standard_blue_left_narrow_arrow;
+  border-radius: 2px;  
+  background-color: $tab_blue;
+}
+.read_more_link {
+  font-size: 14px;
+  color: $light_blue;
+  text-decoration: none;
+  padding-right: 30px;
+  background: image-url("narrow_arrow_right_blue.png") right center no-repeat transparent;
+  &:hover{
+    color: $yellow;
+    background-image: image-url("narrow_arrow_right_yellow.png");
+    text-decoration: underline;
+  }  
 }

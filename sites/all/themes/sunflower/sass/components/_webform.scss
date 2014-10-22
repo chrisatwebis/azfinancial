@@ -7,48 +7,79 @@ input.webform-calendar{
 }
 
 #webform-client-form-76{
-	.form-item{
-		margin-bottom: 5px;
+	margin: 0;
+	padding: 0 0 10px;
+	background: $extra_light_grey;
+	.webform-component{
+		margin: 15px auto;
+		display: block;
+		width: 280px;
 		label{
 			margin-bottom: 2px;
 			font-weight: $font_weight_normal;
 		}
 		&.webform-component--steps{
-			margin: -15px -15px 15px;
+			margin: 0;
+			display: block;
 			background: $dark_grey;
+			width: 100%;
 			ol{
-				padding: 10px 30px;
+				padding: 10px;
 				list-style: none;
 				margin: 0px;
 				overflow: hidden;
 				width: 100%;
 				li{
 					list-style: none;
-					width: 27%;
-					float: left;
-					margin: 0 3%;
+			    @include span-columns(4, 12); // Span 12 out of 12 columns.
 					color: white;
-					font-size: 15px;
+					font-size: 13px;
 					font-weight: $font_weight_semi_bold;
 					text-align: center;
+					&:last-child, &.last-step{
+				    @include span-columns(4 omega, 12); // Span 12 out of 12 columns.						
+					}
 				}
 			}
 		}
+	}
+	.form-actions{
+		margin: 15px;
+		text-align: center;
 	}
 }
 .page-node-76{
 	.node--webform--full{
 		#webform-client-form-76{
-			width: 380px;
-			background: $extra_light_grey;
-			padding: 15px;
 			.form-item{
 				&.webform-component--steps{
-					margin: -15px -15px 15px;
 					ol{
 					}
 				}
 			}
 		}
 	}	
+}
+@include at-breakpoint($desk){
+	.page-node-76{
+		.node--webform--full{
+			#webform-client-form-76{
+				.webform-component{
+					margin: 10px 2%;
+					display: inline-block;
+					width: 45%;
+					&.webform-component--steps{
+						width: 100%;
+						margin: 0px;
+						display: block;
+					}
+				}
+			}
+		}
+	}
+	#webform-client-form-76{
+		.webform-component{
+			margin: 15px 20px;
+		}
+	}
 }

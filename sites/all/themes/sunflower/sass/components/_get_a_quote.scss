@@ -1,0 +1,209 @@
+.page-get-a-quote{
+	//visitor to canada insurance price search result page
+	&.page-get-a-quote-visitor-to-canada-insurance{
+		.price_search_result_header{
+			padding: 20px 0;
+			margin-bottom: 15px;
+			overflow: hidden;
+			.price_search_result_summary{
+				@include span-columns(8, 12);
+				.item{
+					margin-right: 15px;
+					font-size: 16px;
+					line-height: 34px;
+					&.summary_label{
+						color: $yellow;
+					}
+					&.last-item{
+						margin-right: 0px;
+					}
+					.label{
+						margin-right: 5px;
+						color: $dark_blue;
+					}
+				}
+			}
+			.price_search_compare_btns{
+				@include span-columns(4 omega, 12);
+				text-align: right;
+				.compare_btn{
+					@extend .standard_yellow;
+
+					&.next_level{
+						margin: 0 5px;
+						@extend .standard_yellow_right_arrow;
+					}
+					&.previous_level{
+						@extend .standard_yellow_left_arrow;
+					}
+					a{
+						color: white;
+						font-size: 12px;
+						text-decoration: none;
+						font-weight: bold;
+					}
+				}
+			}
+		}
+		.view-id-custom_content.view-display-id-block_7{
+			.view-header{
+				margin: 0 0 15px;
+			}
+			.owl-item{
+				text-align: center;
+				.views-field-field-insurance-company-logo{
+					border-right: 1px solid lightgrey;
+				}
+				.views-field-title{
+					a{
+						color: black;
+						font-size: 12px;
+						text-decoration: none;
+						&:hover{
+							text-decoration: underline;
+						}
+					}
+				}
+			}
+		}
+		.price_search_result_wrapper{
+			.quicktabs-wrapper{
+				ul.quicktabs-tabs{
+					padding: 0px 0 10px;
+					margin: 0px;
+					background: $yellow;
+					overflow: hidden;
+					> li{
+						background: $tab_blue;
+						padding: 10px;
+						@include span-columns(6, 12);				
+						display: inline-block;
+						text-align: center;
+						&.active{
+							background: $yellow;
+						}
+						a{
+							color: white;
+							text-decoration: none;
+							font-weight: bold;
+							&:hover{
+								text-decoration: underline;
+							}
+						}
+						&:last-child{
+							@include span-columns(6 omega, 12);
+						}
+						&:hover{
+							@extend .active;
+						}
+					}
+				}
+			}
+			.plan_result_wrapper{
+				.plan_result_header{
+					background: $light_grey;
+					color: $extra_light_grey;
+					.plan_item{
+						color: white;
+						width: 12.5%;
+						display: inline-block;
+						padding: 10px;
+						.price_per_day{
+							padding: 10px;
+							display: inline-block;
+							width: 50%;
+							text-align: center;
+							.part_1{
+								display: block;
+							}
+						}
+						.price_total{
+							padding: 10px;
+							display: inline-block;
+							vertical-align: text-bottom;
+							width: 50%;
+							text-align: center;
+						}
+					}
+				}
+				.plan_result_footer{
+					.plan_item{
+						color: white;
+						width: 12.5%;
+						display: inline-block;
+						padding: 5px;
+						text-align: center;
+						.cta{
+							display: block;
+							&.buy_plan{
+								@extend .standard_blue;
+								margin-bottom: 10px;
+							}
+							&.view_plan{
+								@extend .standard_yellow;
+							}
+							a{
+								color: white;
+								font-size: 12px;
+								font-weight: bold;
+								text-transform: uppercase;
+								text-decoration: none;
+								&:hover{
+									text-decoration: underline;
+								}
+							}
+						}
+					}
+				}
+				.plan_result_content{
+					.deductible{
+						.deductible_header{
+							background: $extra_light_grey;
+							padding: 15px;
+							color: $yellow;
+							font-size: 18px;
+							.label{
+								margin-right: 15px;
+							}
+							.accordion_btn{
+								float: right;
+								width: 25px;
+								height: 25px;
+								display: block;
+								background: image-url("accordion_close_btn.png") no-repeat center center transparent;
+								cursor: pointer;	
+							}
+						}
+						&.collapsed{
+							.accordion_btn{
+								background: image-url("accordion_open_btn.png") no-repeat center center transparent;
+							}
+						}
+						.deductible_content{
+							background: white;
+							color: $light_grey;
+							.plan_price{
+								width: 12.5%;
+								display: inline-block;
+								padding: 10px;
+								border-right: 1px solid lightgrey;
+								.price_per_day{
+									padding: 10px;
+									display: inline-block;
+									width: 50%;
+									text-align: center;							
+								}
+								.price_total{
+									@extend .price_per_day;
+								}
+								&.last{
+									border-right: 0px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

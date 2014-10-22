@@ -1,0 +1,142 @@
+.node--full{
+	.field--name-field-pwt-tab{
+		display: none;
+		.field-collection-tabs{
+			border: 0px;
+			padding: 0px;
+			ul.ui-tabs-nav{
+				padding: 0px;
+				border: 0px;
+				background: $dark_blue;
+				border-radius: 0px;
+				li.ui-state-default{
+					background: $tab_blue;
+					color: white;
+					border: 0px;
+					border-radius: 0px;
+					padding: 0px;
+					margin: 0px 2px 0 0;
+					a{
+						color: white;
+						padding: 10px 20px;
+					}
+					&.ui-tabs-active{
+						background: $yellow;
+						&:after{
+					    background: image-url("arrow_down_yellow.png") no-repeat center bottom transparent;
+					    content: ' ';
+					    display: inline-block;
+					    height: 20px;
+					    width: 30px;
+					    position: absolute;
+					    bottom: -15px;
+					    left: 50%;
+					    margin-left: -15px;
+						}
+					}
+				}
+			}
+			.ui-widget-content{
+				padding: 20px 10px;
+			}
+		}
+	}
+	.field--name-tab-clone{
+		.field--name-field-pwt-tab{
+			display: block;
+			.views-row{
+				margin-bottom: 10px;
+				.views-field-field-pwt-tab-title{
+					background: $tab_blue;
+					padding: 0px;
+					margin: 0;
+					border: none;
+					a{
+						color: white;
+						font-size: 16px;
+						font-weight: $font_weight_semi_bold;
+						text-decoration: none;
+						display: block;
+						padding: 10px 40px 10px 20px;
+						text-align: left;
+					}
+					.ui-accordion-header-icon{
+						left: auto;
+						right: 20px;
+						background: image-url("accordion_arrow_down_white.png") no-repeat center center transparent;
+					}
+					&:hover, &.ui-state-active{
+						background-color: $yellow;
+						.ui-accordion-header-icon{
+							background-image: image-url("accordion_arrow_up_white.png");
+						}
+					}				
+				}
+				.ui-accordion-content{
+					height: auto !important;
+					padding: 10px 15px;
+					border: 1px solid $border_grey;
+				}
+			}
+		}
+	}
+	.field--name-field-pwt-tab-badge{
+		.view-content{
+			.views-row{
+		    @include box-shadow($border_grey 2px 2px 2px);
+		    border: 1px solid #dcd1cb;
+		    color: $dark_grey;
+		    margin-bottom: 15px;
+		    .field--name-field-pwt-tab-badge-image{
+			    img{
+			    	width: 100%;
+			    	height: auto;
+			    }		    
+		    }
+		    .field--name-field-pwt-tab-badge-title{
+		    	padding: 10px 20px;
+		    	height: 45px;
+		    	font-size: 14px;
+		    }
+		    .field--name-field-pwt-tab-badge-desc{
+		    	padding: 10px 20px;
+		    	height: 150px;
+		    	overflow: hidden;
+		    	font-size: 12px;
+		    	line-height: 18px;
+		    }
+
+			}
+		}
+	}
+	.views-field-field-pwt-tab-badge{
+		@extend .field--name-field-pwt-tab-badge;
+	}
+	.field--name-field-insurance-category{
+		margin: 10px 0;
+	}
+}
+@include at-breakpoint($tab){
+	.node--full{
+		.field--name-field-pwt-tab-badge{
+			.view-content{
+				.views-row{
+					@include span-columns(6, 12); // Span 6 out of 16 columns.
+					&.views-row-even{
+						@include span-columns(6 omega, 12); // Span 6 out of 16 columns.					
+					}
+				}
+			}
+		}	
+	}
+}
+@include at-breakpoint($desk){
+	.node--full{
+		.field--name-field-pwt-tab{
+			display: block;
+		}
+		.field--name-tab-clone{
+			display: none;
+		}
+	}
+}

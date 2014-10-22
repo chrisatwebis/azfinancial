@@ -1,0 +1,474 @@
+//category intro
+#block-quicktabs-category-intro{
+	display: none;
+	.block__content{
+		.quicktabs-tabs{
+			padding: 0px;
+			margin: 0px;
+			width: 100%;
+			background: $dark_blue;
+			display: inline-block;
+			font-size: 0px;
+			li{
+				padding: 0 50px;
+				@include span-columns(36, 108); // Span 6 out of 16 columns.
+				background: $tab_blue;
+				position: relative;
+				a{
+					color: #f0f0f0;
+					font-size: 20px;
+					font-weight: $font_weight_semi_bold;
+					text-decoration: none;
+					display: block;
+					padding: 22px 0 21px 50px;
+					text-align: center;
+					&#quicktabs-tab-category_intro-0{
+						background: image-url("visitor_to_canada_icon.png") left center no-repeat transparent;
+					}
+					&#quicktabs-tab-category_intro-1{
+						background: image-url("travel_insurance_icon.png") left center no-repeat transparent;
+					}
+					&#quicktabs-tab-category_intro-2{
+						background: image-url("student_insurance_icon.png") left center no-repeat transparent;
+					}
+				}
+				&:hover, &.active{
+					background: $yellow;
+					a{
+						color: white;
+					}
+					&:after{
+				    background: image-url("arrow_down_yellow.png") no-repeat center center transparent;
+				    content: ' ';
+				    display: inline-block;
+						height: 36px;
+						width: 40px;
+						position: absolute;
+						bottom: -30px;
+						left: 50%;
+						margin-left: -20px;
+					}
+				}
+				&:last-child{
+					@include span-columns(36 omega, 108);
+				}
+			}
+		}
+		.quicktabs_main{
+			.quicktabs-tabpage{
+				.view-id-custom_content.view-display-id-block_5{
+					> .view-content{
+						@include span-columns(72, 108); // Span 6 out of 16 columns.
+						margin-top: 40px;
+						margin-bottom: 20px;
+						padding-right: 15px;
+						display: inline-block;
+						border-right: 1px solid $dark_blue;						
+						ul{
+							list-style: none;
+							margin: 0px;
+							padding: 0px;
+							.views-row{
+								list-style: none;
+								margin-bottom: 15px;
+								.views-field-title{
+									a{
+										font-size: 20px;
+										font-weight: $font_weight_semi_bold;
+										color: $light_grey;
+										text-decoration: none;
+										&:hover{
+											text-decoration: underline;
+										}
+									}
+								}
+								.views-field-field-pwt-image{
+									display: none;
+								}
+								.views-field-body{
+									color: $dark_grey;
+									p{
+										margin-top: 5px;
+										margin-bottom: 5px;
+									}
+								}
+								.views-field-view-node{
+									.field-content{
+										a{
+											font-size: 14px;
+											color: $light_blue;
+											text-decoration: none;
+											padding-right: 30px;
+											background: image-url("narrow_arrow_right_blue.png") right center no-repeat transparent;
+											&:hover{
+												color: $yellow;
+												background-image: image-url("narrow_arrow_right_yellow.png");
+												text-decoration: underline;
+											}
+										}									
+									}
+								}
+								&.views-row-last{
+									margin-bottom: 0px;
+								}
+								&.views-row-first{
+									.views-field-field-pwt-image{
+										display: block;
+										float: left;
+										margin-right: 20px
+									}
+								}
+							}						
+						}
+
+					}
+					.attachment-after{
+						@include span-columns(36 omega, 108); // Span 6 out of 16 columns.
+						margin-top: 40px;
+						margin-bottom: 20px;
+						padding-left: 15px;
+						display: inline-block;
+						vertical-align: top;
+						.view-header{
+							font-size: 20px;
+							color: $light_grey;
+							font-weight: $font_weight_semi_bold;
+							margin-bottom: 10px;
+						}
+						.view-content{
+							padding: 0px;
+							border-right: 0px;
+							ul{
+								list-style: none;
+								padding: 0px;
+								margin: 0px;
+								.views-row{
+									overflow: hidden;
+									margin: 10px 0;
+									.views-field-title{
+										a{
+											font-size: 13px;
+											font-weight: $font_weight_normal;
+											color: $light_grey;
+											padding-left: 20px;
+											float: left;
+											background: image-url("list_icon_yellow.png") left 4px no-repeat transparent;
+											text-decoration: none;
+											&:hover{
+												text-decoration: underline;
+											}
+										}
+									}
+								}
+							}
+						}
+						.more-link{
+							a{
+								@extend .read_more_link;					
+							}
+						}
+					}
+					.view-footer{
+						clear: both;
+						.view-header{
+							background: $dark_blue;
+							padding: 14px;
+							color: white;
+							text-align: right;
+							position: relative;
+							.section_title{
+								float: left;
+								font-size: 20px;
+								line-height: 20px;
+								font-weight: $font_weight_semi_bold;
+								padding-left: 40px;
+							}
+							.section_tip{
+								text-align: right;
+								margin-right: 30px;
+							}
+							.section_link{
+								text-align: right;
+							}
+							&:after{
+						    background: image-url("arrow_down_blue.png") no-repeat center center transparent;
+						    content: ' ';
+						    display: inline-block;
+								height: 36px;
+								width: 40px;
+								position: absolute;
+								bottom: -30px;
+								left: 50%;
+								margin-left: -20px;
+							}
+						}
+						.view-content{
+							background: $extra_light_grey;
+							width: 100%;
+							border-right: 0px;
+							padding: 40px 50px 20px;
+							.owl-item{
+								text-align: center;
+								.views-field-title{
+									display: block;
+									text-align: center;
+									padding: 0 10px;
+									a{
+										color: black;
+										text-decoration: none;
+										font-size: 12px;
+										&:hover{
+											color: $yellow;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#block-quicktabs-category-intro-mobile{
+	.ui-accordion-header{
+		background-color: $tab_blue;
+		background-position: 20px center;
+		background-repeat: no-repeat;
+		padding: 0px;
+		margin: 0 0 5px;
+		border: none;
+		a{
+			color: white;
+			font-size: 20px;
+			font-weight: $font_weight_semi_bold;
+			text-decoration: none;
+			display: block;
+			padding: 15px 0 15px 70px;
+			text-align: left;
+		}
+		.ui-accordion-header-icon{
+			left: auto;
+			right: 20px;
+			background: image-url("accordion_arrow_down_white.png") no-repeat center center transparent;
+		}
+		&#ui-accordion-quickset-category_intro_mobile-header-0{
+			background-image: image-url("visitor_to_canada_icon_40.png");
+		}
+		&#ui-accordion-quickset-category_intro_mobile-header-1{
+			background-image: image-url("travel_insurance_icon_40.png");
+		}
+		&#ui-accordion-quickset-category_intro_mobile-header-2{
+			background-image: image-url("student_insurance_icon_40.png");
+		}
+		&:hover, &.ui-state-active{
+			background-color: $yellow;
+			.ui-accordion-header-icon{
+				background-image: image-url("accordion_arrow_up_white.png");
+			}
+		}
+	}
+	.ui-accordion-content{
+		margin: 0;
+		border: 0px;
+		padding: 15px 10px;
+		height: auto !important;
+		.view-id-custom_content.view-display-id-block_5{
+			> .view-content{
+				padding-bottom: 30px;
+				margin-bottom: 30px;
+				border-bottom: 1px solid grey;
+				ul{
+					list-style: none;
+					margin: 0px;
+					padding: 0px;
+					.views-row{
+						list-style: none;
+						margin-bottom: 20px;
+						.views-field-title{
+							margin-bottom: 15px;
+							a{
+								font-size: 20px;
+								font-weight: $font_weight_semi_bold;
+								color: $light_grey;
+								text-decoration: none;
+								&:hover{
+									text-decoration: underline;
+								}
+							}
+						}
+						.views-field-field-pwt-image{
+							display: none;
+							margin-bottom: 10px;
+							img{
+								width: 100%;
+								height: auto;
+							}
+						}
+						.views-field-body{
+							color: $dark_grey;
+							margin-bottom: 15px;
+							p{
+								margin-top: 5px;
+								margin-bottom: 5px;
+							}
+						}
+						.views-field-view-node{
+							.field-content{
+								a{
+									@extend .read_more_link;
+								}									
+							}
+						}
+						&.views-row-last{
+							margin-bottom: 0px;
+						}
+						&.views-row-first{
+							.views-field-field-pwt-image{
+								display: block;
+							}
+						}
+					}						
+				}
+			}
+			.attachment-after{
+				margin: 0px;
+				padding: 0px;
+				display: inline-block;
+				vertical-align: top;
+				.view-header{
+					font-size: 20px;
+					color: $light_grey;
+					font-weight: $font_weight_semi_bold;
+					margin-bottom: 10px;
+				}
+				.view-content{
+					padding: 0px;
+					border-right: 0px;
+					ul{
+						list-style: none;
+						padding: 0px;
+						margin: 0px;
+						.views-row{
+							overflow: hidden;
+							margin: 10px 0;
+							.views-field-title{
+								a{
+									font-size: 13px;
+									font-weight: $font_weight_normal;
+									color: $light_grey;
+									padding-left: 20px;
+									float: left;
+									background: image-url("list_icon_yellow.png") left 4px no-repeat transparent;
+									text-decoration: none;
+									&:hover{
+										text-decoration: underline;
+									}
+								}
+							}
+						}
+					}
+				}
+				.more-link{
+					margin-bottom: 10px;
+					a{
+						@extend .read_more_link;					
+					}
+				}
+			}
+			.view-footer{
+				clear: both;
+				.view-header{
+					background: $dark_blue;
+					padding: 14px;
+					color: white;
+					text-align: center;
+					position: relative;
+					.section_title{
+						display: block;
+						font-size: 20px;
+						line-height: 20px;
+						font-weight: $font_weight_semi_bold;
+						margin-bottom: 15px;
+					}
+					.section_tip{
+						display: none;
+					}
+					.section_link{
+						display: block;
+					}
+					&:after{
+				    background: image-url("arrow_down_blue.png") no-repeat center center transparent;
+				    content: ' ';
+				    display: inline-block;
+						height: 36px;
+						width: 40px;
+						position: absolute;
+						bottom: -30px;
+						left: 50%;
+						margin-left: -20px;
+					}
+				}
+				.view-content{
+					background: $extra_light_grey;
+					width: 100%;
+					border-right: 0px;
+					padding: 40px 20px 20px;
+					.owl-theme{
+						.owl-item{
+							text-align: center;
+							.views-field-title{
+								display: block;
+								text-align: center;
+								padding: 0 10px;
+								a{
+									color: black;
+									text-decoration: none;
+									font-size: 12px;
+									&:hover{
+										color: $yellow;
+									}
+								}
+							}
+						}
+						.owl-controls{
+							margin-top: 30px;
+							.owl-buttons{
+								div{
+									top: auto;
+									bottom: -10px;
+									&.owl-prev{
+										left: -10px;
+										&:hover{
+											background-image: image-url("carousel_arrow_left_active.png");										
+										}
+									}
+									&.owl-next{
+										right: -10px;
+										&:hover{
+											background-image: image-url("carousel_arrow_right_active.png");
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+//Tab
+@include at-breakpoint($tab){
+
+}
+//Desk
+@include at-breakpoint($desk){
+	#block-quicktabs-category-intro{
+		display: block;
+	}
+	#block-quicktabs-category-intro-mobile{
+		display: none;
+	}
+}

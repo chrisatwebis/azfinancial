@@ -1,0 +1,93 @@
+.node--testimonials--full{
+	list-style: none;
+	padding: 40px 80px;
+	margin: 0px;
+	position: relative;
+	background: $super_light_grey;
+	.field--name-body{
+		font-weight: normal;
+		color: $dark_grey;
+		font-style: italic;
+		line-height: 24px;
+		margin-bottom: 20px;
+	}
+	.field--name-field-testimonials-client{
+		display: inline-block;
+		margin-right: 10px;
+		color: $tab_blue;
+		font-weight: bold;
+	}
+	.field--name-field-testimonials-date{
+		@extend .field--name-field-testimonials-client;
+	}
+	&:before {
+    background: image-url("quote_left.png") no-repeat center center transparent;
+    content: ' ';
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+  &:after {
+    background: image-url("quote_right.png") no-repeat center center transparent;
+    content: ' ';
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+//testimonials page
+.view-id-custom_content.view-display-id-page_3{
+	.view-header{
+		padding: 10px 25px 20px;
+	}
+	.view-content{
+		ul{
+			padding: 0px;
+			margin: 0px;
+		}
+		.views-row{
+			list-style: none;
+			padding: 40px 80px;
+			margin: 0px;
+			color: $tab_blue;
+			font-weight: bold;
+			position: relative;
+			&.views-row-odd{
+				background: $super_light_grey;
+			}
+			.views-field-body{
+				font-weight: normal;
+				color: $dark_grey;
+				font-style: italic;
+				line-height: 24px;
+				margin-bottom: 20px;
+			}
+			&:before {
+		    background: image-url("quote_left.png") no-repeat center center transparent;
+		    content: ' ';
+		    display: inline-block;
+		    height: 20px;
+		    width: 20px;
+		    position: absolute;
+		    top: 15px;
+		    left: 15px;
+		  }
+		  &:after {
+		    background: image-url("quote_right.png") no-repeat center center transparent;
+		    content: ' ';
+		    display: inline-block;
+		    height: 20px;
+		    width: 20px;
+		    position: absolute;
+		    bottom: 15px;
+		    right: 15px;
+		  }
+		}
+	}
+}
