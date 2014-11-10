@@ -1,12 +1,29 @@
 <?php
 
 require_once('webis_insurance_quoting_engine.api.inc');
-
+require_once('webis_insurance_quoting_engine.webform.inc');
+//Insurance product price entity name
 define('INSURANCE_PRICE_ENTITY_NAME', "insurance_price");
+//Visitor to canada insurance price entity bundle name
 define('VISITOR_INSURANCE_BUNDLE_NAME', "visitor_to_canada_insurance_price");
+//Life insurance price entity bundle name
 define('LIFE_INSURANCE_BUNDLE_NAME', "life_insurance_price");
+
 define('VISITOR_INSURANCE', "visitor_insurance");
 define('LIFE_INSURANCE', "life_insurance");
+//Node type of insurance product.
+define('NODE_TYPE_INSURANCE_PRODUCT', "insurance_product");
+//Comparison type of the price search result.
+define('HORIZONTAL_COMPARISON', "horizontal_comparison");
+define('VERTICAL_COMPARISON', "vertical_comparison");
+
+//insurance product logo image style
+define('INSURANCE_LOGO_MEDIUM', "insurance_logo_medium");
+
+define('NOT_AVAILABLE', "n/a");
+
+define('VISITOR_INSURANCE_ONLINE_PURCHARSE_NID', '184');
+
 /**
  * @file
  */
@@ -16,42 +33,28 @@ function webis_insurance_quoting_engine_menu(){
     'title' => 'Visitor to canada insurance plan and price search',
     'description' => "Visitor to canada insurance plan and price search",
     'page callback' => 'webis_insurance_quoting_engine_visitor_canada_price_search',
-    'page arguments' => array(),
+    'page arguments' => array(VERTICAL_COMPARISON),
     'access arguments' => array('access content'),
   );
-/*  $items['get-a-quote/result'] = array(
-    'title' => 'Get A Quote - Result',
-    'description' => "Get an Aviva Home Insurance or Auto Insurance quote from a broker near you.",
-    'page callback' => 'aviva_lead_gen_get_a_quote_result',
-    'access arguments' => array('access content'),
+  $items['get-a-quote/visitor-to-canada-insurance/vertical-comparison'] = array(
+    'title' => 'Verticla comparison',
+    'description' => "Visitor to canada insurance plan and price search",
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
   );
-  $items['find-a-broker'] = array(
-    'title' => 'Find a Broker',
-    'description' => "Find an Aviva broker near you.",
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('aviva_lead_gen_find_a_broker_result'),
+  $items['get-a-quote/visitor-to-canada-insurance/horizontal-comparison'] = array(
+    'title' => 'Horizontal comparison',
+    'description' => "Visitor to canada insurance plan and price search",
+    'page callback' => 'webis_insurance_quoting_engine_visitor_canada_price_search',
+    'page arguments' => array(HORIZONTAL_COMPARISON),
     'access arguments' => array('access content'),
-    'file' => 'aviva_lead_gen.ap_bpms.inc',
+    'weight' => 0,
+    'type' => MENU_LOCAL_TASK,
   );
-  $items['find-a-broker/branch/%'] = array(
-    'title' => 'Branch',
-    'description' => "Branch detail page",
-    'page callback' => 'ap_bpms_get_branch',
-    'page arguments' => array(2),
-    'access arguments' => array('access content'),
-    'file' => 'aviva_lead_gen.ap_bpms.inc',
-  );
-  $items['admin/aviva_dashboard/aviva_lead_gen'] = array(
-    'title' => 'Aviva Lead Gen Settings',
-    'description' => "Configure the lead gen form settings.",
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('aviva_lead_gen_configure_form'),
-    'access arguments' => array('access administration pages'),
-  );*/
   return $items;
 }
 
-function webis_insurance_quoting_engine_visitor_canada_price_search(){
+function webis_insurance_quoting_engine_visitor_canada_price_search($mode = HORIZONTAL_COMPARISON){
 
 	if(!isset($_GET['start']) || !isset($_GET['end']) || !isset($_GET['birthday']) || !isset($_GET['coverage']))
 	{
@@ -71,18 +74,18 @@ function webis_insurance_quoting_engine_visitor_canada_price_search(){
     return $msg;
 	}
 	//Get the birthday
-	$birthday = $_GET['birthday'];
+	$birthday      = $_GET['birthday'];
   $birthday_time = strtotime( $birthday );
 	//Insurance Amount
-	$coverage = $_GET['coverage'];
-	$start = $_GET['start'];
-	$end = $_GET['end'];
-	$start_time = strtotime( $start );
-	$end_time = strtotime( $end );
+	$coverage      = $_GET['coverage'];
+	$start         = $_GET['start'];
+	$end           = $_GET['end'];
+	$start_time    = strtotime( $start );
+	$end_time      = strtotime( $end );
   //get age from birthday and start time
   $effective_date_age = webis_insurance_quoting_engine_age_from_dob($birthday, $start);
   //get age from birthday
-  $current_age = webis_insurance_quoting_engine_age_from_dob($birthday);  
+  $current_age        = webis_insurance_quoting_engine_age_from_dob($birthday);  
 	//total days
 	$days = (($end_time - $start_time)/(60*60*24))+1;
 	$days = round($days);
@@ -125,21 +128,46 @@ function webis_insurance_quoting_engine_visitor_canada_price_search(){
       </div>
     </div>
 	';
+  switch ($mode) {
+    case HORIZONTAL_COMPARISON:
+      $content .= webis_insurance_quoting_engine_visitor_canada_price_search_horizontal($current_age, $effective_date_age, $coverage, $days);
+      break;
+    case VERTICAL_COMPARISON:
+      $content .= webis_insurance_quoting_engine_visitor_canada_price_search_vertical($current_age, $effective_date_age, $coverage, $days);
+      break;
+    default:
+
+      break;
+  }
+
+	return $content;
+}
+
+/**
+ *  Build the vertical comparision result
+ *
+ */
+function webis_insurance_quoting_engine_visitor_canada_price_search_vertical($current_age, $effective_date_age, $coverage, $days){
+
+  global $lowest_rate;
+  global $lowest_rate_no_spmcc;
+
+  $lowest_rate = 1000;
+  $lowest_rate_no_spmcc = 1000;
+
+  $output = '';
   $plans = webis_insurance_quoting_engine_get_plans(VISITOR_INSURANCE);
-  dpm($plans);
+
+  //Initialize the calculating age. Some of the plans are culculated base on current age, others are culculated base on the effective age.
   $age = $current_age;
-  $deductibles = array();
-  $deductibles_no_spmcc = array();
-  $plan_prices = array();
-  $available_plan_ids = "";
-  //Initalize the tab;
-  $has_price = false;
-  $has_price_no_spmcc = false;
-  $search_price_result = "";
-  $search_price_result_no_spmcc = "";  
-  //$key = entity id, $value = entity;
-  foreach ($plans as $key => $value) {
-    $which_age = webis_insurance_quoting_engine_get_tip_age_to_cal_premium($value);
+  $plan_price = array();
+  //$key = entity id, $plan = entity;
+  foreach ($plans as $key => $plan) {
+    //render each plan.    
+    $render_item = '';
+
+    $which_age = webis_insurance_quoting_engine_get_tip_age_to_cal_premium($plan);
+    
     switch ($which_age) {
       case 'purchase_date_age':
         $age = $current_age;        
@@ -150,11 +178,79 @@ function webis_insurance_quoting_engine_visitor_canada_price_search(){
       default:
         break;
     }
-    $price = webis_insurance_quoting_engine_get_tip_total_price($value, $age, $coverage, TRUE, $days);
-    $price_no_spmcc = webis_insurance_quoting_engine_get_tip_total_price($value, $age, $coverage, FALSE, $days);
+
+    $insurance_product = webis_insurance_quoting_engine_get_insurance_by_price_eid($key);
+    $price = webis_insurance_quoting_engine_get_tip_total_price($plan, $age, $coverage, TRUE, $days);
+    $price_no_spmcc = webis_insurance_quoting_engine_get_tip_total_price($plan, $age, $coverage, FALSE, $days);
 
     if (!empty($price) || !empty($price_no_spmcc)) {
-      $plan_prices[$key]["title"] = $value->title;
+      $plan_price["title"] = $plan->title;
+      $plan_price["id"] = $key;
+      if (!empty($price)) {
+        $plan_price["prices"] = $price;
+      }
+      if (!empty($price_no_spmcc)) {
+        $plan_price["prices_no_spmcc"] = $price_no_spmcc;
+      }
+      $render_item .= "
+        <div class='price_result_item'>
+          <div class='product_info'>".webis_insurance_quoting_engine_render_insurance_product_vertical($insurance_product, $key)."</div>
+          <div class='price_info'>".webis_insurance_quoting_engine_render_price_search_vertical($plan_price, $days)."</div>
+        </div>
+      ";
+
+      $output .= $render_item;
+    }
+
+  }
+  $output = "
+    <div class='lowest_rate'>
+      <div class='spmcc'>
+        <span class='label'>Lowest Price/Day:</span>
+        <span class='value'>$".$lowest_rate."</span>
+      </div>
+      <div class='no_spmcc'>
+        <span class='label'>Lowest Price/Day without SPMCC:</span>
+        <span class='value'>$".$lowest_rate_no_spmcc."</span>
+      </div>
+    </div>".$output;
+  return $output;
+}
+
+/**
+ *  Build the horizontal comparision result
+ *
+ */
+function webis_insurance_quoting_engine_visitor_canada_price_search_horizontal($current_age, $effective_date_age, $coverage, $days){
+  $plans = webis_insurance_quoting_engine_get_plans(VISITOR_INSURANCE);
+  $age = $current_age;
+  $deductibles = array();
+  $deductibles_no_spmcc = array();
+  $plan_prices = array();
+  $available_plan_ids = "";
+  //Initalize the tab;
+  $has_price = false;
+  $has_price_no_spmcc = false;
+  $search_price_result = "";
+  $search_price_result_no_spmcc = "";
+  //$key = entity id, $plan = entity;
+  foreach ($plans as $key => $plan) {
+    $which_age = webis_insurance_quoting_engine_get_tip_age_to_cal_premium($plan);
+    switch ($which_age) {
+      case 'purchase_date_age':
+        $age = $current_age;        
+        break;
+      case 'effective_date_age':
+        $age = $effective_date_age;
+        break;
+      default:
+        break;
+    }
+    $price = webis_insurance_quoting_engine_get_tip_total_price($plan, $age, $coverage, TRUE, $days);
+    $price_no_spmcc = webis_insurance_quoting_engine_get_tip_total_price($plan, $age, $coverage, FALSE, $days);
+
+    if (!empty($price) || !empty($price_no_spmcc)) {
+      $plan_prices[$key]["title"] = $plan->title;
       $plan_prices[$key]["id"] = $key;
       $available_plan_ids .= $key."+";
       if (!empty($price)) {
@@ -174,13 +270,9 @@ function webis_insurance_quoting_engine_visitor_canada_price_search(){
   $content .= $plan_carousel;
   sort($deductibles);
   sort($deductibles_no_spmcc);
-  dpm($available_plan_ids);
-  dpm($plan_prices);
-  dpm($deductibles);
-  dpm($deductibles_no_spmcc);
 
-  $search_price_result = webis_insurance_quoting_engine_build_price_search_result($plan_prices, $deductibles, $days, true);
-  $search_price_result_no_spmcc = webis_insurance_quoting_engine_build_price_search_result($plan_prices, $deductibles, $days, false);
+  $search_price_result = webis_insurance_quoting_engine_render_price_search_horizontal($plan_prices, $deductibles, $days, true);
+  $search_price_result_no_spmcc = webis_insurance_quoting_engine_render_price_search_horizontal($plan_prices, $deductibles, $days, false);
 
   //Build the quicktab.
   $tabs = array(
@@ -203,7 +295,6 @@ function webis_insurance_quoting_engine_visitor_canada_price_search(){
   );
 
   $quicktabs_renderrable = quicktabs_build_quicktabs($qt_name, $qt_options, $tabs);
-  dpm($quicktabs_renderrable);
   $quicktabs_render = drupal_render($quicktabs_renderrable['content']);
   $quicktabs_content = "
     <div class='price_search_result_wrapper'>
@@ -212,13 +303,13 @@ function webis_insurance_quoting_engine_visitor_canada_price_search(){
   ";
 
   $content .= $quicktabs_content;
-	return $content;
 }
 
 /**
-* Build the price search result table
-**/
-function webis_insurance_quoting_engine_build_price_search_result($plan_prices, $deductibles, $days, $has_spmcc = true) {
+ *  Render horizontal price search result
+ *
+ */
+function webis_insurance_quoting_engine_render_price_search_horizontal($plan_prices, $deductibles, $days, $has_spmcc = true) {
   //Set up the search result wrapper
   if ($has_spmcc) {
     $search_price_result = "<div class='plan_result_wrapper spmcc'>";
@@ -236,9 +327,8 @@ function webis_insurance_quoting_engine_build_price_search_result($plan_prices, 
   $search_price_result .= "<div class='plan_result_content'>";
   foreach ($deductibles as $key => $deductible) {
     $search_price_result .= "<div class='deductible deductible_".$deductible."'>";
-    $search_price_result .= "<div class='deductible_header'><span class='label'>".t("Deductiable").":</span><span class='value'>".money_format('%.0n', $deductible)."</span></div>";
+    $search_price_result .= "<div class='deductible_header'><span class='label'>".t("Deductible").":</span><span class='value'>".money_format('%.0n', $deductible)."</span></div>";
     $search_price_result .= "<div class='deductible_content'>";
-    dpm($plan_prices);
     foreach ($plan_prices as $key => $plan_price) {
       if ($key == count($plan_prices)) {
         $search_price_result .= "<span class='plan_price last'>";        
@@ -293,4 +383,243 @@ function webis_insurance_quoting_engine_age_from_dob($dob, $policy_start_date = 
   }
   $age = $age > 0 ? $age : 0;
   return $age;
+}
+
+/**
+ *  Get the current insurance product node by 'plan price' entity id
+ *
+ **/
+function webis_insurance_quoting_engine_get_insurance_by_price_eid($price_entity_id, $lang = null){
+  if (empty($lang)) {
+    global $language;
+    $lang = $language->language;
+  }
+  $entityQuery = new EntityFieldQuery();
+  $entities_query = $entityQuery->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', NODE_TYPE_INSURANCE_PRODUCT)
+        ->propertyCondition('language', $lang, '=')
+        ->fieldCondition('field_insurance_price', 'target_id', $price_entity_id, '=')
+        ->execute();
+  if(!empty($entities_query)){
+    foreach ($entities_query as $value) {
+      $ids = array_keys($value);
+      break;
+    }
+    if (!empty($ids[0])) {
+      $nid = $ids[0];
+      $insurance_product = entity_load_single('node', $nid);
+      return $insurance_product;
+    }
+  }
+}
+
+/**
+ *  Render insurance product for vertical price search result.
+ *
+ */
+function webis_insurance_quoting_engine_render_insurance_product_vertical($insurance_product_node, $eid){
+
+  //get the query argument from url
+  $birthday      = $_GET['birthday'];
+  $start         = $_GET['start'];
+  $end           = $_GET['end'];
+  $coverage      = $_GET['coverage'];
+
+  $output = '';
+  $node_url = ('node/'.$insurance_product_node->nid);
+
+  //render the insurance product logo
+  $field_images = field_get_items('node', $insurance_product_node, 'field_images');
+  $logo = "";
+  if (!empty($field_images)) {
+    $image_item = array(
+      'style_name' => INSURANCE_LOGO_MEDIUM, // just enter the sytle name you'd like
+      'path' => $field_images[0]['uri'],
+      'width' => '',
+      'height' => '',
+      'alt' => $field_images[0]['alt'], // optional
+      'title' => $field_images[0]['title'], // optional
+    );
+    $logo =  l(theme('image_style', $image_item), $node_url, array("html" => TRUE, 'attributes' => array('target'=>'_blank')));
+  }
+
+  //render the title
+  $title = l($insurance_product_node->title, $node_url, array('attributes' => array('target'=>'_blank')));
+  
+  //render the 'buy online' button
+  $buy_online = l(
+    t("Buy Online"), 
+    "node/".VISITOR_INSURANCE_ONLINE_PURCHARSE_NID,
+    array(
+      'query' => array(
+        'start'     => $start,
+        'end'       => $end,
+        'birthday'  => $birthday,
+        'coverage'  => $coverage,
+        'insurance_product' => $eid,
+      ),
+      'attributes' => array('target'=>'_blank')
+    )
+  );
+
+  //render the body field
+  $body_field = field_get_items('node',$insurance_product_node, 'body');
+  $summary = $body_field[0]['safe_summary'];
+  $summary_output = !empty($summary) ? "
+      <div class='summary'>
+        <a class='colorbox-inline' href='?inline=true#summary_content".$insurance_product_node->nid."'>".t("View plan summary")."</a>
+        <div class='summary_content' id='summary_content".$insurance_product_node->nid."'>".$summary."</div>
+      </div>" : "";
+  $output .= "
+    <div class='insurance_product'>
+      <div class='logo'>".$logo."</div>
+      <div class='title'>".$title."</div>
+      <div class='buy_online'>".$buy_online."</div>
+      ".$summary_output."
+    </div>
+  ";
+  return $output;
+}
+
+/**
+ *  Render vertical price search result
+ *
+ */
+function webis_insurance_quoting_engine_render_price_search_vertical($plan_price, $days) {
+
+  //get the query argument from url
+  $birthday      = $_GET['birthday'];
+  $start         = $_GET['start'];
+  $end           = $_GET['end'];
+  $coverage      = $_GET['coverage'];
+
+  $output = "";
+
+  //get the price entity id
+  $eid = $plan_price['id'];
+  //get the blended deductibles.
+  $deductibles = array();
+  $deductibles = !empty($plan_price['prices']) ? array_keys($plan_price['prices']) : $deductibles;
+  $deductibles = !empty($plan_price['prices_no_spmcc']) ? array_unique (array_merge ($deductibles, array_keys($plan_price['prices_no_spmcc']))) : $deductibles;
+  sort($deductibles);
+  $header = array(
+    array(
+      'data'  => t("Deductible"),
+      'class' => 'deductible',
+    ),
+    array(
+      'data'  => t("Stable pre-existing medical condition coverage"),
+      'class' => 'converage_type',
+    ),
+    array(
+      'data'  => t("Price/Day"),
+      'class' => 'price_per_day',
+    ),
+    array(
+      'data'  => t("Total"),
+      'class' => 'total_price',
+    ),
+  );
+  $rows = array();
+
+  global $lowest_rate;
+  global $lowest_rate_no_spmcc;
+
+  foreach ($deductibles as $key => $deductible) {
+    //get total price
+    $total = isset($plan_price['prices'][$deductible]) ? $plan_price['prices'][$deductible] : NOT_AVAILABLE;
+    $per_day = ($total !== NOT_AVAILABLE) ? number_format((float)($total/$days), 2) : NOT_AVAILABLE;
+    //get total no spmcc price
+    $total_no_spmcc = isset($plan_price['prices_no_spmcc'][$deductible]) ? $plan_price['prices_no_spmcc'][$deductible] : NOT_AVAILABLE;
+    $per_day_no_spmcc = ($total_no_spmcc !== NOT_AVAILABLE) ? number_format((float)($total_no_spmcc/$days), 2) : NOT_AVAILABLE;
+
+    //get the lowest rate
+    if ($per_day != NOT_AVAILABLE) {
+      $lowest_rate = ($lowest_rate > $per_day) ? $per_day : $lowest_rate;
+    }
+    //get the lowest rate no spmcc
+    if ($per_day_no_spmcc != NOT_AVAILABLE) {
+      $lowest_rate_no_spmcc = ($lowest_rate_no_spmcc > $per_day_no_spmcc) ? $per_day_no_spmcc : $lowest_rate_no_spmcc;
+    }
+
+    $rows[] = array(
+      array(
+        'data' => l(
+          "$".$deductible, 
+          "node/".VISITOR_INSURANCE_ONLINE_PURCHARSE_NID, 
+          array(
+            "attributes" => array(
+              "title" => t("Buy it with $@value deductible", array( "@value" => $deductible ) )
+            ),
+            "query" => array(
+              'start' => $start,
+              'end' => $end,
+              'birthday' => $birthday,
+              'coverage' => $coverage,
+              'insurance_product' => $eid,
+              'deductible' => $deductible,
+            ),
+            'attributes' => array('target'=>'_blank'),
+          )
+        ), 
+        'class' => 'deductible',
+      ),
+      array(
+        'data' => "<div class='spmcc'>".t("Yes")."</div><div class='no_spmcc'>".t("No")."</div>",
+        'class' => ('converage_type'),
+      ),
+      array( 
+        'data' => "<div class='spmcc'>".webis_insurance_quoting_engine_format_price($per_day)."</div><div class='no_spmcc'>".webis_insurance_quoting_engine_format_price($per_day_no_spmcc)."</div>",
+        'class' => array('price_per_day'),
+      ),
+      array( 
+        'data' => "<div class='spmcc'>".webis_insurance_quoting_engine_format_price($total)."</div><div class='no_spmcc'>".webis_insurance_quoting_engine_format_price($total_no_spmcc)."</div>",
+        'class' => array('total_price'),
+      ),
+    );
+  }
+  $output .= theme("table", array("header" => $header, "rows" => $rows));
+  $output = "<div class='insurance_price'>".$output."</div>";
+
+  return $output;
+
+}
+
+function webis_insurance_quoting_engine_format_price($price) {
+  if ($price != NOT_AVAILABLE) {
+    $price = "$".$price;
+    return $price;
+  }
+  else {
+    return $price;
+  }
+}
+
+/**
+* Implementation of hook_webform_select_options_info().
+* See webform/webform_hooks.php for further information on this hook in the Webform API.
+*/
+function webis_insurance_quoting_engine_webform_select_options_info() {
+  $items = array();
+  $items['available_province'] = array(
+  'title' => t('Canada available Province'),
+  'options callback' => 'webis_insurance_quoting_engine_webform_options_available_province'
+  );
+  $items['gender'] = array(
+  'title' => t('Gender'),
+  'options callback' => 'webis_insurance_quoting_engine_webform_options_gender'
+  );
+  $items['available_visitor_to_canada_insurance'] = array(
+  'title' => t('Visitor to Canada Insurance'),
+  'options callback' => 'webis_insurance_quoting_engine_webform_options_available_visitor_to_canada_insurance'
+  );
+  $items['available_insurance_coverage'] = array(
+  'title' => t('Visitor to Canada Insurance Coverage'),
+  'options callback' => 'webis_insurance_quoting_engine_vtc_get_coverage'
+  );
+  $items['available_insurance_deductible'] = array(
+  'title' => t('Visitor to Canada Insurance Deductible'),
+  'options callback' => 'webis_insurance_quoting_engine_vtc_get_deductible'
+  );
+  return $items;
 }

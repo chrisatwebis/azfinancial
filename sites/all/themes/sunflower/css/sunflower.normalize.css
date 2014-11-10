@@ -94,6 +94,14 @@ html {
 ul {
   padding-left: 20px; }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/variables\/_typography\.scss}line{font-family:\0000320}}
+a {
+  text-decoration: none;
+  color: #003d78; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/azfinancial\.ca\/drupal\/sites\/all\/themes\/sunflower\/sass\/variables\/_typography\.scss}line{font-family:\0000323}}
+  a:hover {
+    text-decoration: underline; }
+
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 /*! normalize.css v3.0.0 | HTML5 Display Definitions | MIT License | git.io/normalize */
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/\.rvm\/gems\/ruby-2\.0\.0-p353\/gems\/compass-normalize-1\.5\/stylesheets\/normalize\/_html5\.scss}line{font-family:\0000320}}

@@ -60,15 +60,221 @@ input.webform-calendar{
 		}
 	}	
 }
-@include at-breakpoint($desk){
-	.page-node-76{
-		.node--webform--full{
-			#webform-client-form-76{
+/**
+ *
+ * Buy online
+ *
+ **/
+.node-type-webform {
+	.webform-client-form {
+		fieldset.collapsible {
+			border: 0px;
+			padding: 0px;
+			margin: 0 0 20px;
+			legend {
+				display: block;
+				width: 100%;
+				.fieldset-legend {
+					padding: 0px;
+					background: none;
+					.fieldset-title {
+						color: white;
+						font-size: 16px;
+						font-weight: $font_weight_semi_bold;
+						text-decoration: none;
+						display: block;
+						padding: 10px 40px 10px 20px;
+						text-align: left;
+						background: image-url("arrow_up_white_right_20.png") no-repeat right center $yellow;
+					}
+					.summary {
+						margin: 0px;
+					}
+				}
+			}
+			.fieldset-wrapper {
+				background: $super_light_grey;
+				padding: 10px 20px;
+				> fieldset {
+					border: 0px;
+					padding: 0px;
+					margin: 0 0 20px;					
+					legend {
+						padding: 10px 20px;
+						font-size: 16px;
+						font-weight: bold;
+						background-color: $extra_light_grey;
+					}
+					.fieldset-wrapper {
+						background-color: $ultra_light_grey;
+						overflow: hidden;
+					}
+					&.collapsible {
+						padding: 20px 0;
+						margin: 0 0 10px;
+						legend {
+							padding: 0px;
+						}
+					}
+				}
+			}
+			&.collapsed {
+				padding: 20px 0;
+				legend {
+					.fieldset-legend {
+						.fieldset-title {
+							background: image-url("arrow_down_white_right_20.png") no-repeat right center $tab_blue;
+							&:hover {
+								background: image-url("arrow_up_white_right_20.png") no-repeat right center $yellow;						
+							}
+						}
+					}
+				}
+			}
+		}
+		.webform-component-textfield,
+		.webform-component-email {
+			.form-text {
+				width: 100%;
+			}
+		}
+		.webform-component-select {
+			.form-select {
+				width: 100%;
+			}
+		}
+		.webform-component-addressfield {
+			.form-item-submitted-step-2-canada-address-canadian-address-country {
+				display: none;
+			}
+			.form-text {
+				width: 100%;
+			}
+			.form-select {
+				width: 100%;
+			}
+			div.addressfield-container-inline > div.form-item {
+//				float: none;
+//				margin-right: 0px;
+			}
+		}
+	}
+}
+
+/**
+ *
+ *	Tab
+ *
+ **/
+@include at-breakpoint($tab) {
+	.node-type-webform {
+		.webform-client-form {
+			.webform-component-textfield,
+			.webform-component-email {
+				.form-text {
+					width: 80%;
+				}
+			}
+			.webform-component-select {
+				.form-select {
+					width: 80%;
+				}
+			}
+			.webform-component-addressfield {
+				.form-text {
+					width: 80%;
+				}
+				.form-select {
+					width: 80%;
+				}
+				div.addressfield-container-inline > div.form-item {
+
+				}
+			}
+			.webform-component--step-2--travel-dates {
+				.webform-component-date {
+			    @include span-columns(6, 12);
+			    &.webform-component--step-2--travel-dates--effective-date {
+				    @include span-columns(6 omega, 12);
+			    }			
+				}
+			}
+			.webform-component--step-2--coverage-and-deductible {
+				.webform-component {
+			    @include span-columns(6, 12);
+			    &.webform-component--step-2--coverage-and-deductible--select-a-deductible-amount {
+				    @include span-columns(6 omega, 12);
+			    }				
+				}
+			}
+			.webform-component--step-2--traveller-information-insured {
+				.webform-component {
+			    @include span-columns(6, 12);
+			    &.webform-component--step-2--traveller-information-insured--insured-1--surname,
+			    &.webform-component--step-2--traveller-information-insured--insured-1--gender,
+			    &.webform-component--step-2--traveller-information-insured--insured-2--surname,
+			    &.webform-component--step-2--traveller-information-insured--insured-2--gender,
+			    &.webform-component--step-2--traveller-information-insured--insured-3--surname,
+			    &.webform-component--step-2--traveller-information-insured--insured-3--gender,
+			    &.webform-component--step-2--traveller-information-insured--insured-4--surname,
+			    &.webform-component--step-2--traveller-information-insured--insured-4--gender,
+			    &.webform-component--step-2--traveller-information-insured--insured-5--surname,
+			    &.webform-component--step-2--traveller-information-insured--insured-5--gender {
+				    @include span-columns(6 omega, 12);
+			    }
+				}
+			}
+			.webform-component--step-2--contact-information {
+				.webform-component {
+			    @include span-columns(6, 12);
+			    &.webform-component--step-2--contact-information--surname,
+			    &.webform-component--step-2--contact-information--home-phone,
+			    &.webform-component--step-2--contact-information--fax-number {
+				    @include span-columns(6 omega, 12);
+			    }					
+				}
+			}
+			.webform-component--step-2--canada-address {
+				.street-block {
+					.form-type-textfield {
+				    @include span-columns(6, 12);
+						&.form-item-submitted-step-2-canada-address-canadian-address-premise {
+					    @include span-columns(6 omega, 12);
+						}
+					}
+				}
+				.locality-block {
+					.form-item {
+				    @include span-columns(6, 12);
+				    &.form-type-select {
+					    @include span-columns(6 omega, 12);
+				    }					
+					}
+				}
+				.webform-component-textfield {
+				  @include span-columns(6, 12);
+					&.webform-component--step-2--canada-address--phone-2 {
+						@include span-columns(6 omega, 12);
+					}
+				}
+			}
+		}
+	}	
+}
+/**
+ *
+ *	Desktop
+ *
+ **/
+@include at-breakpoint($desk) {
+	.page-node-76 {
+		.node--webform--full {
+			#webform-client-form-76 {
 				.webform-component{
 					margin: 10px 2%;
 					display: inline-block;
 					width: 45%;
-					&.webform-component--steps{
+					&.webform-component--steps {
 						width: 100%;
 						margin: 0px;
 						display: block;
@@ -77,7 +283,7 @@ input.webform-calendar{
 			}
 		}
 	}
-	#webform-client-form-76{
+	#webform-client-form-76 {
 		.webform-component{
 			margin: 15px 20px;
 		}

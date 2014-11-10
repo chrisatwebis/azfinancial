@@ -1,50 +1,178 @@
 .page-get-a-quote{
 	//visitor to canada insurance price search result page
+	.price_search_result_header{
+		padding: 10px 0 20px;
+		margin-bottom: 15px;
+		overflow: hidden;
+		.price_search_result_summary{
+			text-align: center;
+			.item{
+				font-size: 14px;
+				line-height: 28px;
+				margin-right: 20px;
+				&.summary_label{
+					color: $yellow;
+					display: block;
+				}
+				&.last-item{
+					margin-right: 0px;
+				}
+				.label{
+					margin-right: 5px;
+					color: $dark_blue;
+				}
+			}
+		}
+		.price_search_compare_btns{
+			margin-top: 10px;
+			text-align: center;
+			.compare_btn{
+				@extend .standard_yellow;
+				&.next_level{
+					margin: 0 5px;
+					@extend .standard_yellow_right_arrow;
+				}
+				&.previous_level{
+					@extend .standard_yellow_left_arrow;
+				}
+				a{
+					color: white;
+					font-size: 12px;
+					text-decoration: none;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+	.lowest_rate {
+		.spmcc,
+		.no_spmcc {
+			display: inline-block;
+			background: image-url("lowest_price_24_yellow.png") no-repeat 10px center $tab_blue;
+			padding: 10px 10px 10px 45px;
+			margin-right: 20px;
+			margin-bottom: 20px;
+			color: white;
+			border-radius: 4px;
+			.value {
+				font-weight: bold;
+			}
+		}
+	}
+	//vertical comparision page
 	&.page-get-a-quote-visitor-to-canada-insurance{
-		.price_search_result_header{
-			padding: 20px 0;
-			margin-bottom: 15px;
-			overflow: hidden;
-			.price_search_result_summary{
-				@include span-columns(8, 12);
-				.item{
-					margin-right: 15px;
-					font-size: 16px;
-					line-height: 34px;
-					&.summary_label{
-						color: $yellow;
+		.price_result_item{
+			padding-bottom: 20px;
+			margin-bottom: 10px;
+			border-bottom: 1px dashed $light_grey;
+			.product_info{
+				margin-bottom: 20px;
+				.insurance_product{
+					.logo{
+						text-align: center;
 					}
-					&.last-item{
-						margin-right: 0px;
+					.title{
+						margin: 10px;
+						text-align: center;
+						a{
+							text-decoration: none;
+							&:hover{
+								text-decoration: underline;
+							}
+						}
 					}
-					.label{
-						margin-right: 5px;
-						color: $dark_blue;
+					.buy_online{
+						@extend .title;
+						a{
+							@extend .standard_yellow;						
+						}
+					}
+					.summary{
+						margin-top: 20px;
+						text-align: center;
+						.colorbox-inline{
+							background: image-url("zoom_icon_blue.png") no-repeat left center transparent;
+							padding: 10px 10px 10px 30px;
+							&:hover{
+								background-image: image-url("zoom_icon_yellow.png");
+							}
+						}
+						.summary_content{
+							display: none;						
+						}
 					}
 				}
 			}
-			.price_search_compare_btns{
-				@include span-columns(4 omega, 12);
-				text-align: right;
-				.compare_btn{
-					@extend .standard_yellow;
+			.price_info {
+				.insurance_price {
+					table {
+						width: 100%;
+						th, td {
+							padding: 8px 0;
+							width: 25%;
+							text-align: center;
+							border: 1px solid $extra_light_grey;
+						}
+						th {
+							padding: 10px 0;
+							background: $dark_grey;
+							color: white;
+						}
+						tr.odd {
+							background: $super_light_grey;
+						}
+						tr.even {
+							background: white;
+						}
+						.deductible {
+							a {
+								color: $yellow;
+								font-size: 1.5em;
+							}
+						}
+						.spmcc {
+							padding-bottom: 10px;
+							margin-bottom: 10px;
+							border-bottom: 1px dashed $extra_light_grey;
+						}
+						.no_spmcc {
 
-					&.next_level{
-						margin: 0 5px;
-						@extend .standard_yellow_right_arrow;
+						}
 					}
-					&.previous_level{
-						@extend .standard_yellow_left_arrow;
+				}
+				.deductible_item {
+					overflow: hidden;
+					text-align: center;
+					padding: 10px;
+					.deductible {
+						color: $yellow;
+						@include span-columns(3, 12);
 					}
-					a{
-						color: white;
-						font-size: 12px;
-						text-decoration: none;
-						font-weight: bold;
+					.price {
+						@include span-columns(9 omega, 12);
+						.product_type {
+							@include span-columns(4, 12);
+						}
+						.price_per_day {
+							@include span-columns(4, 12);
+						}
+						.total_price {
+							@include span-columns(4 omega, 12);
+						}
+						.spmcc, .no_spmcc {
+							overflow: hidden;
+							margin: 10px 0;
+						}
+					}
+					&.header {
+						background: $extra_light_grey;
 					}
 				}
 			}
 		}
+	}
+	//horizontal comparision page
+	&.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison{
 		.view-id-custom_content.view-display-id-block_7{
 			.view-header{
 				margin: 0 0 15px;
@@ -204,6 +332,87 @@
 					}
 				}
 			}
+		}
+	}
+}
+
+@include at-breakpoint($tab){
+	.page-get-a-quote{
+		//visitor to canada insurance price search result page
+		.price_search_result_header{
+			.price_search_result_summary{
+				.item{
+					font-size: 14px;
+					line-height: 34px;
+				}
+			}
+			.price_search_compare_btns{
+			}
+		}
+		//vertical comparision page
+		&.page-get-a-quote-visitor-to-canada-insurance{
+			.price_result_item{
+				overflow: hidden;
+				padding-bottom: 20px;
+				margin-bottom: 20px;
+				position: relative;
+				.product_info{
+					@include vertical-align;
+					@include span-columns(4, 12);
+					.insurance_product{
+
+					}
+				}
+				.price_info{
+					@include span-columns(8 omega, 12);
+					.deductible_item{
+						.price{
+							font-size: 13px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@include at-breakpoint($desk){
+	.page-get-a-quote{
+		//visitor to canada insurance price search result page
+		.price_search_result_header{
+			.price_search_result_summary{
+				@include span-columns(7, 12);
+				text-align: left;
+				.item{
+					&.summary_label{
+						color: $yellow;
+						display: inline-block;
+					}
+				}
+			}
+			.price_search_compare_btns{
+				@include span-columns(5 omega, 12);
+				text-align: right;
+				margin-top: 0px;
+			}
+		}
+		//vertical comparision page
+		&.page-get-a-quote-visitor-to-canada-insurance{
+			.price_result_item{
+				.product_info{
+					@include span-columns(3, 12);
+				}
+				.price_info{
+					@include span-columns(9 omega, 12);
+					.deductible_item{						
+						.deductible{
+						}
+						.price{
+							font-size: 14px;
+						}
+					}
+				}
+			}		
 		}
 	}
 }

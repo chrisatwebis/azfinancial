@@ -30,6 +30,28 @@ function webis_insurance_quoting_engine_vtc_get_coverage(){
 }
 
 /**
+* Build an options list for use by webforms.
+*/
+function webis_insurance_quoting_engine_vtc_get_deductible() {   
+  
+  $options = array(
+    "0"=>"$0 CAD",
+    "50"=>"$50 CAD",
+    "75"=>"$75 CAD",
+    "100"=>"$100 CAD",
+    "250"=>"$250 CAD",
+    "500"=>"$500 CAD",
+    "1000"=>"$1000 CAD",
+    "3000"=>"$3000 CAD",
+    "5000"=>"$5000 CAD",
+    "10000"=>"$10000 CAD"
+  );
+  
+  return $options;
+  
+}
+
+/**
 *
 * Get the next level coverage by current coverage
 **/

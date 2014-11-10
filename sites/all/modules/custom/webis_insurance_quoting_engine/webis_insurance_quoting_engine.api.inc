@@ -9,14 +9,6 @@ function webis_insurance_quoting_engine_get_plans($insurance_type){
   $ids = webis_insurance_quoting_engine_get_plan_ids($insurance_type);
   if (!empty($ids)) {
     $entities = entity_load(INSURANCE_PRICE_ENTITY_NAME, $ids);
-    /*  foreach ($entities as $eid => $entity) {
-          $insurances[$eid]['entity_id'] = $eid;
-          $insurances[$eid]['age_to_calculate'] = webis_insurance_quoting_engine_get_tip_age_to_cal_premium($entity);
-          $insurances[$eid]['rate_adjustment'] = webis_insurance_quoting_engine_get_tip_rate_adjustment($entity);
-          $insurances[$eid]['rate_schedule'] = webis_insurance_quoting_engine_get_tip_rate_schedule($entity, "field_tip_rate_schedule");
-          $insurances[$eid]['rate_schedule_no_spmcc'] = webis_insurance_quoting_engine_get_tip_rate_schedule($entity, "field_tip_rate_schedule_no_spmcc");
-        }*/
-
     return $entities;
   }
 }
@@ -254,7 +246,7 @@ function webis_insurance_quoting_engine_get_tip_total_price($entity, $age, $cove
         foreach ($value['deductible'] as $key_1 => $value_1) {
           $total_final_price = webis_insurance_quoting_engine_get_tip_total_price_by_deductible($entity, $age, $coverage, $spmcc, $days, $value_1['amount']);
           if (!empty($total_final_price)) {
-            $price_array[$value_1['amount']] = $total_final_price;
+            $price_array[$value_1['amount']] = number_format($total_final_price, 2, ".", "");
           }
         }
       }
