@@ -94,7 +94,7 @@ input.webform-calendar{
 			}
 			.fieldset-wrapper {
 				background: $super_light_grey;
-				padding: 10px 20px;
+				padding: 10px 20px 20px;
 				> fieldset {
 					border: 0px;
 					padding: 0px;
@@ -158,8 +158,39 @@ input.webform-calendar{
 			}
 		}
 		.continue_btn {
+			text-align: right;
 			a {
-				@extend .standard_yellow_right_arrow;
+				@extend .standard_yellow_right_circle_arrow;
+			}
+		}
+		#duration_days {
+			margin-top: 20px;
+			display: inline-block;
+			#duration {
+				background: image-url("duration_icon_24.png") no-repeat 10px center $yellow;
+				padding: 10px 10px 10px 45px;
+				border-radius: 4px;
+				color: white;
+			}
+			&.warning {
+				#duration {
+					background-color: red;
+				}
+			}
+		}
+		.insured_age {
+			@extend #duration_days;
+			display: inline-block;
+			.insured_age_duration {
+				background: image-url("person_icon_24.png") no-repeat 10px center $yellow;
+				padding: 10px 10px 10px 45px;
+				border-radius: 4px;
+				color: white;		
+			}
+			&.warning {
+				.insured_age_duration {
+					background-color: red;
+				}
 			}
 		}
 	}

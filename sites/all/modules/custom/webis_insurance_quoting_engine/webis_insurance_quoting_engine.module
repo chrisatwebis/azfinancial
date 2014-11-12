@@ -54,6 +54,41 @@ function webis_insurance_quoting_engine_menu(){
   return $items;
 }
 
+/**
+ * Implements hook_block_info().
+ */
+function webis_insurance_quoting_engine_block_info() {
+  
+  $blocks = array(
+/*    'visitor_insurance_info' => array(
+      'info' => t('Visitor Insurance Info'),
+      'cache' => DRUPAL_NO_CACHE,
+    ),*/
+  );
+  return $blocks;
+
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function webis_insurance_quoting_engine_block_view($delta = '') {
+
+  $block = array();
+  switch ($delta) {
+/*    case 'visitor_insurance_info':
+      $block['content'] = webis_insurance_quoting_engine_block_content();
+      $block['subject'] = t('Your Plan');
+      break;*/
+
+    default:
+      break;
+  }
+  return $block;
+
+}
+
+
 function webis_insurance_quoting_engine_visitor_canada_price_search($mode = HORIZONTAL_COMPARISON){
 
 	if(!isset($_GET['start']) || !isset($_GET['end']) || !isset($_GET['birthday']) || !isset($_GET['coverage']))

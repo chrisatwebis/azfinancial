@@ -46,6 +46,14 @@
     background-color: $dark_blue;
   }
 }
+.standard_yellow_right_circle_arrow {
+  @extend .standard_yellow;
+  background: image-url("arrow_circle_right_10_blue.png") no-repeat right center $yellow;
+  padding-right: 45px;
+  &:hover{
+    background: image-url("arrow_circle_right_10_yellow.png") no-repeat right center $extra_dark_blue;
+  }
+}
 .standard_blue {
   @extend .standard_button;
   background: $dark_blue;
@@ -69,6 +77,13 @@
   padding-right: 45px;
   &:hover{
     background-color: $yellow;
+  }
+}
+.standard_blue_right_circle_arrow {
+  @extend .standard_blue;
+  background: image-url("arrow_circle_right_10_yellow.png") no-repeat right center $extra_dark_blue;
+  &:hover{
+    background: image-url("arrow_circle_right_10_blue.png") no-repeat right center $yellow;
   }
 }
 .pager_next {
