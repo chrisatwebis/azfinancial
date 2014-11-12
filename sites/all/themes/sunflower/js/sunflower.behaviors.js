@@ -233,7 +233,7 @@
         $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .fieldset-wrapper").append('<span class="insured_age"><span class="insured_age_duration">'+Drupal.t("Age")+': <b>'+insured_1_age+" "+Drupal.t("year old")+' </b></span></span>');
       }
 
-      if (insured_1_age <= 0) {
+      if (insured_1_age < 0) {
         $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_age").addClass("warning");
       }
       else {
