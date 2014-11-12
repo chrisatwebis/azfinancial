@@ -139,6 +139,11 @@
     $("<span class='close_btn'></span>").appendTo(".mm-menu").click(function(){
       $(".mm-menu").trigger("close");
     });
+
+    //purchase online webform
+    $("#webform-client-form-184 .webform-component--step-1 > .fieldset-wrapper").append("<div class='continue_btn'><a href='#'>"+Drupal.t("Continue")+"</a></div>");
+    $("#webform-client-form-184 .webform-component--step-2 > .fieldset-wrapper").append("<div class='continue_btn'><a href='#'>"+Drupal.t("Continue")+"</a></div>");
+    $("#webform-client-form-184 .webform-component--step-3 > .fieldset-wrapper").append("<div class='continue_btn'><a href='#'>"+Drupal.t("Continue")+"</a></div>");    
   });
 
 })(jQuery);

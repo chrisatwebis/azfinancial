@@ -154,8 +154,12 @@ input.webform-calendar{
 				width: 100%;
 			}
 			div.addressfield-container-inline > div.form-item {
-//				float: none;
-//				margin-right: 0px;
+
+			}
+		}
+		.continue_btn {
+			a {
+				@extend .standard_yellow_right_arrow;
 			}
 		}
 	}
