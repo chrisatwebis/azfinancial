@@ -313,6 +313,114 @@ E.g if you would like to offer 10% OFF, then you should put "-0.1".',
     ),
   );
 
+  // Exported field_instance: 'field_collection_item-field_tip_surcharge_to_premium-field_tip_max_age'
+  $field_instances['field_collection_item-field_tip_surcharge_to_premium-field_tip_max_age'] = array(
+    'bundle' => 'field_tip_surcharge_to_premium',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_tip_max_age',
+    'label' => 'Maximum Age',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'field_collection_item-field_tip_surcharge_to_premium-field_tip_min_age'
+  $field_instances['field_collection_item-field_tip_surcharge_to_premium-field_tip_min_age'] = array(
+    'bundle' => 'field_tip_surcharge_to_premium',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_tip_min_age',
+    'label' => 'Minimum Age',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'field_collection_item-field_tip_surcharge_to_premium-field_tip_surcharge_percentage'
+  $field_instances['field_collection_item-field_tip_surcharge_to_premium-field_tip_surcharge_percentage'] = array(
+    'bundle' => 'field_tip_surcharge_to_premium',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'The surcharge is only applied to the \'rate without pre-existing medical condition coverage\' when the price of the age couldn\'t be found in the \'rate with pre-existing medical condition coverage\'. 
+The calculation formula is:  final price = price * (1+value)
+Only TU uses it currently.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 2,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_decimal',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_tip_surcharge_percentage',
+    'label' => 'Surcharge Percentage',
+    'required' => 1,
+    'settings' => array(
+      'max' => 1,
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 3,
+    ),
+  );
+
   // Exported field_instance: 'insurance_price-visitor_to_canada_insurance_price-field_tip_age_to_cal_premium'
   $field_instances['insurance_price-visitor_to_canada_insurance_price-field_tip_age_to_cal_premium'] = array(
     'bundle' => 'visitor_to_canada_insurance_price',
@@ -551,6 +659,49 @@ E.g if you would like to offer 10% OFF, then you should put "-0.1".',
     ),
   );
 
+  // Exported field_instance: 'insurance_price-visitor_to_canada_insurance_price-field_tip_surcharge_to_premium'
+  $field_instances['insurance_price-visitor_to_canada_insurance_price-field_tip_surcharge_to_premium'] = array(
+    'bundle' => 'visitor_to_canada_insurance_price',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'insurance_price',
+    'field_name' => 'field_tip_surcharge_to_premium',
+    'label' => 'Surcharge To Premium',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 9,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Age to calculate premium');
@@ -573,7 +724,12 @@ E.g if you would like to offer 10% OFF, then you should put "-0.1".');
   t('Rate Adjustment');
   t('Rate schedule with stable pre-existing medical condition');
   t('Rate schedule without stable pre-existing medical condition');
+  t('Surcharge Percentage');
+  t('Surcharge To Premium');
   t('The rate schedule is a two-dimension table. Price table will show the age of the insured and the coverage of the insurance. The first row is the coverage amount; the first column is the age. ');
+  t('The surcharge is only applied to the \'rate without pre-existing medical condition coverage\' when the price of the age couldn\'t be found in the \'rate with pre-existing medical condition coverage\'. 
+The calculation formula is:  final price = price * (1+value)
+Only TU uses it currently.');
 
   return $field_instances;
 }
