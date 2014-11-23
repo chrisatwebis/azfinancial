@@ -1,7 +1,7 @@
 name = Azfinancial Content And Blocks
 description = content, block related changes
 core = 7.x
-package = Features
+package = Azfinancial
 version = 7.x-1.0
 project = azfinancial_content_and_blocks
 dependencies[] = fe_block
