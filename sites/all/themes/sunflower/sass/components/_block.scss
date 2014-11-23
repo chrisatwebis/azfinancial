@@ -57,6 +57,7 @@
 }
 
 //800 header block
+/*
 #block-block-15{
 	margin-right: 0;
 	display: block;
@@ -75,6 +76,7 @@
 		}
 	}
 }
+*/
 //book a meeting
 #block-block-14 {
 	display: none;
@@ -94,7 +96,7 @@
 		background: $yellow;
 		padding: 10px 20px;
 		margin: 0px;
-		font-size: 20px;
+		font-size: 18px;
 		color: white;
 		font-weight: $font_weight_bold;
 		padding-right: 40px;
@@ -122,7 +124,6 @@
 		display: none;
 		
 	}
-	@include box-shadow(silver 1px 2px 10px);
 }
 
 //Footer menu
@@ -500,10 +501,12 @@
 			}	
 		}
 	}
+	//get a quick quote
 	#block-webform-client-block-76{
 		.block__title{
-			font-size: 18px;
+			font-size: 16px;
 		}
+		@include box-shadow(silver 1px 2px 10px);
 	}
 	//book a meeting
 	#block-block-14 {
@@ -512,6 +515,7 @@
 			font-size: 18px;
 		}
 	}
+	/*
 	//800 header block
 	#block-block-15{
 		margin-right: 20px;
@@ -522,6 +526,7 @@
 			}
 		}
 	}
+	*/
 
 }
 @include at-breakpoint($desk){
@@ -532,6 +537,12 @@
 				margin-left: 30px;
 				display: inline-block;
 			}
+		}
+	}
+	//get a quick quote
+	#block-webform-client-block-76{
+		.block__title{
+			font-size: 18px;
 		}
 	}
 	//book a meeting
