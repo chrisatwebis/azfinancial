@@ -37,5 +37,14 @@ function azfinancial_content_and_blocks_default_fe_block_boxes() {
 
   $export['phone_local'] = $fe_block_boxes;
 
+  $fe_block_boxes = new stdClass();
+  $fe_block_boxes->info = 'QR Code Contact';
+  $fe_block_boxes->format = 'full_html';
+  $fe_block_boxes->machine_name = 'qrcode_contact';
+  $fe_block_boxes->body = '<p><img alt="" src="/sites/default/files/qrcode.png" style="width:100%" /></p>
+';
+
+  $export['qrcode_contact'] = $fe_block_boxes;
+
   return $export;
 }
