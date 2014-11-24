@@ -2310,21 +2310,22 @@ nav.mm-menu.mm-fresh {
   padding: 40px 80px;
   margin: 0px;
   position: relative;
-  background: #f7f7f7; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\000037}}
+  background: #f7f7f7;
+  word-wrap: break-word; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\000038}}
   .node--testimonials--full .field--name-body {
     font-weight: normal;
     color: #333333;
     font-style: italic;
     line-height: 24px;
     margin-bottom: 20px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000314}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000315}}
   .node--testimonials--full .field--name-field-testimonials-client, .node--testimonials--full .field--name-field-testimonials-date {
     display: inline-block;
     margin-right: 10px;
     color: #1a598c;
     font-weight: bold; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000323}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000324}}
   .node--testimonials--full:before {
     background: url('../images/quote_left.png?1407723431') no-repeat center center transparent;
     content: ' ';
@@ -2334,7 +2335,7 @@ nav.mm-menu.mm-fresh {
     position: absolute;
     top: 15px;
     left: 15px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000333}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000334}}
   .node--testimonials--full:after {
     background: url('../images/quote_right.png?1407723460') no-repeat center center transparent;
     content: ' ';
@@ -2345,14 +2346,14 @@ nav.mm-menu.mm-fresh {
     bottom: 15px;
     right: 15px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000346}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000347}}
 .view-id-custom_content.view-display-id-page_3 .view-header {
   padding: 10px 25px 20px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000350}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000351}}
 .view-id-custom_content.view-display-id-page_3 .view-content ul {
   padding: 0px;
   margin: 0px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000354}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000355}}
 .view-id-custom_content.view-display-id-page_3 .view-content .views-row {
   list-style: none;
   padding: 40px 80px;
@@ -2360,17 +2361,17 @@ nav.mm-menu.mm-fresh {
   color: #1a598c;
   font-weight: bold;
   position: relative; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000361}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000362}}
   .view-id-custom_content.view-display-id-page_3 .view-content .views-row.views-row-odd {
     background: #f7f7f7; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000364}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000365}}
   .view-id-custom_content.view-display-id-page_3 .view-content .views-row .views-field-body {
     font-weight: normal;
     color: #333333;
     font-style: italic;
     line-height: 24px;
     margin-bottom: 20px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000371}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000372}}
   .view-id-custom_content.view-display-id-page_3 .view-content .views-row:before {
     background: url('../images/quote_left.png?1407723431') no-repeat center center transparent;
     content: ' ';
@@ -2380,7 +2381,7 @@ nav.mm-menu.mm-fresh {
     position: absolute;
     top: 15px;
     left: 15px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000381}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_testimonials\.scss}line{font-family:\0000382}}
   .view-id-custom_content.view-display-id-page_3 .view-content .views-row:after {
     background: url('../images/quote_right.png?1407723460') no-repeat center center transparent;
     content: ' ';
