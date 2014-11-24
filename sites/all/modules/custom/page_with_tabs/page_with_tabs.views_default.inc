@@ -150,6 +150,70 @@ function page_with_tabs_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'entity';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['footer'] = FALSE;
+
+  /* Display: Tabs Field Collection */
+  $handler = $view->new_display('block', 'Tabs Field Collection', 'block_2');
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'views_accordion';
+  $handler->display->display_options['style_options']['collapsible'] = 1;
+  $handler->display->display_options['style_options']['row-start-open'] = '0';
+  $handler->display->display_options['style_options']['autoheight'] = 0;
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Field collection item: Entity with the Tabs (field_pwt_tab) */
+  $handler->display->display_options['relationships']['field_pwt_tab_node']['id'] = 'field_pwt_tab_node';
+  $handler->display->display_options['relationships']['field_pwt_tab_node']['table'] = 'field_collection_item';
+  $handler->display->display_options['relationships']['field_pwt_tab_node']['field'] = 'field_pwt_tab_node';
+  $handler->display->display_options['relationships']['field_pwt_tab_node']['required'] = TRUE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Field collection item: Tab Title */
+  $handler->display->display_options['fields']['field_pwt_tab_title']['id'] = 'field_pwt_tab_title';
+  $handler->display->display_options['fields']['field_pwt_tab_title']['table'] = 'field_data_field_pwt_tab_title';
+  $handler->display->display_options['fields']['field_pwt_tab_title']['field'] = 'field_pwt_tab_title';
+  $handler->display->display_options['fields']['field_pwt_tab_title']['label'] = '';
+  $handler->display->display_options['fields']['field_pwt_tab_title']['element_label_colon'] = FALSE;
+  /* Field: Field collection item: Tab Description */
+  $handler->display->display_options['fields']['field_pwt_tab_desc']['id'] = 'field_pwt_tab_desc';
+  $handler->display->display_options['fields']['field_pwt_tab_desc']['table'] = 'field_data_field_pwt_tab_desc';
+  $handler->display->display_options['fields']['field_pwt_tab_desc']['field'] = 'field_pwt_tab_desc';
+  $handler->display->display_options['fields']['field_pwt_tab_desc']['label'] = '';
+  $handler->display->display_options['fields']['field_pwt_tab_desc']['element_label_colon'] = FALSE;
+  /* Field: Field collection item: Tab Badge */
+  $handler->display->display_options['fields']['field_pwt_tab_badge']['id'] = 'field_pwt_tab_badge';
+  $handler->display->display_options['fields']['field_pwt_tab_badge']['table'] = 'field_data_field_pwt_tab_badge';
+  $handler->display->display_options['fields']['field_pwt_tab_badge']['field'] = 'field_pwt_tab_badge';
+  $handler->display->display_options['fields']['field_pwt_tab_badge']['label'] = '';
+  $handler->display->display_options['fields']['field_pwt_tab_badge']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_pwt_tab_badge']['type'] = 'field_collection_views_view';
+  $handler->display->display_options['fields']['field_pwt_tab_badge']['settings'] = array(
+    'name' => 'custom_field_collection_view',
+    'display_id' => 'block_1',
+    'add' => '',
+  );
+  $handler->display->display_options['fields']['field_pwt_tab_badge']['delta_offset'] = '0';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Field collection item: Field collection item ID */
+  $handler->display->display_options['arguments']['item_id']['id'] = 'item_id';
+  $handler->display->display_options['arguments']['item_id']['table'] = 'field_collection_item';
+  $handler->display->display_options['arguments']['item_id']['field'] = 'item_id';
+  $handler->display->display_options['arguments']['item_id']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['item_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['item_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['item_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['item_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['item_id']['break_phrase'] = TRUE;
   $translatables['custom_field_collection_view'] = array(
     t('Master'),
     t('more'),
@@ -173,6 +237,8 @@ function page_with_tabs_views_default_views() {
     t('Add'),
     t('All'),
     t('Badges Field Collection'),
+    t('Tabs Field Collection'),
+    t('field_pwt_tab'),
   );
   $export['custom_field_collection_view'] = $view;
 

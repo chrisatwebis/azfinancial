@@ -21,7 +21,7 @@ function page_with_tabs_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'field_collection_views',
         'settings' => array(
-          'add' => 'Add',
+          'add' => '',
           'display_id' => 'block_1',
           'name' => 'custom_field_collection_view',
         ),
@@ -124,7 +124,7 @@ function page_with_tabs_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(
-          'trim_length' => 200,
+          'trim_length' => 300,
         ),
         'type' => 'text_trimmed',
         'weight' => 2,
@@ -135,14 +135,14 @@ function page_with_tabs_field_default_field_instances() {
     'label' => 'Badge Description',
     'required' => 1,
     'settings' => array(
-      'text_processing' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 5,
+        'rows' => 3,
       ),
       'type' => 'text_textarea',
       'weight' => 3,
@@ -239,13 +239,13 @@ function page_with_tabs_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 1,
       ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(
-          'trim_length' => 600,
+          'trim_length' => 300,
         ),
         'type' => 'text_summary_or_trimmed',
         'weight' => 0,
@@ -268,56 +268,44 @@ function page_with_tabs_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 6,
+      'weight' => 4,
     ),
   );
 
-  // Exported field_instance: 'node-page_with_tabs-field_pwt_icon'
-  $field_instances['node-page_with_tabs-field_pwt_icon'] = array(
+  // Exported field_instance: 'node-page_with_tabs-field_insurance_category'
+  $field_instances['node-page_with_tabs-field_insurance_category'] = array(
     'bundle' => 'page_with_tabs',
+    'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Cross reference the site content by insurance category.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 14,
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_pwt_icon',
-    'label' => 'Icon',
-    'required' => 1,
+    'field_name' => 'field_insurance_category',
+    'label' => 'Insurance Category',
+    'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
-      'default_image' => 0,
-      'file_directory' => '',
-      'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '',
-      'max_resolution' => '',
-      'min_resolution' => '',
-      'title_field' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'image',
+      'module' => 'options',
       'settings' => array(
-        'preview_image_style' => 'thumbnail',
-        'progress_indicator' => 'throbber',
+        'apply_chosen' => '',
       ),
-      'type' => 'image_image',
+      'type' => 'options_select',
       'weight' => 2,
     ),
   );
@@ -329,20 +317,16 @@ function page_with_tabs_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 15,
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
     ),
     'entity_type' => 'node',
@@ -351,7 +335,7 @@ function page_with_tabs_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'alt_field' => 0,
-      'default_image' => 0,
+      'default_image' => 115,
       'file_directory' => '',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '',
@@ -368,7 +352,7 @@ function page_with_tabs_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -387,13 +371,13 @@ function page_with_tabs_field_default_field_instances() {
           'view_mode' => 'full',
         ),
         'type' => 'field_collection_tabs',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
@@ -408,7 +392,7 @@ function page_with_tabs_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 7,
+      'weight' => 5,
     ),
   );
 
@@ -418,8 +402,9 @@ function page_with_tabs_field_default_field_instances() {
   t('Badge Image');
   t('Badge Title');
   t('Body');
-  t('Icon');
+  t('Cross reference the site content by insurance category.');
   t('Image');
+  t('Insurance Category');
   t('Max length is 200 characters.');
   t('Tab Badge');
   t('Tab Description');

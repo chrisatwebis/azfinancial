@@ -22,11 +22,13 @@ function page_with_tabs_ds_layout_settings_info() {
       'ds_content' => array(
         0 => 'body',
         1 => 'field_pwt_tab',
+        2 => 'tab_clone',
       ),
     ),
     'fields' => array(
       'body' => 'ds_content',
       'field_pwt_tab' => 'ds_content',
+      'tab_clone' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(

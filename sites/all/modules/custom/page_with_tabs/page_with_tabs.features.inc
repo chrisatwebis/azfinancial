@@ -63,11 +63,12 @@ function page_with_tabs_node_info() {
     'page_with_tabs' => array(
       'name' => t('Page With Tabs'),
       'base' => 'node_content',
-      'description' => t('Use this to create page with tabs.'),
+      'description' => t('Use <em>page with tabs</em> for your static content with multiple tabs.'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',
     ),
   );
+  drupal_alter('node_info', $items);
   return $items;
 }

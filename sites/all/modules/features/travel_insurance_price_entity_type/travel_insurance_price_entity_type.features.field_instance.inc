@@ -313,6 +313,43 @@ E.g if you would like to offer 10% OFF, then you should put "-0.1".',
     ),
   );
 
+  // Exported field_instance: 'field_collection_item-field_tip_surcharge_to_premium-field_tip_discount_base'
+  $field_instances['field_collection_item-field_tip_surcharge_to_premium-field_tip_discount_base'] = array(
+    'bundle' => 'field_tip_surcharge_to_premium',
+    'default_value' => array(
+      0 => array(
+        'value' => 'no_spmcc',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Please choose which price to calculate the discount for deductibles.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 3,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_tip_discount_base',
+    'label' => 'Deductible Discount Price Base',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => '',
+      ),
+      'type' => 'options_select',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'field_collection_item-field_tip_surcharge_to_premium-field_tip_max_age'
   $field_instances['field_collection_item-field_tip_surcharge_to_premium-field_tip_max_age'] = array(
     'bundle' => 'field_tip_surcharge_to_premium',
@@ -384,9 +421,9 @@ E.g if you would like to offer 10% OFF, then you should put "-0.1".',
     'bundle' => 'field_tip_surcharge_to_premium',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'The surcharge is only applied to the \'rate without pre-existing medical condition coverage\' when the price of the age couldn\'t be found in the \'rate with pre-existing medical condition coverage\'. 
-The calculation formula is:  final price = price * (1+value)
-Only TU uses it currently.',
+    'description' => 'The surcharge is only applied to the \'rate without pre-existing medical condition coverage\' when the price of the age couldn\'t be found in the \'rate with pre-existing medical condition coverage\'. <br>
+The calculation formula is:  <b>final price = price * (1+value)</b>.<br>
+This situation happens when the insurance company doesn\'t include the insurer\'s age in the price list of \'with stable pre-existing medical condition\', but the insurance company still can insure the insurer with surcharge other than the price of \'without pre-existing medical condition\'. Currently, only TU uses it.<br>',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -707,6 +744,7 @@ Only TU uses it currently.',
   t('Age to calculate premium');
   t('Applicable Coverage');
   t('Deductible Amount');
+  t('Deductible Discount Price Base');
   t('Deductibles');
   t('Discount');
   t('Max Discount Amount');
@@ -715,6 +753,7 @@ Only TU uses it currently.',
   t('Please choose the maximum applicable age. The valid age is <b>less than or equal to</b> the maximum age.');
   t('Please choose the minimum applicable age. The valid age is <b>greater than or equal to</b> the minimum age.');
   t('Please choose which age to calculate the policy premium.');
+  t('Please choose which price to calculate the discount for deductibles.');
   t('Please indicate the discount for this deductible. <br>
 ( 1+value )*price = sell price.
 <br>
@@ -727,9 +766,9 @@ E.g if you would like to offer 10% OFF, then you should put "-0.1".');
   t('Surcharge Percentage');
   t('Surcharge To Premium');
   t('The rate schedule is a two-dimension table. Price table will show the age of the insured and the coverage of the insurance. The first row is the coverage amount; the first column is the age. ');
-  t('The surcharge is only applied to the \'rate without pre-existing medical condition coverage\' when the price of the age couldn\'t be found in the \'rate with pre-existing medical condition coverage\'. 
-The calculation formula is:  final price = price * (1+value)
-Only TU uses it currently.');
+  t('The surcharge is only applied to the \'rate without pre-existing medical condition coverage\' when the price of the age couldn\'t be found in the \'rate with pre-existing medical condition coverage\'. <br>
+The calculation formula is:  <b>final price = price * (1+value)</b>.<br>
+This situation happens when the insurance company doesn\'t include the insurer\'s age in the price list of \'with stable pre-existing medical condition\', but the insurance company still can insure the insurer with surcharge other than the price of \'without pre-existing medical condition\'. Currently, only TU uses it.<br>');
 
   return $field_instances;
 }

@@ -10,34 +10,39 @@
 function page_with_tabs_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_pwt_icon'
-  $field_bases['field_pwt_icon'] = array(
+  // Exported field_base: 'field_insurance_category'
+  $field_bases['field_insurance_category'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_pwt_icon',
+    'field_name' => 'field_insurance_category',
     'foreign keys' => array(
-      'fid' => array(
+      'tid' => array(
         'columns' => array(
-          'fid' => 'fid',
+          'tid' => 'tid',
         ),
-        'table' => 'file_managed',
+        'table' => 'taxonomy_term_data',
       ),
     ),
     'indexes' => array(
-      'fid' => array(
-        0 => 'fid',
+      'tid' => array(
+        0 => 'tid',
       ),
     ),
     'locked' => 0,
-    'module' => 'image',
+    'module' => 'taxonomy',
     'settings' => array(
-      'default_image' => 0,
-      'uri_scheme' => 'public',
+      'allowed_values' => array(
+        0 => array(
+          'vocabulary' => 'insurance_category',
+          'parent' => 0,
+        ),
+      ),
+      'options_list_callback' => 'i18n_taxonomy_allowed_values',
     ),
     'translatable' => 0,
-    'type' => 'image',
+    'type' => 'taxonomy_term_reference',
   );
 
   // Exported field_base: 'field_pwt_image'

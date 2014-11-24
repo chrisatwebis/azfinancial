@@ -15,7 +15,7 @@ function webis_image_styles_image_default_styles() {
     'name' => 'webis_banner',
     'label' => 'Webis Banner',
     'effects' => array(
-      3 => array(
+      6 => array(
         'label' => 'Scale and crop',
         'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
         'effect callback' => 'image_scale_and_crop_effect',

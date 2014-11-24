@@ -51,8 +51,8 @@ function travel_insurance_price_entity_type_field_group_info() {
     'label' => 'Applicable Age Range',
     'weight' => '0',
     'children' => array(
-      0 => 'field_tip_min_age',
-      1 => 'field_tip_max_age',
+      0 => 'field_tip_max_age',
+      1 => 'field_tip_min_age',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

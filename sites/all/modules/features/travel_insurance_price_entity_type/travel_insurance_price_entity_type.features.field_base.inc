@@ -150,6 +150,32 @@ function travel_insurance_price_entity_type_field_default_field_bases() {
     'type' => 'number_float',
   );
 
+  // Exported field_base: 'field_tip_discount_base'
+  $field_bases['field_tip_discount_base'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_tip_discount_base',
+    'foreign keys' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'spmcc' => 'Price With Stable Pre-existing Medical Condition Coverage',
+        'no_spmcc' => 'Price Without Stable Pre-existing Medical Condition Coverage',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_tip_max_age'
   $field_bases['field_tip_max_age'] = array(
     'active' => 1,
