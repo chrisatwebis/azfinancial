@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the Azfinancial Content And Blocks feature.
  */
+
+include_once 'azfinancial_content_and_blocks.features.inc';
