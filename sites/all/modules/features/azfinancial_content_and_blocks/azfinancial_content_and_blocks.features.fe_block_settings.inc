@@ -218,6 +218,150 @@ function azfinancial_content_and_blocks_default_fe_block_settings() {
     'visibility' => 0,
   );
 
+  $export['menu_block-10'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 10,
+    'i18n_block_language' => array(
+      0 => 'zh-hans',
+    ),
+    'i18n_mode' => 0,
+    'module' => 'menu_block',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'ohm' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'ohm',
+        'weight' => 0,
+      ),
+      'omega' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'omega',
+        'weight' => 0,
+      ),
+      'sunflower' => array(
+        'region' => 'postscript_third',
+        'status' => 1,
+        'theme' => 'sunflower',
+        'weight' => -42,
+      ),
+    ),
+    'title' => '国际学生保险',
+    'visibility' => 0,
+  );
+
+  $export['menu_block-11'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 11,
+    'i18n_block_language' => array(
+      0 => 'zh-hant',
+    ),
+    'i18n_mode' => 0,
+    'module' => 'menu_block',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'ohm' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'ohm',
+        'weight' => 0,
+      ),
+      'omega' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'omega',
+        'weight' => 0,
+      ),
+      'sunflower' => array(
+        'region' => 'postscript_third',
+        'status' => 1,
+        'theme' => 'sunflower',
+        'weight' => -41,
+      ),
+    ),
+    'title' => '國際學生保險',
+    'visibility' => 0,
+  );
+
+  $export['menu_block-12'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 12,
+    'i18n_block_language' => array(
+      0 => 'zh-hans',
+    ),
+    'i18n_mode' => 0,
+    'module' => 'menu_block',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'ohm' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'ohm',
+        'weight' => 0,
+      ),
+      'omega' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'omega',
+        'weight' => 0,
+      ),
+      'sunflower' => array(
+        'region' => 'postscript_third',
+        'status' => 1,
+        'theme' => 'sunflower',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '外出旅游保险',
+    'visibility' => 0,
+  );
+
+  $export['menu_block-13'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 13,
+    'i18n_block_language' => array(
+      0 => 'zh-hant',
+    ),
+    'i18n_mode' => 0,
+    'module' => 'menu_block',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'ohm' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'ohm',
+        'weight' => 0,
+      ),
+      'omega' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'omega',
+        'weight' => 0,
+      ),
+      'sunflower' => array(
+        'region' => 'postscript_third',
+        'status' => 1,
+        'theme' => 'sunflower',
+        'weight' => 0,
+      ),
+    ),
+    'title' => '外出旅遊保險',
+    'visibility' => 0,
+  );
+
   $export['menu_block-2'] = array(
     'cache' => -1,
     'custom' => 0,
