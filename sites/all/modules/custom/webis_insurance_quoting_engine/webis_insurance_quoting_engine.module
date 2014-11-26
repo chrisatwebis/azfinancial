@@ -195,48 +195,49 @@ function webis_insurance_quoting_engine_visitor_canada_price_search_vertical($cu
 
   //Initialize the calculating age. Some of the plans are culculated base on current age, others are culculated base on the effective age.
   $age = $current_age;
-  $plan_price = array();
   //$key = entity id, $plan = entity;
   foreach ($plans as $key => $plan) {
-    //render each plan.    
-    $render_item = '';
-
-    $which_age = webis_insurance_quoting_engine_get_tip_age_to_cal_premium($plan);
-    
-    switch ($which_age) {
-      case 'purchase_date_age':
-        $age = $current_age;        
-        break;
-      case 'effective_date_age':
-        $age = $effective_date_age;
-        break;
-      default:
-        break;
-    }
-
     $insurance_product = webis_insurance_quoting_engine_get_insurance_by_price_eid($key);
-    $price = webis_insurance_quoting_engine_get_tip_total_price($plan, $age, $coverage, TRUE, $days);
-    $price_no_spmcc = webis_insurance_quoting_engine_get_tip_total_price($plan, $age, $coverage, FALSE, $days);
+    if (!empty($insurance_product)) {
+      //render each plan.    
+      $render_item = '';
 
-    if (!empty($price) || !empty($price_no_spmcc)) {
-      $plan_price["title"] = $plan->title;
-      $plan_price["id"] = $key;
-      if (!empty($price)) {
-        $plan_price["prices"] = $price;
+      $which_age = webis_insurance_quoting_engine_get_tip_age_to_cal_premium($plan);
+      
+      switch ($which_age) {
+        case 'purchase_date_age':
+          $age = $current_age;        
+          break;
+        case 'effective_date_age':
+          $age = $effective_date_age;
+          break;
+        default:
+          break;
       }
-      if (!empty($price_no_spmcc)) {
-        $plan_price["prices_no_spmcc"] = $price_no_spmcc;
-      }
-      $render_item .= "
-        <div class='price_result_item'>
-          <div class='product_info'>".webis_insurance_quoting_engine_render_insurance_product_vertical($insurance_product, $key)."</div>
-          <div class='price_info'>".webis_insurance_quoting_engine_render_price_search_vertical($plan_price, $days)."</div>
-        </div>
-      ";
 
-      $output .= $render_item;
+      $price = webis_insurance_quoting_engine_get_tip_total_price($plan, $age, $coverage, TRUE, $days);
+      $price_no_spmcc = webis_insurance_quoting_engine_get_tip_total_price($plan, $age, $coverage, FALSE, $days);
+
+      if (!empty($price) || !empty($price_no_spmcc)) {
+        $plan_price = array();
+        $plan_price["title"] = $plan->title;
+        $plan_price["id"] = $key;
+        if (!empty($price)) {
+          $plan_price["prices"] = $price;
+        }
+        if (!empty($price_no_spmcc)) {
+          $plan_price["prices_no_spmcc"] = $price_no_spmcc;
+        }
+        $render_item .= "
+          <div class='price_result_item'>
+            <div class='product_info'>".webis_insurance_quoting_engine_render_insurance_product_vertical($insurance_product, $key)."</div>
+            <div class='price_info'>".webis_insurance_quoting_engine_render_price_search_vertical($plan_price, $days)."</div>
+          </div>
+        ";
+
+        $output .= $render_item;
+      }
     }
-
   }
   $output = "
     <div class='lowest_rate'>
@@ -434,6 +435,7 @@ function webis_insurance_quoting_engine_get_insurance_by_price_eid($price_entity
         ->entityCondition('bundle', NODE_TYPE_INSURANCE_PRODUCT)
         ->propertyCondition('language', $lang, '=')
         ->fieldCondition('field_insurance_price', 'target_id', $price_entity_id, '=')
+        ->propertyCondition('status', 1)
         ->execute();
   if(!empty($entities_query)){
     foreach ($entities_query as $value) {

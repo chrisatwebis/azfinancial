@@ -52,5 +52,5 @@ features[field_instance][] = insurance_price-visitor_to_canada_insurance_price-f
 features[field_instance][] = insurance_price-visitor_to_canada_insurance_price-field_tip_rate_schedule
 features[field_instance][] = insurance_price-visitor_to_canada_insurance_price-field_tip_rate_schedule_no_spmcc
 features[field_instance][] = insurance_price-visitor_to_canada_insurance_price-field_tip_surcharge_to_premium
-mtime = 1416778913
+mtime = 1416797835
 project path = sites/all/modules/features

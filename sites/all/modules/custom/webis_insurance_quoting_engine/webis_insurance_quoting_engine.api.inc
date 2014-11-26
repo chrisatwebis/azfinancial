@@ -64,9 +64,9 @@ function webis_insurance_quoting_engine_get_tip_rate_adjustment($entity){
     $field_collection_query = new EntityFieldQuery();
     $field_collection_entities = entity_load('field_collection_item', $fc_ids);
     $rate_adjustment_array = array();
-    foreach ($field_collection_entities as $key => $entity) {
+    foreach ($field_collection_entities as $key => $field_collection_entity) {
       //get tip deductible
-      $field_tip_deductible = field_get_items('field_collection_item', $entity, 'field_tip_deductible');
+      $field_tip_deductible = field_get_items('field_collection_item', $field_collection_entity, 'field_tip_deductible');
       $deductibles_entity_ids = array();
       foreach ($field_tip_deductible as $key_1 => $deductible) {
         $deductibles_entity_ids[] = $deductible['value'];
@@ -93,10 +93,10 @@ function webis_insurance_quoting_engine_get_tip_rate_adjustment($entity){
       }
 
       //get the min age
-      $min_age = field_get_items('field_collection_item', $entity, 'field_tip_min_age');
+      $min_age = field_get_items('field_collection_item', $field_collection_entity, 'field_tip_min_age');
       $min_age = $min_age[0]['value'];
       //get the max age
-      $max_age = field_get_items('field_collection_item', $entity, 'field_tip_max_age');
+      $max_age = field_get_items('field_collection_item', $field_collection_entity, 'field_tip_max_age');
       $max_age = $max_age[0]['value'];
       //put info back to our array.
       $rate_adjustment_array[$key]['min_age'] = $min_age;
@@ -188,9 +188,47 @@ function webis_insurance_quoting_engine_get_tip_base_price($entity, $age, $cover
 }
 
 /**
+* Get the 'field_tip_surcharge_to_premium' field by entity.
+* @argument
+* $entity - insurance price entity
+*/
+function webis_insurance_quoting_engine_get_surcharge_to_premium($entity){
+  $field_ids = field_get_items(INSURANCE_PRICE_ENTITY_NAME, $entity, 'field_tip_surcharge_to_premium');
+  if (!empty($field_ids) && is_array($field_ids)) {
+    $fc_ids = array();
+    foreach ($field_ids as $key => $field_collection) {
+      $fc_ids[] = $field_collection['value'];
+    }
+    $field_collection_query = new EntityFieldQuery();
+    $field_collection_entities = entity_load('field_collection_item', $fc_ids);
+    $surcharge_to_premium_array = array();
+    foreach ($field_collection_entities as $key => $field_collection_entity) {
+      //get the min age
+      $min_age = field_get_items('field_collection_item', $field_collection_entity, 'field_tip_min_age');
+      $min_age = $min_age[0]['value'];
+      //get the max age
+      $max_age = field_get_items('field_collection_item', $field_collection_entity, 'field_tip_max_age');
+      $max_age = $max_age[0]['value'];
+      //get the surcharge percentage
+      $surcharge_percentage = field_get_items('field_collection_item', $field_collection_entity, 'field_tip_surcharge_percentage');
+      $surcharge_percentage = $surcharge_percentage[0]['value'];
+      //get the discount base
+      $discount_base = field_get_items('field_collection_item', $field_collection_entity, 'field_tip_discount_base');
+      $discount_base = $discount_base[0]['value'];
+
+      $surcharge_to_premium_array[$key]['min_age'] = $min_age;
+      $surcharge_to_premium_array[$key]['max_age'] = $max_age;
+      $surcharge_to_premium_array[$key]['surcharge_percentage'] = $surcharge_percentage;
+      $surcharge_to_premium_array[$key]['discount_base'] = $discount_base;
+    }
+    return $surcharge_to_premium_array;
+  }
+}
+
+/**
 * Get the final price by the 'insurance_id', 'age', 'coverage', 'deductible'
 * @arguments
-* $insurance_id - insurance entity id
+* $entity - insurance price entity
 * $age - the age of the insured
 * $coverage - the coverage of the policy
 * $spmcc - whether use the stable pre-existing medical condition coverage. 
@@ -223,6 +261,36 @@ function webis_insurance_quoting_engine_get_tip_total_price_by_deductible($entit
         $total_final_price = $total_base_price - $total_discount;
       }
       return $total_final_price;
+    }
+    else {
+      //If the base_price is still empty, then try to find out the base_price from surcharge premium of price of no_spmcc.
+      $surcharge_to_premium_array = webis_insurance_quoting_engine_get_surcharge_to_premium($entity);
+      //if this is for finding the price of spmcc, and the surcharge is set for this insurance price.
+      if ($spmcc && !empty($surcharge_to_premium_array)) {
+        //get the price of no_spmcc.
+        $base_price_no_spmcc = webis_insurance_quoting_engine_get_tip_base_price($entity, $age, $coverage, FALSE);
+        $total_final_price_no_spmcc = webis_insurance_quoting_engine_get_tip_total_price_by_deductible($entity, $age, $coverage, FALSE, $days, $deductible_amount);
+        //if we could find out the price for no_spmcc, then use the no_spmcc to calculate the price of spmcc
+        if (!empty($base_price_no_spmcc)) {
+          foreach ($surcharge_to_premium_array as $key => $value) {
+            //we will only find the first match of age.
+            if ($value['min_age'] <= $age && $age <= $value['max_age']) {
+              switch ($value['discount_base']) {
+                case 'no_spmcc':
+                  $surcharge_amount = $base_price_no_spmcc * $value['surcharge_percentage'] * $days;
+                  $total_final_price = $total_final_price_no_spmcc + $surcharge_amount;
+                  break;
+                case 'spmcc':
+                  $total_final_price = $total_final_price_no_spmcc * (1 + $value['surcharge_percentage']);
+                default:
+                  # code...
+                  break;
+              }
+              return $total_final_price;
+            }
+          }        
+        }
+      }
     }
   }
 }

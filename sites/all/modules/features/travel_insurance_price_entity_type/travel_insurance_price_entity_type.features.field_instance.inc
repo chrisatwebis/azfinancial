@@ -353,7 +353,11 @@ E.g if you would like to offer 10% OFF, then you should put "-0.1".',
   // Exported field_instance: 'field_collection_item-field_tip_surcharge_to_premium-field_tip_max_age'
   $field_instances['field_collection_item-field_tip_surcharge_to_premium-field_tip_max_age'] = array(
     'bundle' => 'field_tip_surcharge_to_premium',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -386,7 +390,11 @@ E.g if you would like to offer 10% OFF, then you should put "-0.1".',
   // Exported field_instance: 'field_collection_item-field_tip_surcharge_to_premium-field_tip_min_age'
   $field_instances['field_collection_item-field_tip_surcharge_to_premium-field_tip_min_age'] = array(
     'bundle' => 'field_tip_surcharge_to_premium',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -419,7 +427,11 @@ E.g if you would like to offer 10% OFF, then you should put "-0.1".',
   // Exported field_instance: 'field_collection_item-field_tip_surcharge_to_premium-field_tip_surcharge_percentage'
   $field_instances['field_collection_item-field_tip_surcharge_to_premium-field_tip_surcharge_percentage'] = array(
     'bundle' => 'field_tip_surcharge_to_premium',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
     'deleted' => 0,
     'description' => 'The surcharge is only applied to the \'rate without pre-existing medical condition coverage\' when the price of the age couldn\'t be found in the \'rate with pre-existing medical condition coverage\'. <br>
 The calculation formula is:  <b>final price = price * (1+value)</b>.<br>
