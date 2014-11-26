@@ -46,6 +46,40 @@ function azfinancial_content_and_blocks_default_fe_block_settings() {
     'visibility' => 0,
   );
 
+  $export['block-contact_us'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'i18n_block_language' => array(),
+    'i18n_mode' => 1,
+    'machine_name' => 'contact_us',
+    'module' => 'block',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'ohm' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'ohm',
+        'weight' => 0,
+      ),
+      'omega' => array(
+        'region' => 'branding',
+        'status' => 1,
+        'theme' => 'omega',
+        'weight' => 0,
+      ),
+      'sunflower' => array(
+        'region' => 'postscript_fourth',
+        'status' => 1,
+        'theme' => 'sunflower',
+        'weight' => 0,
+      ),
+    ),
+    'title' => 'Contact Us',
+    'visibility' => 0,
+  );
+
   $export['block-phone_800'] = array(
     'cache' => -1,
     'custom' => 0,
@@ -111,6 +145,40 @@ function azfinancial_content_and_blocks_default_fe_block_settings() {
       ),
     ),
     'title' => '',
+    'visibility' => 0,
+  );
+
+  $export['block-qrcode_contact'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'i18n_block_language' => array(),
+    'i18n_mode' => 1,
+    'machine_name' => 'qrcode_contact',
+    'module' => 'block',
+    'node_types' => array(),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'ohm' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'ohm',
+        'weight' => 0,
+      ),
+      'omega' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'omega',
+        'weight' => 0,
+      ),
+      'sunflower' => array(
+        'region' => 'postscript_fourth',
+        'status' => 1,
+        'theme' => 'sunflower',
+        'weight' => 0,
+      ),
+    ),
+    'title' => 'Scan to save contact',
     'visibility' => 0,
   );
 
@@ -645,6 +713,48 @@ function azfinancial_content_and_blocks_default_fe_block_settings() {
       ),
     ),
     'title' => 'Main Menu',
+    'visibility' => 0,
+  );
+
+  $export['sharethis-sharethis_block'] = array(
+    'cache' => 4,
+    'custom' => 0,
+    'delta' => 'sharethis_block',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 1,
+    'module' => 'sharethis',
+    'node_types' => array(
+      0 => 'blog',
+      1 => 'faq',
+      2 => 'insurance_product',
+      3 => 'page',
+      4 => 'page_with_tabs',
+      5 => 'testimonials',
+      6 => 'webform',
+    ),
+    'pages' => '',
+    'roles' => array(),
+    'themes' => array(
+      'ohm' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'ohm',
+        'weight' => 0,
+      ),
+      'omega' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'omega',
+        'weight' => 0,
+      ),
+      'sunflower' => array(
+        'region' => 'help',
+        'status' => 1,
+        'theme' => 'sunflower',
+        'weight' => 0,
+      ),
+    ),
+    'title' => 'Share with your friends',
     'visibility' => 0,
   );
 

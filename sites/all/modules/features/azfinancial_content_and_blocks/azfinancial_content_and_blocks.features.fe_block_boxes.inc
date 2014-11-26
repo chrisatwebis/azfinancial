@@ -20,6 +20,30 @@ function azfinancial_content_and_blocks_default_fe_block_boxes() {
   $export['call_us_800'] = $fe_block_boxes;
 
   $fe_block_boxes = new stdClass();
+  $fe_block_boxes->info = 'Contact Us';
+  $fe_block_boxes->format = 'full_html';
+  $fe_block_boxes->machine_name = 'contact_us';
+  $fe_block_boxes->body = '<p><strong>Business Phone:</strong></p>
+
+<p><a href="tel: 416-834-9204">416-834-9204</a> (cell)</p>
+
+<p><a href="tel:905-771-8288">905-771-8288</a> (Toronto)</p>
+
+<p><a href="tel:905-771-8288">604-637-2195</a> (Vancouver)</p>
+
+<p><a href="tel:403-228-1798">403-228-1798</a> (Calgary)</p>
+
+<p><strong>Toll Free:</strong></p>
+
+<p><a href="tel:18778349204" style="line-height: 20.7999992370605px;" title="Call AZ Financial">1-877-834-9204</a></p>
+
+<p><strong>Email:</strong><br />
+<a href="mailto:info@financial.ca?subject=Thank%20you&amp;body=You%20will%20get%20reply%20with%2024%20hours.">info@azfinancial.ca</a></p>
+';
+
+  $export['contact_us'] = $fe_block_boxes;
+
+  $fe_block_boxes = new stdClass();
   $fe_block_boxes->info = 'Phone 800';
   $fe_block_boxes->format = 'full_html';
   $fe_block_boxes->machine_name = 'phone_800';
@@ -41,7 +65,7 @@ function azfinancial_content_and_blocks_default_fe_block_boxes() {
   $fe_block_boxes->info = 'QR Code Contact';
   $fe_block_boxes->format = 'full_html';
   $fe_block_boxes->machine_name = 'qrcode_contact';
-  $fe_block_boxes->body = '<p><img alt="" src="/sites/default/files/qrcode.png" style="width:100%" /></p>
+  $fe_block_boxes->body = '<div><img alt="" src="/sites/default/files/qrcode.png" style="width:100%" /></div>
 ';
 
   $export['qrcode_contact'] = $fe_block_boxes;
