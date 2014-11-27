@@ -596,7 +596,10 @@ function webis_insurance_quoting_engine_render_price_search_vertical($plan_price
               'insurance_product' => $eid,
               'deductible' => $deductible,
             ),
-            'attributes' => array('target'=>'_blank'),
+            'attributes' => array(
+              'target'=>'_blank',
+              'title' => t('click to buy with this deductible'),
+            ),
           )
         ), 
         'class' => 'deductible',
