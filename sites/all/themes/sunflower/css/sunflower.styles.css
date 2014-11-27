@@ -1168,103 +1168,104 @@ ul.breadcrumb {
         padding: 10px 10px 10px 30px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\0000396}}
         .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .product_info .insurance_product .summary .colorbox-inline:hover {
-          background-image: url('../images/zoom_icon_yellow.png?1414387821'); }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003100}}
+          background-image: url('../images/zoom_icon_yellow.png?1414387821');
+          color: #ca9f03; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003101}}
       .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .product_info .insurance_product .summary .summary_content {
         display: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003108}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003109}}
   .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .insurance_price table {
     width: 100%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003110}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003111}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .insurance_price table th, .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .insurance_price table td {
       padding: 8px 0;
       width: 25%;
       text-align: center;
       border: 1px solid #e5e5e5; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003116}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003117}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .insurance_price table th {
       padding: 10px 0;
       background: #333333;
       color: white; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003121}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003122}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .insurance_price table tr.odd {
       background: #f7f7f7; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003124}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003125}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .insurance_price table tr.even {
       background: white; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003128}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003129}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .insurance_price table .deductible a {
       color: #ca9f03;
       font-size: 1.5em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003133}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003134}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .insurance_price table .spmcc {
       padding-bottom: 10px;
       margin-bottom: 10px;
       border-bottom: 1px dashed #e5e5e5; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003143}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003144}}
   .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .deductible_item {
     overflow: hidden;
     text-align: center;
     padding: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003147}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003148}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .deductible_item .deductible {
       color: #ca9f03;
       width: 23.72881%;
       float: left;
       margin-right: 1.69492%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003151}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003152}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .deductible_item .price {
       width: 74.57627%;
       float: right;
       margin-right: 0;
       *margin-left: -1em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003153}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003154}}
       .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .deductible_item .price .product_type {
         width: 32.20339%;
         float: left;
         margin-right: 1.69492%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003156}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003157}}
       .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .deductible_item .price .price_per_day, .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .deductible_item .price .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_content .deductible .deductible_content .plan_price .price_total, .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_content .deductible .deductible_content .plan_price .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .deductible_item .price .price_total {
         width: 32.20339%;
         float: left;
         margin-right: 1.69492%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003159}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003160}}
       .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .deductible_item .price .total_price {
         width: 32.20339%;
         float: right;
         margin-right: 0;
         *margin-left: -1em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003162}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003163}}
       .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .deductible_item .price .spmcc, .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .deductible_item .price .no_spmcc {
         overflow: hidden;
         margin: 10px 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003167}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003168}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .deductible_item.header {
       background: #e5e5e5; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003177}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003178}}
 .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .view-id-custom_content.view-display-id-block_7 .view-header {
   margin: 0 0 15px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003180}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003181}}
 .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .view-id-custom_content.view-display-id-block_7 .owl-item {
   text-align: center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003182}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003183}}
   .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .view-id-custom_content.view-display-id-block_7 .owl-item .views-field-field-insurance-company-logo {
     border-right: 1px solid lightgrey; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003186}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003187}}
   .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .view-id-custom_content.view-display-id-block_7 .owl-item .views-field-title a {
     color: black;
     font-size: 12px;
     text-decoration: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003190}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003191}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .view-id-custom_content.view-display-id-block_7 .owl-item .views-field-title a:hover {
       text-decoration: underline; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003199}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003200}}
 .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .quicktabs-wrapper ul.quicktabs-tabs {
   padding: 0px 0 10px;
   margin: 0px;
   background: #ca9f03;
   overflow: hidden; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003204}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003205}}
   .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .quicktabs-wrapper ul.quicktabs-tabs > li {
     background: #1a598c;
     padding: 10px;
@@ -1273,82 +1274,82 @@ ul.breadcrumb {
     margin-right: 1.69492%;
     display: inline-block;
     text-align: center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003210}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003211}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .quicktabs-wrapper ul.quicktabs-tabs > li.active, .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .quicktabs-wrapper ul.quicktabs-tabs > li:hover {
       background: #ca9f03; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003213}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003214}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .quicktabs-wrapper ul.quicktabs-tabs > li a {
       color: white;
       text-decoration: none;
       font-weight: bold; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003217}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003218}}
       .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .quicktabs-wrapper ul.quicktabs-tabs > li a:hover {
         text-decoration: underline; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003221}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003222}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .quicktabs-wrapper ul.quicktabs-tabs > li:last-child {
       width: 49.15254%;
       float: right;
       margin-right: 0;
       *margin-left: -1em; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003231}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003232}}
 .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_header {
   background: #666666;
   color: #e5e5e5; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003234}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003235}}
   .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_header .plan_item {
     color: white;
     width: 12.5%;
     display: inline-block;
     padding: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003239}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003240}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_header .plan_item .price_per_day, .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_header .plan_item .plan_result_content .deductible .deductible_content .plan_price .price_total, .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_content .deductible .deductible_content .plan_price .plan_result_header .plan_item .price_total {
       padding: 10px;
       display: inline-block;
       width: 50%;
       text-align: center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003244}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003245}}
       .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_header .plan_item .price_per_day .part_1, .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_header .plan_item .plan_result_content .deductible .deductible_content .plan_price .price_total .part_1, .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_content .deductible .deductible_content .plan_price .plan_result_header .plan_item .price_total .part_1 {
         display: block; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003248}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003249}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_header .plan_item .price_total {
       padding: 10px;
       display: inline-block;
       vertical-align: text-bottom;
       width: 50%;
       text-align: center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003258}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003259}}
 .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_footer .plan_item {
   color: white;
   width: 12.5%;
   display: inline-block;
   padding: 5px;
   text-align: center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003264}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003265}}
   .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_footer .plan_item .cta {
     display: block; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003266}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003267}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_footer .plan_item .cta.buy_plan {
       margin-bottom: 10px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003273}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003274}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_footer .plan_item .cta a {
       color: white;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003279}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003280}}
       .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_footer .plan_item .cta a:hover {
         text-decoration: underline; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003288}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003289}}
 .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_content .deductible .deductible_header {
   background: #e5e5e5;
   padding: 15px;
   color: #ca9f03;
   font-size: 18px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003293}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003294}}
   .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_content .deductible .deductible_header .label {
     margin-right: 15px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003296}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003297}}
   .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_content .deductible .deductible_header .accordion_btn {
     float: right;
     width: 25px;
@@ -1356,41 +1357,41 @@ ul.breadcrumb {
     display: block;
     background: url('../images/accordion_close_btn.png?1412304630') no-repeat center center transparent;
     cursor: pointer; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003306}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003307}}
 .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_content .deductible.collapsed .accordion_btn {
   background: url('../images/accordion_open_btn.png?1412304673') no-repeat center center transparent; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003310}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003311}}
 .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_content .deductible .deductible_content {
   background: white;
   color: #666666; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003313}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003314}}
   .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_content .deductible .deductible_content .plan_price {
     width: 12.5%;
     display: inline-block;
     padding: 10px;
     border-right: 1px solid lightgrey; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003318}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003319}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_content .deductible .deductible_content .plan_price .price_per_day, .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_content .deductible .deductible_content .plan_price .price_total {
       padding: 10px;
       display: inline-block;
       width: 50%;
       text-align: center; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003327}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003328}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance-horizontal-comparison .price_search_result_wrapper .plan_result_wrapper .plan_result_content .deductible .deductible_content .plan_price.last {
       border-right: 0px; }
 
 @media (min-width: 38.5em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003344}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003345}}
   .page-get-a-quote .price_search_result_header .price_search_result_summary .item {
     font-size: 14px;
     line-height: 34px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003354}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003355}}
   .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item {
     overflow: hidden;
     padding-bottom: 20px;
     margin-bottom: 20px;
     position: relative; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003359}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003360}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .product_info {
       position: absolute;
       top: 50%;
@@ -1400,43 +1401,43 @@ ul.breadcrumb {
       width: 32.20339%;
       float: left;
       margin-right: 1.69492%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003366}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003367}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info {
       width: 66.10169%;
       float: right;
       margin-right: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003369}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003370}}
       .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .deductible_item .price {
         font-size: 13px; } }
 @media (min-width: 61.25em) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003383}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003384}}
   .page-get-a-quote .price_search_result_header .price_search_result_summary {
     width: 57.62712%;
     float: left;
     margin-right: 1.69492%;
     text-align: left; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003387}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003388}}
     .page-get-a-quote .price_search_result_header .price_search_result_summary .item.summary_label {
       color: #ca9f03;
       display: inline-block; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003393}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003394}}
   .page-get-a-quote .price_search_result_header .price_search_compare_btns {
     width: 40.67797%;
     float: right;
     margin-right: 0;
     text-align: right;
     margin-top: 0px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003402}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003403}}
   .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .product_info {
     width: 23.72881%;
     float: left;
     margin-right: 1.69492%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003405}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003406}}
   .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info {
     width: 74.57627%;
     float: right;
     margin-right: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003410}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_get_a_quote\.scss}line{font-family:\00003411}}
     .page-get-a-quote.page-get-a-quote-visitor-to-canada-insurance .price_result_item .price_info .deductible_item .price {
       font-size: 14px; } }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_mmenu\.scss}line{font-family:\000033}}
@@ -2466,7 +2467,7 @@ input.webform-calendar {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_webform\.scss}line{font-family:\0000365}}
 .i18n-zh-hans #block-webform-client-block-76 .block__title, .i18n-zh-hant #block-webform-client-block-76 .block__title {
-  font-size: 20px; }
+  font-size: 18px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_webform\.scss}line{font-family:\0000373}}
 .i18n-zh-hans #webform-client-form-76 .webform-component.webform-component--steps ol li, .i18n-zh-hant #webform-client-form-76 .webform-component.webform-component--steps ol li {
   font-size: 14px;
