@@ -6,11 +6,11 @@ input.webform-calendar{
 	background: image-url("calendar_icon.png")	center center no-repeat transparent;
 }
 
-#webform-client-form-76{
+#webform-client-form-76 {
 	margin: 0;
 	padding: 0 0 10px;
 	background: $extra_light_grey;
-	.webform-component{
+	.webform-component {
 		margin: 15px auto;
 		display: block;
 		width: 280px;
@@ -18,26 +18,36 @@ input.webform-calendar{
 			margin-bottom: 2px;
 			font-weight: $font_weight_normal;
 		}
-		&.webform-component--steps{
+		&.webform-component--steps {
 			margin: 0;
 			display: block;
 			background: $dark_grey;
 			width: 100%;
-			ol{
+			ol {
 				padding: 10px;
 				list-style: none;
 				margin: 0px;
 				overflow: hidden;
 				width: 100%;
-				li{
+				li {
 					list-style: none;
 			    @include span-columns(4, 12); // Span 12 out of 12 columns.
 					color: white;
 					font-size: 13px;
 					font-weight: $font_weight_semi_bold;
 					text-align: center;
-					&:last-child, &.last-step{
+					&:last-child, &.last-step {
 				    @include span-columns(4 omega, 12); // Span 12 out of 12 columns.						
+					}
+					padding-left: 45px;
+					&.step_1 {
+						background: image-url("step_1.png") no-repeat 10px center transparent;
+					}
+					&.step_2 {
+						background: image-url("step_2.png") no-repeat 10px center transparent;
+					}
+					&.step_3 {
+						background: image-url("step_3.png") no-repeat 10px center transparent;
 					}
 				}
 			}
@@ -48,6 +58,31 @@ input.webform-calendar{
 		text-align: center;
 	}
 }
+
+
+.i18n-zh-hans {
+	#block-webform-client-block-76{
+		.block__title{
+			font-size: 20px;
+		}
+	}
+	#webform-client-form-76 {
+		.webform-component {
+			&.webform-component--steps {
+				ol {
+					li {
+						font-size: 14px;
+						line-height: 31px;
+					}
+				}
+			}
+		}
+	}
+}
+.i18n-zh-hant {
+	@extend .i18n-zh-hans;	
+}
+
 .page-node-76{
 	.node--webform--full{
 		#webform-client-form-76{

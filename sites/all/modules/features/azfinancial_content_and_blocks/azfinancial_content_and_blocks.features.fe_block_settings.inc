@@ -758,5 +758,39 @@ function azfinancial_content_and_blocks_default_fe_block_settings() {
     'visibility' => 0,
   );
 
+  $export['webform-client-block-76'] = array(
+    'cache' => -1,
+    'custom' => 0,
+    'delta' => 'client-block-76',
+    'i18n_block_language' => array(),
+    'i18n_mode' => 1,
+    'module' => 'webform',
+    'node_types' => array(),
+    'pages' => 'node/76',
+    'roles' => array(),
+    'themes' => array(
+      'ohm' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'ohm',
+        'weight' => 0,
+      ),
+      'omega' => array(
+        'region' => '',
+        'status' => 0,
+        'theme' => 'omega',
+        'weight' => 0,
+      ),
+      'sunflower' => array(
+        'region' => 'overlay',
+        'status' => 1,
+        'theme' => 'sunflower',
+        'weight' => 0,
+      ),
+    ),
+    'title' => 'GET A QUICK FREE QUOTE FOR VISITOR TO CANADA INSURANCE',
+    'visibility' => 0,
+  );
+
   return $export;
 }

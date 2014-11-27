@@ -97,19 +97,24 @@
 		padding: 10px 20px;
 		margin: 0px;
 		font-size: 18px;
+		text-align: center;
 		color: white;
 		font-weight: $font_weight_bold;
 		padding-right: 40px;
 		cursor: pointer;
+		background: image-url("calculator_icon.png") no-repeat 10px center $yellow;
+		padding-left: 40px;
+		position: relative;
 		span{
 			background: image-url("arrow_down_white.png") no-repeat center center transparent;
 			width: 25px;
 			height: 13px;
+			margin-top: -7px;
 			display: block;
 			font-size: 0px;
 			text-indent: -9999px;
 			position: absolute;
-			top: 16px;
+			top: 50%;
 			right: 16px;	
 		}
 	}
