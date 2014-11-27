@@ -1564,9 +1564,9 @@ nav.mm-menu.mm-fresh {
           font-size: 16px; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_navigation\.scss}line{font-family:\0000368}}
         #block-superfish-1 ul.sf-menu > li.sf-depth-1.menuparent ul.sf-megamenu li.sf-depth-2 li.sf-depth-3 {
-          margin-bottom: 5px;
+          margin-bottom: 3px;
           font-size: 14px;
-          padding: 5px 0;
+          padding: 3px 0;
           font-weight: 400; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_navigation\.scss}line{font-family:\0000373}}
           #block-superfish-1 ul.sf-menu > li.sf-depth-1.menuparent ul.sf-megamenu li.sf-depth-2 li.sf-depth-3 a {

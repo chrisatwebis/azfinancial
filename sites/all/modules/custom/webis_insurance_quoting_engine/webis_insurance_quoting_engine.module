@@ -130,7 +130,7 @@ function webis_insurance_quoting_engine_visitor_canada_price_search($mode = HORI
   $next_level_amount = webis_insurance_quoting_engine_vtc_get_next_coverage($coverage);;
   $current_path = current_path();
 
-  $previous_link = l(t("Compare with @amount", array("@amount" => $previous_level_amount)), $current_path, array(
+  $previous_link = l(t("Compare with $@amount", array("@amount" => $previous_level_amount)), $current_path, array(
     'query' => array(
       "start" => $_GET['start'], 
       "end" => $_GET['end'], 
@@ -138,7 +138,7 @@ function webis_insurance_quoting_engine_visitor_canada_price_search($mode = HORI
       "coverage" => $previous_level_amount,
     )
   ));
-  $next_link = l(t("Compare with @amount", array("@amount" => $next_level_amount)), $current_path, array(
+  $next_link = l(t("Compare with $@amount", array("@amount" => $next_level_amount)), $current_path, array(
     "query" => array(
       "start" => $_GET["start"], 
       "end" => $_GET["end"], 
@@ -242,11 +242,11 @@ function webis_insurance_quoting_engine_visitor_canada_price_search_vertical($cu
   $output = "
     <div class='lowest_rate'>
       <div class='spmcc'>
-        <span class='label'>Lowest Price/Day:</span>
+        <span class='label'>".t("Lowest Price/Day:")."</span>
         <span class='value'>$".$lowest_rate."</span>
       </div>
       <div class='no_spmcc'>
-        <span class='label'>Lowest Price/Day without SPMCC:</span>
+        <span class='label'>".t("Lowest Price/Day without SPMCC:")."</span>
         <span class='value'>$".$lowest_rate_no_spmcc."</span>
       </div>
     </div>".$output;
