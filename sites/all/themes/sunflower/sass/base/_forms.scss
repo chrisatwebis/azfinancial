@@ -3,6 +3,9 @@ input[type=text]{
 	border: 1px solid $med_light_grey;
 	border-radius: 4px;
 	height: 32px;
+	&.error {
+		border: 2px solid red;
+	}
 }
 input[type=password]{
 	@extend input[type=text];

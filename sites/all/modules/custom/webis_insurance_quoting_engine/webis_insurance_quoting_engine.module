@@ -51,6 +51,15 @@ function webis_insurance_quoting_engine_menu(){
     'weight' => 0,
     'type' => MENU_LOCAL_TASK,
   );
+  $items['get-a-quote/visitor-to-canada-insurance/calculate-premium'] = array(
+    'title' => 'Calculate premium for visitor to canada insurance plan',
+    'description' => "Calculate premium for visitor to canada insurance plan",
+    'page callback' => 'webis_insurance_quoting_engine_vtc_cal_premium',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+    'weight' => 0,
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 

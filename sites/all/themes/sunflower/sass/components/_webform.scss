@@ -102,67 +102,102 @@ input.webform-calendar{
  **/
 .node-type-webform {
 	.webform-client-form {
-		fieldset.collapsible {
+		> div > fieldset {
 			border: 0px;
 			padding: 0px;
-			margin: 0 0 20px;
-			legend {
+			margin: 0 0 10px;
+			position: relative;
+			> legend {
 				display: block;
 				width: 100%;
 				.fieldset-legend {
-					padding: 0px;
-					background: none;
-					.fieldset-title {
-						color: white;
-						font-size: 16px;
-						font-weight: $font_weight_semi_bold;
-						text-decoration: none;
-						display: block;
-						padding: 10px 40px 10px 20px;
-						text-align: left;
-						background: image-url("arrow_up_white_right_20.png") no-repeat right center $yellow;
-					}
+					color: white;
+					font-size: 16px;
+					font-weight: $font_weight_semi_bold;
+					text-decoration: none;
+					display: block;
+					padding: 10px 40px 10px 20px;
+					text-align: left;
+					background: image-url("arrow_up_white_right_20.png") no-repeat right center $yellow;
 					.summary {
 						margin: 0px;
 					}
 				}
+				&:hover {
+					cursor: pointer;
+				}
 			}
-			.fieldset-wrapper {
+			> .fieldset-wrapper {
 				background: $super_light_grey;
 				padding: 10px 20px 20px;
+				//level two
 				> fieldset {
 					border: 0px;
 					padding: 0px;
-					margin: 0 0 20px;					
-					legend {
+					margin: 0 0 20px;
+					position: relative;
+					> legend {
 						padding: 10px 20px;
 						font-size: 16px;
+						display: block;
+						width: 100%;
 						font-weight: bold;
 						background-color: $extra_light_grey;
 					}
-					.fieldset-wrapper {
+					> .fieldset-wrapper {
+						padding: 10px 20px 20px;
 						background-color: $ultra_light_grey;
 						overflow: hidden;
-					}
-					&.collapsible {
-						padding: 20px 0;
-						margin: 0 0 10px;
-						legend {
+						fieldset {
+							border: 0px;
 							padding: 0px;
+							margin: 0 0 20px;
+							position: relative;
+							background: white;
+							legend {
+								padding: 10px 20px;
+								font-size: 14px;
+								display: block;
+								width: 100%;
+								font-weight: bold;
+								background-color: $yellow;
+								color: white;
+							}
+							.fieldset-wrapper {
+								padding: 10px 20px;
+
+							}
 						}
 					}
 				}
 			}
-			&.collapsed {
-				padding: 20px 0;
-				legend {
+			&.custom_collapsed {
+				> legend {
 					.fieldset-legend {
-						.fieldset-title {
-							background: image-url("arrow_down_white_right_20.png") no-repeat right center $tab_blue;
-							&:hover {
-								background: image-url("arrow_up_white_right_20.png") no-repeat right center $yellow;						
-							}
+						background: image-url("arrow_down_white_right_20.png") no-repeat right center $tab_blue;
+						&:hover {
+							background: image-url("arrow_up_white_right_20.png") no-repeat right center $yellow;						
 						}
+					}
+				}
+			}
+			&.disabled {
+				> legend {
+					&:hover {
+						cursor: default;
+					}
+					.fieldset-legend {
+						background: image-url("arrow_down_white_right_20.png") no-repeat right center $light_grey;
+						&:hover {
+							background: image-url("arrow_down_white_right_20.png") no-repeat right center $light_grey;
+						}
+					}					
+				}
+			}
+			&.webform-component--step-3 {
+				.webform-component-radios {
+					&.custom_hidden {
+						display: none;
 					}
 				}
 			}
@@ -197,10 +232,18 @@ input.webform-calendar{
 			a {
 				@extend .standard_yellow_right_circle_arrow;
 			}
+			&.disabled {
+				a{
+					cursor: default;
+					background-color: $light_grey;
+				}
+			}
 		}
 		#duration_days {
-			margin-top: 20px;
 			display: inline-block;
+			position: absolute;
+			top: 10px;
+			right: 0px;
 			#duration {
 				background: image-url("duration_icon_24.png") no-repeat 10px center $yellow;
 				padding: 10px 10px 10px 45px;
@@ -215,7 +258,6 @@ input.webform-calendar{
 		}
 		.insured_age {
 			@extend #duration_days;
-			display: inline-block;
 			.insured_age_duration {
 				background: image-url("person_icon_24.png") no-repeat 10px center $yellow;
 				padding: 10px 10px 10px 45px;
@@ -266,7 +308,7 @@ input.webform-calendar{
 			    @include span-columns(6, 12);
 			    &.webform-component--step-2--travel-dates--effective-date {
 				    @include span-columns(6 omega, 12);
-			    }			
+			    }
 				}
 			}
 			.webform-component--step-2--coverage-and-deductible {
@@ -356,6 +398,50 @@ input.webform-calendar{
 	#webform-client-form-76 {
 		.webform-component{
 			margin: 15px 20px;
+		}
+	}
+	.node-type-webform {
+		.webform-client-form {
+			.webform-component--step-2--traveller-information-insured {
+				.webform-component {
+			    @include span-columns(3, 16);
+			    &.webform-component--step-2--traveller-information-insured--insured-1--surname,
+			    &.webform-component--step-2--traveller-information-insured--insured-2--surname,
+			    &.webform-component--step-2--traveller-information-insured--insured-3--surname,
+			    &.webform-component--step-2--traveller-information-insured--insured-4--surname,
+			    &.webform-component--step-2--traveller-information-insured--insured-5--surname {
+				    @include span-columns(3, 16);
+			    }
+			    &.webform-component--step-2--traveller-information-insured--insured-1--birthday,
+			    &.webform-component--step-2--traveller-information-insured--insured-2--birthday,
+			    &.webform-component--step-2--traveller-information-insured--insured-3--birthday,
+			    &.webform-component--step-2--traveller-information-insured--insured-4--birthday,
+			    &.webform-component--step-2--traveller-information-insured--insured-5--birthday {
+			    	@include span-columns(7, 16);			    	
+			    }
+			    &.webform-component--step-2--traveller-information-insured--insured-1--gender,
+			    &.webform-component--step-2--traveller-information-insured--insured-2--gender,
+			    &.webform-component--step-2--traveller-information-insured--insured-3--gender,
+			    &.webform-component--step-2--traveller-information-insured--insured-4--gender,
+			    &.webform-component--step-2--traveller-information-insured--insured-5--gender {
+				    @include span-columns(3 omega, 16);
+			    }
+				}
+			}
+			.webform-component--step-2--travel-dates {
+				.webform-component-date {
+			    @include span-columns(4, 12);
+			    &.webform-component--step-2--travel-dates--effective-date {
+				    @include span-columns(4, 12);
+			    }
+			    &.webform-component--step-2--travel-dates--expiry-date {
+				    @include span-columns(4 omega, 12);			    
+			    }
+			    select {
+			    	padding: 6px 26px 6px 8px;
+			    }
+				}
+			}
 		}
 	}
 }
