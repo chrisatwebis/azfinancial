@@ -8,9 +8,9 @@ dependencies[] = variable
 
 configure = admin/config/user-interface/owlcarousel
 
-; Information added by Drupal.org packaging script on 2014-05-13
-version = "7.x-1.2"
+; Information added by Drupal.org packaging script on 2014-12-10
+version = "7.x-1.3"
 core = "7.x"
 project = "owlcarousel"
-datestamp = "1399977530"
+datestamp = "1418215392"
 
