@@ -52,9 +52,18 @@ function webis_insurance_quoting_engine_menu(){
     'type' => MENU_LOCAL_TASK,
   );
   $items['get-a-quote/visitor-to-canada-insurance/calculate-premium'] = array(
-    'title' => 'Calculate premium for visitor to canada insurance plan',
+    'title' => "Calculate premium for visitor to canada insurance plan",
     'description' => "Calculate premium for visitor to canada insurance plan",
-    'page callback' => 'webis_insurance_quoting_engine_vtc_cal_premium',
+    'page callback' => 'webis_insurance_quoting_engine_wapi_vtc_cal_premium',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+    'weight' => 0,
+    'type' => MENU_CALLBACK,
+  );
+  $items['get-a-quote/visitor-to-canada-insurance/get-deductible-coverage'] = array(
+    'title' => "Get deductibles for visitor to canada insurance plan",
+    'description' => "Get deductibles for visitor to canada insurance plan",
+    'page callback' => 'webis_insurance_quoting_engine_wapi_vtc_get_deductible_coverage',
     'page arguments' => array(),
     'access arguments' => array('access content'),
     'weight' => 0,

@@ -314,7 +314,7 @@ function webis_insurance_quoting_engine_get_tip_total_price($entity, $age, $cove
         foreach ($value['deductible'] as $key_1 => $value_1) {
           $total_final_price = webis_insurance_quoting_engine_get_tip_total_price_by_deductible($entity, $age, $coverage, $spmcc, $days, $value_1['amount']);
           if (!empty($total_final_price)) {
-            $price_array[$value_1['amount']] = number_format($total_final_price, 2, ".", "");
+            $price_array[$value_1['amount']] = round($total_final_price, 2);
           }
         }
       }

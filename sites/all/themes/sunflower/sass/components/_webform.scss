@@ -165,10 +165,27 @@ input.webform-calendar{
 							}
 							.fieldset-wrapper {
 								padding: 10px 20px;
-
+								overflow: hidden;
+								.error_msg {
+									color: red;
+									background: image-url("warining_icon.png") no-repeat 0px bottom transparent;
+									padding-left: 30px;
+								}
 							}
 						}
 					}
+				}
+				.form-type-radio {
+					display: inline-block;
+					margin: 10px 10px 10px 0;
+				}
+				.no_spmcc_msg, .spmcc_msg {
+					margin: 10px 0;
+					font-size: 12px;
+					line-height: 16px;
+					color: $light_grey;
+					padding-left: 24px;
+					background: image-url("info_icon_16.png") no-repeat 0px center transparent;										
 				}
 			}
 			&.custom_collapsed {
@@ -198,6 +215,73 @@ input.webform-calendar{
 				.webform-component-radios {
 					&.custom_hidden {
 						display: none;
+					}
+				}
+			}
+			.review_wrapper {
+				.review {
+					.section {
+						.s_header {
+							background: $extra_light_grey;
+							font-size: 16px;
+							padding: 10px 15px;
+							color: $yellow;
+						}
+						.s_content {
+							background: white;
+							padding: 10px 15px;
+							font-size: 14px;
+							line-height: 150%;
+							margin-bottom: 10px;
+							.item {
+								margin: 5px 0;
+								.label {
+								  @include span-columns(6, 12);
+								}
+								.value {
+								  @include span-columns(6 omega, 12);
+									font-weight: bold;
+								}
+								&.i_header {
+									font-weight: bold;
+								}
+							}
+						}
+						&.insured {
+							.s_content {
+								.item {
+									overflow: hidden;
+									.name, .birthday, .spmcc {
+								    @include span-columns(3, 12);
+									}
+									.birthday {
+										.age {
+											display: none;
+										}
+									}
+									.premium {
+								    @include span-columns(3 omega, 12);
+									}
+									&.family_plan {
+										.premium {
+											text-decoration: line-through;
+										}
+									}
+								}
+							}
+						}
+						&.policy_summary {
+							.s_content {
+								overflow: hidden;
+								.item {
+									overflow: hidden;
+									padding: 10px;
+									border: 1px solid $extra_light_grey;
+								  &.arrival_date, &.expiry_date, &.family_plan, &.deductible, &.total_premium {
+								  }
+								}
+							}
+						}
 					}
 				}
 			}
@@ -367,6 +451,56 @@ input.webform-calendar{
 				  @include span-columns(6, 12);
 					&.webform-component--step-2--canada-address--phone-2 {
 						@include span-columns(6 omega, 12);
+					}
+				}
+			}
+			> div > fieldset {
+				.review_wrapper {
+					.review {
+						.section {
+							.s_header {
+							}
+							.s_content {
+								.item {
+									.label {
+									  @include span-columns(6, 12);
+									}
+									.value {
+									  @include span-columns(6 omega, 12);
+										font-weight: bold;
+									}
+								}
+							}
+							&.insured {
+								.s_content {
+									.item {
+										overflow: hidden;
+										.name, .birthday, .spmcc {
+									    @include span-columns(3, 12);
+										}
+										.birthday {
+											.age {
+												margin-left: 5px;
+												display: inline-block;
+											}
+										}
+										.premium {
+									    @include span-columns(3 omega, 12);
+										}
+									}
+								}
+							}
+							&.policy_summary {
+								.s_content {
+									.item {
+									  @include span-columns(6, 12);
+									  &.arrival_date, &.expiry_date, &.family_plan, &.deductible, &.total_premium {
+										  @include span-columns(6 omega, 12);								  
+									  }
+									}
+								}
+							}
+						}
 					}
 				}
 			}
