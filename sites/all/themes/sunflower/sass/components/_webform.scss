@@ -174,6 +174,9 @@ input.webform-calendar{
 							}
 						}
 					}
+					&.webform-component--step-4--premium {
+						display: none;
+					}
 				}
 				.form-type-radio {
 					display: inline-block;
