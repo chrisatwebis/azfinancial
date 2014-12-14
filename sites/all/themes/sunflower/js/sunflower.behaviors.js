@@ -289,7 +289,7 @@
         spmcc_options.find("input:radio[value=yes]").attr('disabled', true).parent().fadeOut();
         spmcc_options.find("input:radio[value=no]").attr('checked', 'checked').parent().fadeIn();
         if (spmcc_options.find(".spmcc_msg").length <= 0) {
-          spmcc_options.append("<div class='spmcc_msg'>"+Drupal.t("The 'Yes' option is not available due to the insured's age!")+"</div>")
+          spmcc_options.append("<div class='spmcc_msg'>"+Drupal.t("For the insured's age, the pre-existing medical condition is not coverred!")+"</div>")
         }
       }).on("premium_found_no_spmcc", function(e, delta, ajax_premium){
         // if the premium is found for the insured, then remove the error message.
@@ -304,7 +304,7 @@
         spmcc_options.find("input:radio[value=no]").attr('disabled', true).parent().fadeOut();
         spmcc_options.find("input:radio[value=yes]").attr('checked', 'checked').parent().fadeIn();
         if (spmcc_options.find(".no_spmcc_msg").length <= 0) {
-          spmcc_options.append("<div class='no_spmcc_msg'>"+Drupal.t("The 'No' option is not available due to the insured's age!")+"</div>")
+          spmcc_options.append("<div class='no_spmcc_msg'>"+Drupal.t("For the insured's age, the pre-existing medical condition is automatically covered!")+"</div>")
         }
       });
       
