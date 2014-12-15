@@ -769,9 +769,7 @@
         var city              = $("#edit-submitted-step-2-canada-address-canadian-address-locality").val() ? ("<br>"+$("#edit-submitted-step-2-canada-address-canadian-address-locality").val()) : "";
         var province          = $("#edit-submitted-step-2-canada-address-canadian-address-administrative-area").val() ? (", "+$("#edit-submitted-step-2-canada-address-canadian-address-administrative-area").val()) : "";
         var postal_code       = $("#edit-submitted-step-2-canada-address-canadian-address-postal-code").val() ? (" "+$("#edit-submitted-step-2-canada-address-canadian-address-postal-code").val()) : "";
-        var phone_1           = $("#edit-submitted-step-2-canada-address-phone-1").val() ? ("<br>"+$("#edit-submitted-step-2-canada-address-phone-1").val()) : "";
-        var phone_2           = $("#edit-submitted-step-2-canada-address-phone-2").val() ? ("     "+$("#edit-submitted-step-2-canada-address-phone-2").val()) : "";
-        var canada_address    = address_1+address_2+city+province+postal_code+phone_1+phone_2;
+        var canada_address    = address_1+address_2+city+province+postal_code;
 
         //traveller information
         var family_plan_class   = family_plan ? "family_plan" : "";
