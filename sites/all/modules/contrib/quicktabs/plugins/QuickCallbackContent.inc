@@ -40,6 +40,13 @@ class QuickCallbackContent extends QuickContent {
       '#title' => t('Path'),
       '#element_validate' => array('quicktabs_callback_element_validate'),
     );
+    $form['callback']['use_title'] = array(
+      '#type' => 'checkbox',
+      '#return_value'=>TRUE,
+      '#title' => 'Use callback title',
+      '#default_value' => isset($tab['use_title']) ? $tab['use_title'] : FALSE,
+      '#description' => t('Should quicktabs use the rendered title of the callback?'),
+    );
     return $form;
   }
 
@@ -64,6 +71,9 @@ class QuickCallbackContent extends QuickContent {
       $page_title = drupal_get_title();
       $response = menu_execute_active_handler($item['actual_path'], FALSE);
       // Revert the page title.
+      if($this->settings['use_title']) {
+        $this->title = drupal_get_title();
+      }
       drupal_set_title($page_title);
 
       if (!is_array($response)) {
