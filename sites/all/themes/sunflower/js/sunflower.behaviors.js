@@ -614,18 +614,22 @@
             $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured option").hide();
             $("#edit-submitted-step-2-coverage-and-deductible-select-a-deductible-amount option").hide();
             var coverage_selected = false;
-            for (var i = coverages.length - 1; i >= 0; i--) {
-              $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured option[value="+coverages[i]+"]").show();
-              if ($("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured").val() == coverages[i]) { coverage_selected = true;}
-            };
+            if (coverages !== undefined) {
+              for (var i = coverages.length - 1; i >= 0; i--) {
+                $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured option[value="+coverages[i]+"]").show();
+                if ($("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured").val() == coverages[i]) { coverage_selected = true;}
+              };              
+            }
             if (!coverage_selected) {
               $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured").val("");              
             }
             var deductible_selected = false;
-            for (var i = deductibles.length - 1; i >= 0; i--) {
-              $("#edit-submitted-step-2-coverage-and-deductible-select-a-deductible-amount option[value="+deductibles[i]+"]").show();
-              if ($("#edit-submitted-step-2-coverage-and-deductible-select-a-deductible-amount").val() == deductibles[i]) { deductible_selected = true;}
-            };
+            if ( deductibles !== undefined ) {
+              for (var i = deductibles.length - 1; i >= 0; i--) {
+                $("#edit-submitted-step-2-coverage-and-deductible-select-a-deductible-amount option[value="+deductibles[i]+"]").show();
+                if ($("#edit-submitted-step-2-coverage-and-deductible-select-a-deductible-amount").val() == deductibles[i]) { deductible_selected = true;}
+              };              
+            }
             if (!deductible_selected) {
               $("#edit-submitted-step-2-coverage-and-deductible-select-a-deductible-amount").val("");              
             }
