@@ -47,6 +47,25 @@ select{
 		padding: 4px;
 	}
 }
+.ife_messages {
+	&.messages {
+
+	}
+	&.error {
+		padding: 5px 5px 5px 30px;
+		color: red;
+		background: image-url("warining_icon.png") no-repeat 0px 3px transparent;
+		clear: both;
+		border: 0px;
+	}
+}
+label.error {
+	padding: 5px 5px 5px 30px;
+	color: red;
+	background: image-url("warining_icon.png") no-repeat 0px 3px transparent;
+	clear: both;
+	display: block;
+}
 @-moz-document url-prefix() {
 	select{
 		background-image: none;

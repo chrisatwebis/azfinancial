@@ -170,6 +170,8 @@ input.webform-calendar{
 									color: red;
 									background: image-url("warining_icon.png") no-repeat 0px bottom transparent;
 									padding-left: 30px;
+									clear: both;
+									line-height: 24px;
 								}
 							}
 						}
@@ -343,17 +345,30 @@ input.webform-calendar{
 				}
 			}
 		}
-		.insured_age {
+		.insured_information {
 			@extend #duration_days;
-			.insured_age_duration {
-				background: image-url("person_icon_24.png") no-repeat 10px center $yellow;
-				padding: 10px 10px 10px 45px;
-				border-radius: 4px;
-				color: white;		
-			}
-			&.warning {
+			.insured_age {
 				.insured_age_duration {
-					background-color: red;
+					background: image-url("person_icon_24.png") no-repeat 10px center $yellow;
+					padding: 10px 10px 10px 40px;
+					border-radius: 4px;
+					color: white;		
+				}
+				&.warning {
+					.insured_age_duration {
+						background-color: red;
+					}
+				}
+			}
+			.insured_premium {
+				.insured_premium_price {
+					background: image-url("dollar_sign_24.png") no-repeat 10px center $yellow;
+					padding: 10px 10px 10px 40px;
+					border-radius: 4px;
+					color: white;
+					.price {
+						font-weight: bold;
+					}
 				}
 			}
 		}

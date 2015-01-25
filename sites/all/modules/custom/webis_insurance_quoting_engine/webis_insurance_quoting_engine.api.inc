@@ -238,17 +238,21 @@ function webis_insurance_quoting_engine_get_surcharge_to_premium($entity){
 * @return - final total price
 */
 function webis_insurance_quoting_engine_get_tip_total_price_by_deductible($entity, $age, $coverage, $spmcc = TRUE, $days, $deductible_amount){
+  $deductible_found = false;
+  $coverage_found = false;
   if (!empty($entity)) {
     $base_price = webis_insurance_quoting_engine_get_tip_base_price($entity, $age, $coverage, $spmcc);
     if (!empty($base_price)) {
+      $coverage_found = true;
       $rate_adjustment = webis_insurance_quoting_engine_get_tip_rate_adjustment($entity);
-      $discount = "";
+      $discount = 0;
       foreach ($rate_adjustment as $key => $value) {
         if ($value['min_age'] <= $age && $age <= $value['max_age']) {
           foreach ($value['deductible'] as $key_1 => $value_1) {
             if ($value_1['amount'] == $deductible_amount && in_array($coverage, $value_1['coverages'])) {
               $discount = $value_1['discount'];
               $max_discount = isset($value_1['max_discount']) ? $value_1['max_discount'] : "";
+              $deductible_found = true;
             }
           }
         }

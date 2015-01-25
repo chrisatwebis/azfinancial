@@ -11,6 +11,7 @@
 **/
 function webis_insurance_quoting_engine_vtc_get_coverage(){
   $coverage = array(
+    ""        => "- Select -",
     "10000"   => "$10,000 CAD",
     "15000"   => "$15,000 CAD",
     "20000"   => "$20,000 CAD",
@@ -35,6 +36,7 @@ function webis_insurance_quoting_engine_vtc_get_coverage(){
 function webis_insurance_quoting_engine_vtc_get_deductible() {   
   
   $options = array(
+    ""        => "- Select -",
     "0"       => "$0 CAD",
     "50"      => "$50 CAD",
     "75"      => "$75 CAD",
@@ -92,6 +94,7 @@ function webis_insurance_quoting_engine_wapi_vtc_cal_premium () {
   $response = array();
   $response['status_code'] = 1;
   $response['message'] = "";
+  $response['query'] = $query;
   $mandatory_args = array('pid', 'effective', 'expiry', 'coverage', 'deductible', 'insured_bod');
 
   /*validate the query to make sure we have what we need.
@@ -167,12 +170,19 @@ function webis_insurance_quoting_engine_wapi_vtc_cal_premium () {
 
 /**
 * Get the deductible list and coverage list of price entity - web api
+*
+* URL Argument
+*   pid - price entity id
+*   age - age string of the insurer, e.g. 10_65_71 (3 insurers, the ages are 10, 65 and 71)
+*   intersect - whether the result should be in
 **/
 function webis_insurance_quoting_engine_wapi_vtc_get_deductible_coverage() {
   $query = drupal_get_query_parameters();
+  // $query = $_POST;
   $response = array();
   $response['status_code'] = 1;
   $response['message'] = "";
+  $response['query'] = $query;
   $mandatory_args = array('pid');
 
   /*validate the query to make sure we have what we need.
@@ -206,17 +216,77 @@ function webis_insurance_quoting_engine_wapi_vtc_get_deductible_coverage() {
     drupal_exit();
   }
   $rate_adjustment = webis_insurance_quoting_engine_get_tip_rate_adjustment($plan);
+  // var_dump($rate_adjustment);
   $deductibles = array();
   $coverages = array();
-  foreach ($rate_adjustment as $key => $value) {
-    foreach ($value['deductible'] as $key_1 => $deductible) {
-      $deductibles[] = $deductible['amount'];
-      $coverages = array_merge($coverages, $deductible['coverages']);
+
+  //check whether array operation should be: intersect or merge.
+  $array_intersect = true;
+  if (isset($query['intersect']) && ($query['intersect'] == 'false')) {
+    $array_intersect = false;
+  }
+  //if the age argument is passed.
+  if (!empty($query['age'])) {
+    $age_arr = explode("_", $query['age']);
+    foreach ($age_arr as $age_key => $age_value) {
+      if (strlen($age_value) > 0) {
+        $age = intval($age_value);
+        $deductible_age = array();
+        $coverage_age = array();
+        foreach ($rate_adjustment as $key => $value) {
+          if (($value['min_age'] <= $age) && ($age <= $value['max_age'])) {
+            foreach ($value['deductible'] as $key_1 => $deductible) {
+              $deductible_age[] = $deductible['amount'];
+              $coverage_age = array_merge($coverage_age, $deductible['coverages']);                
+            }
+          }
+        }
+        //if we need to intersect the array.
+        if ($array_intersect) {
+          //if it is empty, it means this is the first time of the loop.
+          if (empty($deductibles)) {
+            $deductibles = $deductible_age;
+          }
+          else {
+            $deductibles = array_intersect($deductibles, $deductible_age);
+            
+          }
+          //if it is empty, it means this is the first time of the loop.
+          if (empty($coverages)) {
+            $coverages = $coverage_age;
+          }
+          else {
+            $coverages = array_intersect($coverages, $coverage_age);
+          }
+          //if the intersect result is empty, then return the loop immediately.
+          if (empty($deductibles) || empty($coverages)) {
+            break;
+          }
+        }
+        else {
+          //if we merge the array
+          $deductibles = array_merge($deductibles, $deductible_age);
+          $coverages = array_merge($coverages, $coverage_age);
+        }
+      }
     }
   }
+  else {
+    foreach ($rate_adjustment as $key => $value) {
+      foreach ($value['deductible'] as $key_1 => $deductible) {
+        $deductibles[] = $deductible['amount'];
+        $coverages = array_merge($coverages, $deductible['coverages']);
+      }
+    }
+  }
+
+  $deductibles = array_unique($deductibles);
   sort($deductibles);
   $coverages = array_unique($coverages);
   sort($coverages);
+
+// var_dump($deductibles);
+// var_dump($coverages);
 
   $response['message']     = 'Success!';
   $response['deductibles'] = $deductibles;
