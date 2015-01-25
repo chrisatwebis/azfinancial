@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Azfinancial Configuration feature.
+ */
+
+include_once 'azfinancial_configuration.features.inc';
