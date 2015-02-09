@@ -215,8 +215,9 @@ function webis_insurance_quoting_engine_wapi_vtc_get_deductible_coverage() {
     drupal_json_output($response);
     drupal_exit();
   }
+
   $rate_adjustment = webis_insurance_quoting_engine_get_tip_rate_adjustment($plan);
-  // var_dump($rate_adjustment);
+  // print_r($rate_adjustment);
   $deductibles = array();
   $coverages = array();
 
@@ -225,6 +226,7 @@ function webis_insurance_quoting_engine_wapi_vtc_get_deductible_coverage() {
   if (isset($query['intersect']) && ($query['intersect'] == 'false')) {
     $array_intersect = false;
   }
+
   //if the age argument is passed.
   if (!empty($query['age'])) {
     $age_arr = explode("_", $query['age']);
@@ -236,7 +238,15 @@ function webis_insurance_quoting_engine_wapi_vtc_get_deductible_coverage() {
         foreach ($rate_adjustment as $key => $value) {
           if (($value['min_age'] <= $age) && ($age <= $value['max_age'])) {
             foreach ($value['deductible'] as $key_1 => $deductible) {
-              $deductible_age[] = $deductible['amount'];
+              //check whether coverage value is passed.
+              if (isset($query['coverages']) && ($query['coverages'] != "null")) {
+                 if (in_array($query['coverages'], $deductible['coverages'])) {
+                  $deductible_age[] = $deductible['amount'];                  
+                 }
+              }
+              else {
+                $deductible_age[] = $deductible['amount'];
+              }
               $coverage_age = array_merge($coverage_age, $deductible['coverages']);                
             }
           }
@@ -248,8 +258,7 @@ function webis_insurance_quoting_engine_wapi_vtc_get_deductible_coverage() {
             $deductibles = $deductible_age;
           }
           else {
-            $deductibles = array_intersect($deductibles, $deductible_age);
-            
+            $deductibles = array_intersect($deductibles, $deductible_age);            
           }
           //if it is empty, it means this is the first time of the loop.
           if (empty($coverages)) {
@@ -274,7 +283,15 @@ function webis_insurance_quoting_engine_wapi_vtc_get_deductible_coverage() {
   else {
     foreach ($rate_adjustment as $key => $value) {
       foreach ($value['deductible'] as $key_1 => $deductible) {
-        $deductibles[] = $deductible['amount'];
+        //check whether coverage value is passed.
+        if (isset($query['coverages']) && ($query['coverages'] != "null")) {
+          if (in_array($query['coverages'], $deductible['coverages'])) {
+            $deductibles[] = $deductible['amount'];
+          }
+        }
+        else {
+          $deductibles[] = $deductible['amount'];
+        }
         $coverages = array_merge($coverages, $deductible['coverages']);
       }
     }
@@ -284,9 +301,6 @@ function webis_insurance_quoting_engine_wapi_vtc_get_deductible_coverage() {
   sort($deductibles);
   $coverages = array_unique($coverages);
   sort($coverages);
-
-// var_dump($deductibles);
-// var_dump($coverages);
 
   $response['message']     = 'Success!';
   $response['deductibles'] = $deductibles;

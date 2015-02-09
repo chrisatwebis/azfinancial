@@ -257,14 +257,16 @@ function webis_insurance_quoting_engine_get_tip_total_price_by_deductible($entit
           }
         }
       }
-      $total_base_price = $base_price * $days;
-      $total_final_price = ($discount + 1) * $total_base_price;
-      //if there is max discount, and there is actual discount
-      if (!empty($max_discount) && $discount < 0) {
-        $total_discount = ($total_base_price - $total_final_price) > $max_discount ? $max_discount : ($total_base_price - $total_final_price);
-        $total_final_price = $total_base_price - $total_discount;
+      if ($deductible_found && $coverage_found) {
+        $total_base_price = $base_price * $days;
+        $total_final_price = ($discount + 1) * $total_base_price;
+        //if there is max discount, and there is actual discount
+        if (!empty($max_discount) && $discount < 0) {
+          $total_discount = ($total_base_price - $total_final_price) > $max_discount ? $max_discount : ($total_base_price - $total_final_price);
+          $total_final_price = $total_base_price - $total_discount;
+        }
+        return $total_final_price;
       }
-      return $total_final_price;
     }
     else {
       //If the base_price is still empty, then try to find out the base_price from surcharge premium of price of no_spmcc.
