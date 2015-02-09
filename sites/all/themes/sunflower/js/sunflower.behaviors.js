@@ -161,10 +161,30 @@
       function get_obj_deductibles() {
         return $("#edit-submitted-step-2-coverage-and-deductible-select-a-deductible-amount");
       }
+      //Get deductibles clone field object
+      function get_obj_deductibles_clone() {
+        return $("#deductibles_clone");
+      }
       //Get coverage field object
       function get_obj_coverages() {
         return $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured");
       }
+      //Get coverages clone field object
+      function get_obj_coverages_clone() {
+        return $("#coverages_clone");
+      }
+
+      //clone the deductibles;
+      var deductibles_clone = $("<select id='deductibles_clone'></select>");
+      get_obj_deductibles().find("option").clone().appendTo(deductibles_clone);
+      deductibles_clone.find("option:selected").removeAttr("selected").prop("selected", false);
+      get_obj_deductibles().after(deductibles_clone);
+
+      //clone the coverages;
+      var coverages_clone = $("<select id='coverages_clone'></select>");
+      get_obj_coverages().find("option").clone().appendTo(coverages_clone);
+      coverages_clone.find("option:selected").removeAttr("selected").prop("selected", false);
+      get_obj_coverages().after(coverages_clone);
 
       //add 'continue' button to step 2,3,4
       $.each([1,2,3], function(index, value) {
@@ -196,6 +216,7 @@
       $(".continue_btn a").click(function(e){
         e.preventDefault();
         if ($(this).parent().hasClass("disabled") == false) {
+          //if the continue button is not disabled, then open the next step.
           var parent = $(this).parents(".webform-component-fieldset");
           $.each([1,2,3,4], function(index, value) { 
             if ($("#webform-client-form-184 .webform-component--step-"+value).hasClass("custom_collapsed") == false) {
@@ -208,8 +229,13 @@
           return false;
         }
         else {
-          $("#webform-client-form-184 .form-actions .form-submit").click();
-          // alert("Please fill out the required fields before click on 'Continue' button. Once the required fields are fulfilled, the 'Continue' button will be automatically enabled.");
+          //if the continue button is disabled. 
+          if ($(".no_result_found").length > 0) {
+            $('html, body').animate({ scrollTop: ($(".no_result_found:first").offset().top - 100) }, 1000, function(){});
+          }
+          else {
+            $("#webform-client-form-184 .form-actions .form-submit").click();            
+          }
         }
       });
 
@@ -278,7 +304,7 @@
             break;
         }
 
-      }).on("get_deductible_coverage_by_pid", function(e, price_entity_id){
+      }).on("get_deductible_coverage_by_pid", function(e, price_entity_id, passed_coverages_value){
 
         //check whether pid is ready
         if (price_entity_id.length > 0) {
@@ -292,15 +318,19 @@
             }
           };
           
+          var data_arg = { pid: price_entity_id, age: insured_age, intersect: true };
+          //check whether coverage value is passed
+          if (typeof passed_coverages_value !== 'undefined') {
+            data_arg.coverages = passed_coverages_value;
+          }
+          console.log(data_arg);
           //get the deductible and coverage
           $.ajax({
             // type: "POST",
             type: "GET",
             url: "/get-a-quote/visitor-to-canada-insurance/get-deductible-coverage",
             traditional: false,
-            data: {
-              pid: price_entity_id, age: insured_age, intersect: true
-            }
+            data: data_arg
           })
           .done(function( data ) {
             var age = data.query.age;
@@ -308,18 +338,26 @@
             var deductibles = data.deductibles;
             var coverages_obj = get_obj_coverages();
             var deductibles_obj = get_obj_deductibles();
-            coverages_obj.find("option").hide();
-            coverages_obj.find("option:first-child").show();
-            deductibles_obj.find("option").hide();
-            deductibles_obj.find("option:first-child").show();
+            var coverages_obj_clone = get_obj_coverages_clone();
+            var deductibles_obj_clone = get_obj_deductibles_clone();
+
+            var deductibles_value = deductibles_obj.val();
+            var coverages_value = coverages_obj.val();
+
+            coverages_obj.find("option").remove();
+            deductibles_obj.find("option").remove();
 
             var coverage_selected = false;
             if (coverages !== undefined) {
               //if there are coverages
               if (coverages.length > 0) {
-                for (var i = coverages.length - 1; i >= 0; i--) {
-                  $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured option[value="+coverages[i]+"]").show();
-                  if (coverages_obj.val() == coverages[i]) { coverage_selected = true;}
+                for (var i = 0; i < coverages.length; i++) {
+                  coverages_obj.append(coverages_obj_clone.find("option[value="+coverages[i]+"]").clone());
+                  if (coverages_value == coverages[i]) {
+                    coverage_selected = true;
+                    coverages_obj.val(coverages[i]);
+                  }
+
                 };
                 //found the coverages, trigger the event to remove the error message if there is any.
                 form.trigger("found_coverages");
@@ -343,7 +381,7 @@
                   }
                   else {
                     //if there is only 1 insured
-                    error_msg = "There is no coverage found for insured's age: "+age_arr[0]+".";
+                    error_msg = "There is no coverage found for insured's age: "+age_arr[0]+", please choose different plan.";
                   }
                 }
                 else {
@@ -355,15 +393,18 @@
               }
             }
             if (!coverage_selected) {
-              coverages_obj.val("").find("option:selected").removeAttr("selected").prop("selected", false);;
+              coverages_obj.val("").find("option:selected").removeAttr("selected").prop("selected", false);
             }
 
             var deductible_selected = false;
             if ( deductibles !== undefined ) {
               if (deductibles.length > 0) {
-                for (var i = deductibles.length - 1; i >= 0; i--) {
-                  $("#edit-submitted-step-2-coverage-and-deductible-select-a-deductible-amount option[value="+deductibles[i]+"]").show();
-                  if (deductibles_obj.val() == deductibles[i]) { deductible_selected = true;}
+                for (var i = 0; i < deductibles.length; i++) {
+                  deductibles_obj.append(deductibles_obj_clone.find("option[value="+deductibles[i]+"]").clone());
+                  if (deductibles_value == deductibles[i]) {
+                    deductible_selected = true;
+                    deductibles_obj.val(deductibles[i]);
+                  }
                 };
                 //found the deductibles, trigger the event to remove the error message if there is any.
                 form.trigger("found_deductibles");
@@ -386,7 +427,7 @@
                   }
                   else {
                     //if there is only 1 insured
-                    error_msg = "There is no deductible found for insured's age: "+age_arr[0]+".";
+                    error_msg = "There is no deductible found for insured's age: "+age_arr[0]+", please try different plan.";
                   }
                 }
                 else {
@@ -400,6 +441,10 @@
             if (!deductible_selected) {
               deductibles_obj.val("").find("option:selected").removeAttr("selected").prop("selected", false);
             }
+
+            buyonline_step_2_check_completion();
+            buyonline_step_3_update();
+
           });
         }  
 
@@ -427,6 +472,8 @@
           deductibles_obj.parent().find(".no_result_found").remove();
         }
         deductibles_obj.parent().append('<div class="ife_messages messages error messages-inline no_result_found">'+error_msg+'</div>');
+        //delete the price hint for each insured.
+        $(".insured_premium").remove();
 
       }).on("no_coverages", function(e, error_msg){
 
@@ -436,6 +483,8 @@
           coverages_obj.parent().find(".no_result_found").remove();
         }
         coverages_obj.parent().append('<div class="ife_messages messages error messages-inline no_result_found">'+error_msg+'</div>');
+        //delete the price hint for each insured.
+        $(".insured_premium").remove();
 
       }).on("premium_factor_change", function(e){
 
@@ -450,8 +499,8 @@
         // if the premium is found for the insured, then remove the error message.
         var the_insured = $(".webform-component--step-2--traveller-information-insured--insured-"+delta);
         
-        if (the_insured.find(".error_msg").length >= 0) {
-          the_insured.find(".error_msg").remove();
+        if (the_insured.find(".error").length >= 0) {
+          the_insured.find(".error").remove();
         }
 
         var insured_premium_price = ("<span class='insured_premium_price'>"+Drupal.t('Price/Day: ')+"<span class='price'>$"+ajax_premium+"</span></span>");
@@ -480,11 +529,11 @@
         var the_insured = $(".webform-component--step-2--traveller-information-insured--insured-"+delta);
         form.trigger("step_incomplete", [2]);
         
-        if (the_insured.find(".error_msg").length >= 0) {
-          the_insured.find(".error_msg").remove();
+        if (the_insured.find(".no_result_found").length >= 0) {
+          the_insured.find(".no_result_found").remove();
         }
         
-        the_insured.find(".fieldset-wrapper").append("<div class='error_msg'>"+Drupal.t("We can't find the price for the 'insured "+(delta)+"' whose age is "+age)+".</div>");
+        the_insured.find(".fieldset-wrapper").append("<div class='ife_messages messages error messages-inline no_result_found'>"+Drupal.t("We can't find the price for the 'insured "+(delta)+"' whose age is "+age+", please choose different plan.")+"</div>");
         
         if (the_insured.find(".insured_premium").length > 0) {
           the_insured.find(".insured_premium").remove();
@@ -499,8 +548,8 @@
         // if the premium is found for the insured, then remove the error message.
         var the_insured = $(".webform-component--step-2--traveller-information-insured--insured-"+delta);
         
-        if (the_insured.find(".error_msg").length >= 0) {
-          the_insured.find(".error_msg").remove();
+        if (the_insured.find(".no_result_found").length >= 0) {
+          the_insured.find(".no_result_found").remove();
         }
 
         var spmcc_options = $("#edit-submitted-step-3-do-you-want-pre-existing-condition-covered-"+delta);
@@ -523,8 +572,8 @@
         // if the premium is found for the insured, then remove the error message.
         var the_insured = $(".webform-component--step-2--traveller-information-insured--insured-"+delta);
         
-        if (the_insured.find(".error_msg").length >= 0) {
-          the_insured.find(".error_msg").remove();
+        if (the_insured.find(".no_result_found").length >= 0) {
+          the_insured.find(".no_result_found").remove();
         }
 
         var spmcc_options = $("#edit-submitted-step-3-do-you-want-pre-existing-condition-covered-"+delta);
@@ -856,12 +905,14 @@
       //monitor step 2 element change event
       function buyonline_step_2_monitor() {
 
-        $(".webform-component--step-2").find("input, select").change(function(){
+        $(".webform-component--step-2").find("input, select").change(function(e){
+          form.trigger("get_deductible_coverage_by_pid", [buyonline_step_2_get_pid(), $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured").val()]);
+          // form.trigger("get_deductible_coverage_by_pid", [buyonline_step_2_get_pid()]);
           buyonline_step_2_show_age();
           buyonline_step_2_show_duration();
-          buyonline_step_2_check_completion();
-          buyonline_step_3_update();
-          form.trigger("get_deductible_coverage_by_pid", [buyonline_step_2_get_pid()]);
+        });
+        $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured").change(function(){
+
         });
         get_obj_product().change();
 
@@ -1038,7 +1089,7 @@
             })
             .done(function( data ) {
               ajax_premium_counter--;
-              console.log(data);
+              //console.log(data);
               if (typeof data.storage !== 'undefined' && typeof data.storage.insured_id !== 'undefined') {
                 var delta = parseInt(data.storage.insured_id)+1;
                 if ($("#insured_person_"+data.storage.insured_id).length) {
@@ -1081,7 +1132,7 @@
               }              
             });
           }
-        };
+        }; 
         var review = $("<div class='review_wrapper'><div class='review'><div class='section policy_summary'><div class='s_header'>"+Drupal.t("Policy Summary")+"</div><div class='s_content'>"+policy_summary+"</div></div><div class='section insured'><div class='s_header'>"+Drupal.t("Traveller Information")+"</div><div class='s_content'>"+traveller_info+"</div></div><div class='section contact'><div class='s_header'>"+Drupal.t("Contact Information")+"</div><div class='s_content'>"+contact_info+"</div></div><div class='section address'><div class='s_header'>"+Drupal.t("Canada Address")+"</div><div class='s_content'>"+canada_address+"</div></div></div></div>");
         $(".webform-component--step-4--review").html(review);
 
