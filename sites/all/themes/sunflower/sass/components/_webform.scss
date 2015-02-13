@@ -375,6 +375,9 @@ input.webform-calendar{
 		#deductibles_clone, #coverages_clone {
 			display: none;
 		}
+		#traveller_number {
+			padding: 10px 20px;
+		}
 	}
 }
 
@@ -524,6 +527,12 @@ input.webform-calendar{
 						}
 					}
 				}
+			}
+			#traveller_number {
+				position: absolute;
+				top: 0px;
+				right: 0px;
+				padding: 5px 20px;
 			}
 		}
 	}	

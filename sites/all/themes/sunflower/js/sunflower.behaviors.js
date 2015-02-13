@@ -150,8 +150,11 @@
       $(".mm-menu").trigger("close");
     });
 
+    //purchase online webform
     //only run the script if it is buy online page
     if ($("#webform-client-form-184").length) {
+
+      var form = $("#webform-client-form-184");
 
       //Get product field object
       function get_obj_product() {
@@ -173,6 +176,25 @@
       function get_obj_coverages_clone() {
         return $("#coverages_clone");
       }
+      //Get the traveller information fieldset
+      function add_dropdown_to_traveller_information_fieldset() {
+        var traveller_info_feildset = $("fieldset.webform-component--step-2--traveller-information-insured");
+        var count = traveller_info_feildset.find("> .fieldset-wrapper > fieldset").length;
+        if (count > 1) {
+          var traveller_number = $("<div id='traveller_number'><label for='traveller_number_select'>"+Drupal.t("Number Of Insured: ")+"</label><select id='traveller_number_select'></select></div>");
+          for (var i = 1; i <= count; i++) {
+            traveller_number.find("select").append("<option value='"+i+"'>"+i+"</option>");
+          };
+          traveller_info_feildset.prepend(traveller_number);
+          traveller_number.find("select").change(function(){
+            traveller_info_feildset.find("> .fieldset-wrapper > fieldset").slice(0, $(this).val()).fadeIn();
+            traveller_info_feildset.find("> .fieldset-wrapper > fieldset").slice($(this).val()).fadeOut();
+          });
+          traveller_number.find("select").change();                   
+        }
+      }
+      //Add the "how many insured" dropdown
+      add_dropdown_to_traveller_information_fieldset();
 
       //clone the deductibles;
       var deductibles_clone = $("<select id='deductibles_clone'></select>");
@@ -239,8 +261,6 @@
         }
       });
 
-      var form = $("#webform-client-form-184");
-      //purchase online webform
       var step_1_complete = false;
       var step_2_complete = false;
       var step_3_complete = false;
@@ -257,14 +277,12 @@
           case 2:
             form.find(".webform-component--step-"+step_number+" .continue_btn").removeClass("disabled");
             step_2_complete = true;
-            console.log("step 2");
             //Step 3 doesn't really need to do anything, hence just check it upon step 2 is completed.
             buyonline_step_3_check_completion();
             break;
           case 3:
             form.find(".webform-component--step-"+step_number+" .continue_btn").removeClass("disabled");
             step_3_complete = true;
-            console.log("step 3");
             buyonline_step_4_review();
             buyonline_show_submit_btn(true);
             break;
@@ -325,7 +343,6 @@
           if (typeof passed_coverages_value !== 'undefined') {
             data_arg.coverages = passed_coverages_value;
           }
-          console.log(data_arg);
           //get the deductible and coverage
           $.ajax({
             // type: "POST",
@@ -335,7 +352,6 @@
             data: data_arg
           })
           .done(function( data ) {
-            console.log(data);
             var age = data.query.age;
             var coverages = data.coverages;
             var deductibles = data.deductibles;
@@ -1019,7 +1035,6 @@
         if (!step_1_complete || !step_2_complete || !step_3_complete) {
           return ;
         }
-        console.log("step 4");
         var price_entity_id   = buyonline_step_2_get_pid();
         var application_date  = buyonline_get_today_date();
         var arrival_date      = buyonline_step_2_get_arrival_date();
@@ -1028,7 +1043,7 @@
         var trip_duration     = buyonline_step_2_get_duration();
         var beneficiary       = buyonline_step_2_get_beneficiary();
         var family_plan       = buyonline_step_2_get_family_plan();
-        var deductible        = buyonline_step_2_get_deductible();console.log(deductible);
+        var deductible        = buyonline_step_2_get_deductible();
         var deductible_amount = deductible['value'];
         var deductible_label  = deductible['label'];
         var coverage          = buyonline_step_2_get_coverage();
@@ -1094,8 +1109,6 @@
             })
             .done(function( data ) {
               ajax_premium_counter--;
-              console.log(data);
-              console.log(insured_info);
               if (typeof data.storage !== 'undefined' && typeof data.storage.insured_id !== 'undefined') {
                 var delta = parseInt(data.storage.insured_id)+1;
                 if ($("#insured_person_"+data.storage.insured_id).length) {
@@ -1131,7 +1144,6 @@
                     //if the desired premium is not found, then trigger the 'premium'.
                     if (found_premium) {
                       form.trigger("premium_found", [delta, data]);
-                      console.log("premium_found");
                     }
                   }
                 }
@@ -1139,7 +1151,6 @@
               //if all the insured have the price.
               if (ajax_premium_counter == 0) {
                 form.trigger("total_premium_update");
-                console.log("total_premium_update");
               }            
             });
           }
