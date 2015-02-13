@@ -44,6 +44,7 @@ function webis_insurance_quoting_engine_vtc_get_deductible() {
     "250"     => "$250 CAD",
     "500"     => "$500 CAD",
     "1000"    => "$1,000 CAD",
+    "2500"    => "$2,500 CAD",
     "3000"    => "$3,000 CAD",
     "5000"    => "$5,000 CAD",
     "10000"   => "$10,000 CAD"
