@@ -188,7 +188,7 @@
           traveller_info_feildset.prepend(traveller_number);
           traveller_number.find("select").change(function(){
             traveller_info_feildset.find("> .fieldset-wrapper > fieldset").slice(0, $(this).val()).fadeIn();
-            traveller_info_feildset.find("> .fieldset-wrapper > fieldset").slice($(this).val()).fadeOut();
+            traveller_info_feildset.find("> .fieldset-wrapper > fieldset").slice($(this).val()).fadeOut().find("input, select").val("");
           });
           traveller_number.find("select").change();                   
         }
