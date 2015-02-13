@@ -257,12 +257,14 @@
           case 2:
             form.find(".webform-component--step-"+step_number+" .continue_btn").removeClass("disabled");
             step_2_complete = true;
+            console.log("step 2");
             //Step 3 doesn't really need to do anything, hence just check it upon step 2 is completed.
             buyonline_step_3_check_completion();
             break;
           case 3:
             form.find(".webform-component--step-"+step_number+" .continue_btn").removeClass("disabled");
             step_3_complete = true;
+            console.log("step 3");
             buyonline_step_4_review();
             buyonline_show_submit_btn(true);
             break;
@@ -333,6 +335,7 @@
             data: data_arg
           })
           .done(function( data ) {
+            console.log(data);
             var age = data.query.age;
             var coverages = data.coverages;
             var deductibles = data.deductibles;
@@ -377,11 +380,11 @@
                       }
                     };
                     error_msg = error_msg.substring(0, error_msg.length - 2) + ". ";
-                    error_msg += "You might have to split your policy into 2 policies. You could call us to find out the quote!";
+                    error_msg += "You might have to split your policy into 2 policies. Also, remember that you could always call us!!";
                   }
                   else {
                     //if there is only 1 insured
-                    error_msg = "There is no coverage found for insured's age: "+age_arr[0]+", please choose different plan.";
+                    error_msg = "There is no coverage found for insured's age: "+age_arr[0]+", please choose different plan. Also, remember that you could always call us!";
                   }
                 }
                 else {
@@ -423,7 +426,7 @@
                       }
                     };
                     error_msg = error_msg.substring(0, error_msg.length - 2) + ". ";
-                    error_msg += "You might have to split your policy into 2 policies. You could call us to find out the quote!";
+                    error_msg += "You might have to split your policy into 2 policies. Also, remember that you could always call us!!";
                   }
                   else {
                     //if there is only 1 insured
@@ -494,8 +497,10 @@
 
         buyonline_step_4_update_total_premium();
 
-      }).on("premium_found", function(e, delta, ajax_premium){
-        
+      }).on("premium_found", function(e, delta, data){
+        //get all insureds information
+        var insured_info = buyonline_step_4_get_all_insured_info();
+        var ajax_premium = (insured_info[data.storage.insured_id]['spmcc'] == 'yes' ? data.premium.spmcc : data.premium.no_spmcc);        
         // if the premium is found for the insured, then remove the error message.
         var the_insured = $(".webform-component--step-2--traveller-information-insured--insured-"+delta);
         
@@ -533,7 +538,7 @@
           the_insured.find(".no_result_found").remove();
         }
         
-        the_insured.find(".fieldset-wrapper").append("<div class='ife_messages messages error messages-inline no_result_found'>"+Drupal.t("We can't find the price for the 'insured "+(delta)+"' whose age is "+age+", please choose different plan.")+"</div>");
+        the_insured.find(".fieldset-wrapper").append("<div class='ife_messages messages error messages-inline no_result_found'>"+Drupal.t("We can't find the price for the 'insured "+(delta)+"' whose age is "+age+", please choose different coverage, deductible or plan. Also, remember that you could always call us!")+"</div>");
         
         if (the_insured.find(".insured_premium").length > 0) {
           the_insured.find(".insured_premium").remove();
@@ -578,7 +583,7 @@
 
         var spmcc_options = $("#edit-submitted-step-3-do-you-want-pre-existing-condition-covered-"+delta);
         spmcc_options.find("input:radio[value=no]").attr('disabled', false).parent().fadeIn();
-        spmcc_options.find(".no_spmcc_msg").remove();
+        spmcc_options.find(".spmcc_msg").remove();
 
       }).on("premium_not_found_no_spmcc", function(e, delta, age){
         
@@ -587,8 +592,8 @@
         spmcc_options.find("input:radio[value=no]").attr('disabled', true).parent().fadeOut();
         spmcc_options.find("input:radio[value=yes]").attr('checked', 'checked').parent().fadeIn();
         
-        if (spmcc_options.find(".no_spmcc_msg").length <= 0) {
-          spmcc_options.append("<div class='no_spmcc_msg'>"+Drupal.t("For the insured's age, the pre-existing medical condition is automatically covered!")+"</div>")
+        if (spmcc_options.find(".spmcc_msg").length <= 0) {
+          spmcc_options.append("<div class='spmcc_msg'>"+Drupal.t("For the insured's age, the pre-existing medical condition is automatically covered!")+"</div>")
         }
 
       });
@@ -1014,7 +1019,7 @@
         if (!step_1_complete || !step_2_complete || !step_3_complete) {
           return ;
         }
-
+        console.log("step 4");
         var price_entity_id   = buyonline_step_2_get_pid();
         var application_date  = buyonline_get_today_date();
         var arrival_date      = buyonline_step_2_get_arrival_date();
@@ -1023,7 +1028,7 @@
         var trip_duration     = buyonline_step_2_get_duration();
         var beneficiary       = buyonline_step_2_get_beneficiary();
         var family_plan       = buyonline_step_2_get_family_plan();
-        var deductible        = buyonline_step_2_get_deductible();
+        var deductible        = buyonline_step_2_get_deductible();console.log(deductible);
         var deductible_amount = deductible['value'];
         var deductible_label  = deductible['label'];
         var coverage          = buyonline_step_2_get_coverage();
@@ -1089,7 +1094,8 @@
             })
             .done(function( data ) {
               ajax_premium_counter--;
-              //console.log(data);
+              console.log(data);
+              console.log(insured_info);
               if (typeof data.storage !== 'undefined' && typeof data.storage.insured_id !== 'undefined') {
                 var delta = parseInt(data.storage.insured_id)+1;
                 if ($("#insured_person_"+data.storage.insured_id).length) {
@@ -1098,9 +1104,10 @@
                     form.trigger("premium_not_found", [delta, data.storage.age]);
                   }
                   else {
-                    var ajax_premium = (insured_info[data.storage.insured_id]['spmcc'] == 'yes' ? data.premium.spmcc : data.premium.no_spmcc);
+                    var found_premium = false;
                     //if the premium of spmcc is same as price for no_spmcc, then disable no_spmcc.
                     if (data.premium.spmcc == data.premium.no_spmcc) {
+                      found_premium = true;
                       form.trigger("premium_not_found_no_spmcc", [delta, data.storage.age]);                    
                     }
                     else {
@@ -1109,6 +1116,7 @@
                         form.trigger("premium_not_found_spmcc", [delta, data.storage.age]);
                       }
                       else {
+                        found_premium = true;
                         form.trigger("premium_found_spmcc", [delta, data.storage.age]);
                       }
                       //if the premium for no_spmcc is not found, then trigger event;
@@ -1116,20 +1124,23 @@
                         form.trigger("premium_not_found_no_spmcc", [delta, data.storage.age]);
                       }
                       else {
+                        found_premium = true;
                         form.trigger("premium_found_no_spmcc", [delta, data.storage.age]);                    
                       }
                     }
                     //if the desired premium is not found, then trigger the 'premium'.
-                    if (ajax_premium != null) {
-                      form.trigger("premium_found", [delta, ajax_premium]);
-                      //if all the insured have the price.
-                      if (ajax_premium_counter == 0) {
-                        form.trigger("total_premium_update");
-                      }
+                    if (found_premium) {
+                      form.trigger("premium_found", [delta, data]);
+                      console.log("premium_found");
                     }
                   }
                 }
-              }              
+              }
+              //if all the insured have the price.
+              if (ajax_premium_counter == 0) {
+                form.trigger("total_premium_update");
+                console.log("total_premium_update");
+              }            
             });
           }
         }; 

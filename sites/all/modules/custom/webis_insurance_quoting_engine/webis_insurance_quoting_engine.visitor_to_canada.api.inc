@@ -195,6 +195,7 @@ function webis_insurance_quoting_engine_wapi_vtc_get_deductible_coverage() {
       $missing_args[] = $value;
     }
   }
+  //if missing arguments, then return the error message.
   if (!$response['status_code']) {
     $response['message'] = t("The following URL arguments are needed:");
     foreach ($missing_args as $key => $value) {
@@ -209,6 +210,7 @@ function webis_insurance_quoting_engine_wapi_vtc_get_deductible_coverage() {
     drupal_exit();
   }
 
+  //if there is no plan for provided pid, then return error message.
   $plan = entity_load_single(INSURANCE_PRICE_ENTITY_NAME, $query['pid']);
   if (empty($plan)) {
     $response['status_code'] = 0;
@@ -229,6 +231,7 @@ function webis_insurance_quoting_engine_wapi_vtc_get_deductible_coverage() {
   }
 
   //if the age argument is passed.
+  // var_dump( !empty($query['age']) );
   if (!empty($query['age'])) {
     $age_arr = explode("_", $query['age']);
     foreach ($age_arr as $age_key => $age_value) {
