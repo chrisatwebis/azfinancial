@@ -1,0 +1,73 @@
+diff --git a/addressfield_tokens.components.inc b/addressfield_tokens.components.inc
+index 3593455..e084a3a 100644
+--- a/addressfield_tokens.components.inc
++++ b/addressfield_tokens.components.inc
+@@ -23,6 +23,7 @@ function _webform_defaults_addressfield() {
+       'attributes'                => array(),
+       'description'               => '',
+       'available_countries'       => array(),
++      'default_country'           => '',
+       'csv_separate'              => 0,
+     ),
+   );
+@@ -53,6 +54,14 @@ function _webform_edit_addressfield($component) {
+     '#options' => _addressfield_country_options_list(),
+     '#default_value' => $component['extra']['available_countries'],
+   );
++  $form['extra']['default_country'] = array(
++    '#type' => 'select',
++    '#multiple' => FALSE,
++    '#title' => t('Default country'),
++    '#description' => t('Select which country should be selected as the default.'),
++    '#options' => _addressfield_country_options_list(),
++    '#default_value' => $component['extra']['default_country'],
++  );
+   $form['extra']['csv_separate'] = array(
+     '#type' => 'radios',
+     '#title' => t('CSV download'),
+@@ -98,7 +107,7 @@ function _webform_render_addressfield($component, $value = NULL, $filter = TRUE)
+       'description',
+     ),
+   );
+-  
++ 
+   $available = !empty($component['extra']['available_countries']) ? $component['extra']['available_countries'] : NULL;
+     
+   // Get the current address
+@@ -117,7 +126,7 @@ function _webform_render_addressfield($component, $value = NULL, $filter = TRUE)
+     $address = _webform_addressfield($component['cid']);
+   }
+   if (empty($address)) {
+-    $address = addressfield_default_values($available);
++    $address = _webform_addressfield_default_values($available, $component);
+   }
+   
+   // Generate the address form.
+@@ -139,6 +148,27 @@ function _webform_render_addressfield($component, $value = NULL, $filter = TRUE)
+   return $element;
+ }
+ 
++function _webform_addressfield_default_values($available, $component) {
++  $default_country = !empty($component['extra']['default_country']) ? $component['extra']['default_country'] : NULL;
++  $default_values = array(
++    'country' => $default_country,
++    'name_line' => '',
++    'first_name' => '',
++    'last_name' => '',
++    'organisation_name' => '',
++    'administrative_area' => '',
++    'sub_administrative_area' => '',
++    'locality' => '',
++    'dependent_locality' => '',
++    'postal_code' => '',
++    'thoroughfare' => '',
++    'premise' => '',
++    'sub_premise' => '',
++    'data' => '',
++  );
++  return ($default_values);
++}
++
+ /**
+  * Stores an addressfield submitted in a webform component.  Ideally we should store
+  * it in the $form_state instead, but there appears to be no way to get it to actually

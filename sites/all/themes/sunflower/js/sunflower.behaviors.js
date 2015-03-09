@@ -926,9 +926,13 @@
       //monitor step 2 element change event
       function buyonline_step_2_monitor() {
 
-        $(".webform-component--step-2").find("input, select").change(function(e){
+        $(".webform-component--step-2").find("select").change(function(e){
           form.trigger("get_deductible_coverage_by_pid", [buyonline_step_2_get_pid(), $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured").val()]);
-          // form.trigger("get_deductible_coverage_by_pid", [buyonline_step_2_get_pid()]);
+          buyonline_step_2_show_age();
+          buyonline_step_2_show_duration();
+        });
+        $(".webform-component--step-2").find("input").keyup(function(e){
+          form.trigger("get_deductible_coverage_by_pid", [buyonline_step_2_get_pid(), $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured").val()]);
           buyonline_step_2_show_age();
           buyonline_step_2_show_duration();
         });

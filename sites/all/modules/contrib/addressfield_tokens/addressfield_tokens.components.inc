@@ -23,6 +23,7 @@ function _webform_defaults_addressfield() {
       'attributes'                => array(),
       'description'               => '',
       'available_countries'       => array(),
+      'default_country'           => '',
       'csv_separate'              => 0,
     ),
   );
@@ -52,6 +53,14 @@ function _webform_edit_addressfield($component) {
     '#description' => t('If no countries are selected, all countries will be available.'),
     '#options' => _addressfield_country_options_list(),
     '#default_value' => $component['extra']['available_countries'],
+  );
+  $form['extra']['default_country'] = array(
+    '#type' => 'select',
+    '#multiple' => FALSE,
+    '#title' => t('Default country'),
+    '#description' => t('Select which country should be selected as the default.'),
+    '#options' => _addressfield_country_options_list(),
+    '#default_value' => $component['extra']['default_country'],
   );
   $form['extra']['csv_separate'] = array(
     '#type' => 'radios',
@@ -98,7 +107,7 @@ function _webform_render_addressfield($component, $value = NULL, $filter = TRUE)
       'description',
     ),
   );
-  
+ 
   $available = !empty($component['extra']['available_countries']) ? $component['extra']['available_countries'] : NULL;
     
   // Get the current address
@@ -117,7 +126,7 @@ function _webform_render_addressfield($component, $value = NULL, $filter = TRUE)
     $address = _webform_addressfield($component['cid']);
   }
   if (empty($address)) {
-    $address = addressfield_default_values($available);
+    $address = _webform_addressfield_default_values($available, $component);
   }
   
   // Generate the address form.
@@ -137,6 +146,27 @@ function _webform_render_addressfield($component, $value = NULL, $filter = TRUE)
   drupal_alter('field_widget_addressfield_standard_form', $element, $form_state, $context); 
   
   return $element;
+}
+
+function _webform_addressfield_default_values($available, $component) {
+  $default_country = !empty($component['extra']['default_country']) ? $component['extra']['default_country'] : NULL;
+  $default_values = array(
+    'country' => $default_country,
+    'name_line' => '',
+    'first_name' => '',
+    'last_name' => '',
+    'organisation_name' => '',
+    'administrative_area' => '',
+    'sub_administrative_area' => '',
+    'locality' => '',
+    'dependent_locality' => '',
+    'postal_code' => '',
+    'thoroughfare' => '',
+    'premise' => '',
+    'sub_premise' => '',
+    'data' => '',
+  );
+  return ($default_values);
 }
 
 /**
