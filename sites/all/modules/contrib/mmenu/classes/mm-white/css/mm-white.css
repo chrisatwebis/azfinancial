@@ -1,0 +1,232 @@
+/* Mmenu transition */
+html.mm-white .mm-page,
+html.mm-white #mm-blocker,
+html.mm-white .mm-fixed-top,
+html.mm-white .mm-fixed-bottom,
+html.mm-white .mm-menu.mm-horizontal > .mm-panel {
+  -webkit-transition: none 0.2s linear;
+  -moz-transition: none 0.2s linear;
+  -ms-transition: none 0.2s linear;
+  -o-transition: none 0.2s linear;
+  transition: none 0.2s linear;
+  -webkit-transition-property: top, right, bottom, left, border;
+  -moz-transition-property: top, right, bottom, left, border;
+  -ms-transition-property: top, right, bottom, left, border;
+  -o-transition-property: top, right, bottom, left, border;
+  transition-property: top, right, bottom, left, border;
+}
+
+/* Body */
+html.mm-white .mm-page {
+  box-shadow: none !important;
+}
+
+/* Mmenu nav */
+html.mm-white nav.mm-white {
+  background: #e8e8e8;
+  color: #686868;
+  font-family: Helvetica, sans-serif;
+}
+
+html.mm-white nav.mm-white {
+  font-size: 18px;
+}
+
+html.mm-white nav.mm-white a {
+  font-size: 1.25em;
+}
+
+html.mm-white nav.mm-white > .mm-header {
+  border: none;
+  color: #686868;
+  text-shadow: 0 1px #fff;
+  height: 60px;
+  line-height: 60px;
+  padding: 0;
+  -webkit-box-shadow: 0 2px 4px #aaa;
+  -moz-box-shadow: 0 2px 4px #aaa;
+  box-shadow: 0 2px 4px #aaa;
+  background: #dbdbdb; /* Old browsers */
+  background: -moz-linear-gradient(top,  #dbdbdb 0%, #d7d7d7 50%, #d2d2d2 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dbdbdb), color-stop(50%,#d7d7d7), color-stop(100%,#d2d2d2)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #dbdbdb 0%,#d7d7d7 50%,#d2d2d2 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #dbdbdb 0%,#d7d7d7 50%,#d2d2d2 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #dbdbdb 0%,#d7d7d7 50%,#d2d2d2 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #dbdbdb 0%,#d7d7d7 50%,#d2d2d2 100%); /* W3C */
+  filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', endColorstr='#d2d2d2',GradientType=0 )"; /* IE6-9 */
+}
+
+html.mm-white nav.mm-white > .mm-header .mm-title {
+  font-size: 1.5em;
+  padding: 0 10%;
+  width: 80%;
+  text-align: center;
+}
+
+html.mm-white nav.mm-white > .mm-header .mm-prev:before,
+html.mm-white nav.mm-white > .mm-header .mm-next:before {
+  z-index: 10;
+  border-color: #fff;
+  margin-bottom: -5px;
+  width: 10px;
+  height: 10px;
+}
+
+html.mm-white nav.mm-white > .mm-panel {
+  padding: 60px 20px;
+  margin: 20px 0;
+}
+
+html.mm-white nav.mm-white > .mm-panel > li.mmenu-expanded:not(:first-child) {
+  margin-top: 20px !important;
+}
+
+html.mm-white nav.mm-white .mm-list > li {
+  border: 1px solid #d3d3d3;
+  border-top: 1px solid #fff;
+}
+
+html.mm-white nav.mm-white .mm-list > li.mmenu-expanded {
+  border-top: 1px solid #d3d3d3;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+html.mm-white nav.mm-white .mm-list > li > span {
+  padding: 15px 20px;
+}
+
+/* Mmenu list icons */
+html.mm-white nav.mm-white .mm-list > li > a,
+html.mm-white nav.mm-white .mm-list > li > span {
+  white-space: normal;
+}
+
+html.mm-white nav.mm-white span.mmenu-list.mmenu-block-collapsed .mmenu-list-title,
+html.mm-white nav.mm-white a.mmenu-list .mmenu-list-title {
+  text-shadow: 0 1px #fff;
+}
+
+html.mm-white nav.mm-white li {
+  display: table;
+  width: 100%;
+}
+
+html.mm-white nav.mm-white .mmenu-list-icon,
+html.mm-white nav.mm-white span.mmenu-list.mmenu-block-collapsed .mmenu-list-title,
+html.mm-white nav.mm-white a.mmenu-list .mmenu-list-title {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+html.mm-white nav.mm-white .mmenu-list-icon:before {
+  color: #666;
+}
+
+html.mm-white nav.mm-white .mm-list > li:not(.mmenu-wrap) a:not(.mm-subopen):not(.mm-subclose):not(.mm-fullsubopen) {
+  padding: 15px 20px;
+}
+
+html.mm-white nav.mm-white .mm-list > li.mm-selected > a,
+html.mm-white nav.mm-white .mm-list > li.mm-selected > span {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+html.mm-white nav.mm-white .mm-list > li:not(.mm-subtitle):not(.mm-label):not(.mm-noresults)::after {
+  border: none !important;
+}
+
+html.mm-white nav.mm-white em.mm-counter {
+  color: #686868;
+  text-shadow: 0 1px #fff;
+  font-size: 1.25em;
+}
+
+html.mm-white nav.mm-white a.mm-subopen:before,
+html.mm-white nav.mm-white a.mm-fullsubopen:before,
+html.mm-white nav.mm-white a.mm-subclose:before {
+  border-left-color: rgba(0, 0, 0, 0.25);
+  border-left-width: 0px;
+  border-left-style: solid;
+}
+
+html.mm-white nav.mm-white a.mm-subopen:after,
+html.mm-white nav.mm-white a.mm-fullsubopen:after,
+html.mm-white nav.mm-white a.mm-subclose:after {
+  border-color: #686868;
+  width: 8px;
+  height: 8px;
+  right: 20px;
+}
+
+html.mm-white nav.mm-white .mmenu-block-collapsed {
+  padding: 15px 20px !important;
+  font-size: 1.25em;
+}
+
+html.mm-white nav.mm-white .mmenu-block-expanded {
+  background: #dbdbdb; /* Old browsers */
+  background: -moz-linear-gradient(top,  #dbdbdb 0%, #d7d7d7 50%, #d2d2d2 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dbdbdb), color-stop(50%,#d7d7d7), color-stop(100%,#d2d2d2)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #dbdbdb 0%,#d7d7d7 50%,#d2d2d2 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #dbdbdb 0%,#d7d7d7 50%,#d2d2d2 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #dbdbdb 0%,#d7d7d7 50%,#d2d2d2 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #dbdbdb 0%,#d7d7d7 50%,#d2d2d2 100%); /* W3C */
+  filter: "progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', endColorstr='#d2d2d2',GradientType=0 )"; /* IE6-9 */
+  color: #686868;
+  text-shadow: 0 1px #fff;
+  padding: 10px 20px 10px 20px !important;
+}
+
+html.mm-white nav.mm-white > .mm-panel > .mm-list {
+  margin: 0;
+  padding: 0;
+}
+
+/* Has search */
+html.mm-white nav.mm-white.mm-hassearch > .mm-search {
+  height: 50px;
+  top: 60px;
+  border-bottom: 1px solid #242a37;
+}
+
+html.mm-white nav.mm-white.mm-hassearch > .mm-header {
+  top: 0;
+}
+
+html.mm-white nav.mm-white.mm-hassearch > .mm-panel {
+  padding-top: 110px !important;
+}
+
+html.mm-white nav.mm-white.mm-hassearch li.mm-noresults {
+  padding: 40px 0;
+  color: #686868;
+  text-shadow: 0 1px #fff;
+}
+
+/* Mmenu search form block */
+html.mm-white nav.mm-white .search-form {
+  margin-bottom: 0;
+}
+
+html.mm-white nav.mm-white .search-form .container-inline div,
+html.mm-white nav.mm-white .search-form .container-inline label {
+  display: block;
+}
+
+html.mm-white nav.mm-white .search-form .form-item {
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+html.mm-white nav.mm-white .search-form label {
+  margin-bottom: 10px;
+}
+
+html.mm-white nav.mm-white .search-form .form-text {
+  padding: 5px 0;
+  width: 100%;
+  border: none;
+}
+html.mm-white nav.mm-white .search-form .form-submit {
+  margin: 0;
+}

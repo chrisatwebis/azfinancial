@@ -9,6 +9,7 @@ function webis_insurance_quoting_engine_get_plans($insurance_type){
   $ids = webis_insurance_quoting_engine_get_plan_ids($insurance_type);
   if (!empty($ids)) {
     $entities = entity_load(INSURANCE_PRICE_ENTITY_NAME, $ids);
+    dpm($entities);
     return $entities;
   }
 }
