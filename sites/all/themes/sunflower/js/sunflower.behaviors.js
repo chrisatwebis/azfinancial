@@ -176,6 +176,33 @@
       function get_obj_coverages_clone() {
         return $("#coverages_clone");
       }
+      //get the count of completed insured info
+      function buyonline_step_insured_completion_count() {
+        var completion = buyonline_step_2_check_all_insured_completion();
+        var count = 0;
+        for (var i = completion.length - 1; i >= 0; i--) {
+          if (completion[i]) {
+            count++;
+          }
+        };
+        return count;
+      }
+      
+      //collapse the step
+      function buyonline_collapse_step(step_number) {
+        $("#webform-client-form-184 .webform-component--step-"+step_number).addClass("custom_collapsed disabled").find("> .fieldset-wrapper").hide();    
+      }
+
+      //Hide form submit button
+      function buyonline_show_submit_btn(show){
+        if (show == true) {
+          $("#webform-client-form-184 .form-actions").show();         
+        }
+        else {
+          $("#webform-client-form-184 .form-actions").hide();        
+        }
+      }
+
       //Get the traveller information fieldset
       function add_dropdown_to_traveller_information_fieldset() {
         var traveller_info_feildset = $("fieldset.webform-component--step-2--traveller-information-insured");
@@ -260,6 +287,526 @@
           }
         }
       });
+
+
+      //Verify whether effective date and expiry date are fulfilled.
+      function buyonline_step_2_effective_expiry_is_complete() {
+        var all_selected = true;
+        $(".webform-component--step-2--travel-dates--effective-date select").each(
+          function(){
+            if($(this).val() == "") {
+              all_selected = false;
+              return all_selected;
+            }
+          }
+        );
+        $(".webform-component--step-2--travel-dates--expiry-date select").each(
+          function(){
+            if ($(this).val() == "") {
+              all_selected = false;
+              return all_selected;
+            }
+          }
+        );
+        return all_selected;
+      }
+      
+      function buyonline_step_2_show_duration() {
+        var total_days = buyonline_step_2_get_duration();
+        if (typeof total_days !== 'undefined') {
+          if($("#duration_days").length) {
+            $("#duration_days #duration").html(Drupal.t("Duration")+": <b>"+total_days+" "+Drupal.t("days")+" </b>");
+          }
+          else {
+            $(".webform-component--step-2--travel-dates .fieldset-wrapper").append('<span id="duration_days"><span id="duration">'+Drupal.t("Duration")+': <b>'+total_days+" "+Drupal.t("days")+' </b></span></span>');
+          }          
+          if (total_days <= 0) {
+            $("#duration_days").addClass("warning");
+          }
+          else {
+            $("#duration_days").removeClass("warning");          
+          }
+        }
+        else {
+          if($("#duration_days").length) {
+            $("#duration_days").remove();
+          }
+        }
+      }
+      //get the total days of the policy
+      function buyonline_step_2_get_duration() {
+        if (buyonline_step_2_effective_expiry_is_complete()) {
+          var effective_year = $(".webform-component--step-2--travel-dates--effective-date .year").val();
+          var effective_day = $(".webform-component--step-2--travel-dates--effective-date .day").val();
+          var effective_month = $(".webform-component--step-2--travel-dates--effective-date .month").val();
+          
+          var expiry_month = $(".webform-component--step-2--travel-dates--expiry-date .month").val();
+          var expiry_day = $(".webform-component--step-2--travel-dates--expiry-date .day").val();
+          var expiry_year = $(".webform-component--step-2--travel-dates--expiry-date .year").val();
+          
+          var minutes = 1000*60;
+          var hours = minutes*60;
+          var days = hours*24;
+          var expiry_date = new Date();
+          expiry_date.setFullYear(expiry_year,expiry_month-1,expiry_day);
+          var effective_date = new Date();
+          effective_date.setFullYear(effective_year,effective_month-1,effective_day);
+          var t = expiry_date.getTime() - effective_date.getTime();
+          var total_days = 0;
+          total_days = Math.round(t/days)+1;
+          return total_days;
+        }
+      }
+      //get the individual birthday in following format: yyyy-mm-dd
+      function buyonline_step_2_get_dob(delta) {
+        if (buyonline_step_2_is_bdate_complete(delta)) {
+          var year = $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday .year").val();
+          var day = $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday .day").val();
+          var month = $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday .month").val();
+          if (day<10) { day = '0' + day; }
+          if (month<10) { month = '0'+ month; }
+          return year+"-"+month+"-"+day;
+        }        
+      }
+      //calculate the individual age bases on the birthday
+      function buyonline_step_2_get_age(delta) {
+        if (buyonline_step_2_is_bdate_complete(delta)) {
+          var dob_year = $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday .year").val();
+          var dob_day = $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday .day").val();
+          var dob_month = $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday .month").val();            
+          var minutes = 1000*60;
+          var hours = minutes*60;
+          var days = hours*24;          
+          var dob_date = new Date();
+          dob_date.setFullYear(dob_year,dob_month-1,dob_day);
+          var current_date = new Date();
+          var diff = current_date - dob_date;
+          var diffdays = diff / days;
+          var insured_age = Math.floor(diffdays / 365.25);
+          return insured_age;
+        }
+      }
+      //show the age tooltip
+      function buyonline_step_2_show_age() {
+        // var delta = event.data.element;
+        for (var delta = 1; delta <= 5; delta++) {
+          var insured_age = buyonline_step_2_get_age(delta);
+          if ($(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_information").length <= 0) {
+            $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .fieldset-wrapper").append("<div class='insured_information'></div>");
+          }
+          if (typeof insured_age !== 'undefined') {
+            if ($(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_age").length) {
+              $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_age .insured_age_duration").html(
+                Drupal.t("Age")+": <b>"+insured_age+" "+Drupal.t("year old")+" </b>"
+              );
+            }
+            else {
+              $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_information").append('<span class="insured_age"><span class="insured_age_duration">'+Drupal.t("Age")+': <b>'+insured_age+" "+Drupal.t("year old")+' </b></span></span>');
+            }
+            if (insured_age < 0) {
+              $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_age").addClass("warning");
+            }
+            else {
+              $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_age").removeClass("warning");          
+            }
+          }
+          else {
+            if ($(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_age").length) {
+              $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_age").remove();
+            }
+          }          
+        };
+      }
+
+      function buyonline_step_2_is_bdate_complete(delta) {
+        var all_selected = true;
+        $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday select").each(
+          function(){
+            if ($(this).val() == "") {
+              all_selected = false;
+              return all_selected;
+            }
+          }
+        );
+        return all_selected;
+      }
+      //check whether the insured info have been completed
+      function buyonline_step_2_check_insured_completion(delta) {
+        var insured_complete = true;
+        if ($(".webform-component--step-2--traveller-information-insured--insured-"+delta).length > 0) {
+          $(".webform-component--step-2--traveller-information-insured--insured-"+delta).find("input:not(:image), select").each(function(){
+            if ($(this).val() == false) {
+              insured_complete = false;
+            }
+          });
+          return insured_complete;
+        }
+      }
+      /*
+      * check all the insured info completion.
+      * return - an array with item value: true or false 
+      */
+      function buyonline_step_2_check_all_insured_completion() {
+        var insured_completion = [];
+        for (var i = 1; i <= 5; i++) {
+          insured_completion[i-1] = buyonline_step_2_check_insured_completion(i);
+        };
+        return insured_completion;
+      }
+
+      //check anytime whether step 1 is completed.
+      function buyonline_step_1_check_completion() {
+        if ($("#edit-submitted-step-1-for-all-members-1").prop("checked")) {
+          form.trigger("step_complete", [1]);
+          return true;
+        }
+        else {
+          form.trigger("step_incomplete", [1]);
+          return false;
+        }
+      }
+
+      //monitor step 1 element change event
+      function buyonline_step_1_monitor() {
+        $(".webform-component--step-1").find("input, select").change(function(){
+          buyonline_step_1_check_completion();
+        });
+        $(".webform-component--step-1").find("input, select").change();
+      }
+      //Auto expanse the step 2 accordion.
+      function buyonline_step_2_auto_expanse() {
+        form.find(".webform-component--step-1 .continue_btn a").click();
+      }
+      //get the price entity id
+      function buyonline_step_2_get_pid() {
+        var pid = get_obj_product().val();
+        return pid;
+      }
+      //get the beneficiary name
+      function buyonline_step_2_get_beneficiary() {
+        return $("#edit-submitted-step-2-insured-members-beneficiary-name").val();
+      }
+      //get the arrival date 
+      function buyonline_step_2_get_arrival_date() {
+        var month   = $("#edit-submitted-step-2-travel-dates-canada-arrival-date-month").val();
+        var day     = $("#edit-submitted-step-2-travel-dates-canada-arrival-date-day").val();
+        var year    = $("#edit-submitted-step-2-travel-dates-canada-arrival-date-year").val();
+        if (day<10) { day = '0' + day; }
+        if (month<10) { month = '0'+ month; }
+        return year+"-"+month+"-"+day;
+      }
+      //get the effective date 
+      function buyonline_step_2_get_effective_date() {
+        var month   = $("#edit-submitted-step-2-travel-dates-effective-date-month").val();
+        var day     = $("#edit-submitted-step-2-travel-dates-effective-date-day").val();
+        var year    = $("#edit-submitted-step-2-travel-dates-effective-date-year").val();
+        if (day < 10) { day = '0' + day; }
+        if (month < 10) { month = '0' + month; }
+        return year+"-"+month+"-"+day;
+      }
+      //get the expiry date 
+      function buyonline_step_2_get_expiry_date() {
+        var month = $("#edit-submitted-step-2-travel-dates-expiry-date-month").val();
+        var day = $("#edit-submitted-step-2-travel-dates-expiry-date-day").val();
+        var year = $("#edit-submitted-step-2-travel-dates-expiry-date-year").val();
+        if (day < 10) { day = '0' + day; }
+        if (month < 10) { month = '0' + month; }
+        return year+"-"+month+"-"+day;
+      }
+      //get the deductible 
+      function buyonline_step_2_get_deductible() {
+        var deductibles_obj = get_obj_deductibles();
+        var deductible = [];
+        if (deductibles_obj.val() !== "") {
+          deductible['value'] = deductibles_obj.val();
+          deductible['label'] = $("#edit-submitted-step-2-coverage-and-deductible-select-a-deductible-amount option:selected").text();
+        }
+        else {
+          deductible['value'] = "";
+          deductible['label'] = "";        
+        }
+        return deductible;          
+      }
+      //get the coverage 
+      function buyonline_step_2_get_coverage() {
+        var coverages_obj = get_obj_coverages();
+        var coverage = [];
+        if (coverages_obj.val() !== "") {
+          coverage['value'] = coverages_obj.val();
+          coverage['label'] = coverages_obj.find("option:selected").text();
+        }
+        else {
+          coverage['value'] = "";
+          coverage['label'] = "";         
+        }
+        return coverage;          
+      }
+      //get family plan
+      function buyonline_step_2_get_family_plan() {
+        if ($("#edit-submitted-step-2-insured-members-family-plan-1").is(':checked')) {
+          return 1;
+        }
+        return 0;
+      }
+      //check whether step 2 is completed.
+      function buyonline_step_2_check_completion() {
+
+        var fulfilled = true;
+        $(".webform-component--step-2").find(".required").each(function(){
+          if ($(this).val() == '') {
+            fulfilled = false;
+          }
+        });
+        if (fulfilled && buyonline_step_2_effective_expiry_is_complete() && step_1_complete) {
+          form.trigger("step_complete", [2]);
+          return true;
+        }
+        else {
+          form.trigger("step_incomplete", [2]);
+          return false;
+        }
+
+      }
+      //monitor step 2 element change event
+      function buyonline_step_2_monitor() {
+
+        $(".webform-component--step-2").find("select").change(function(e){
+          form.trigger("get_deductible_coverage_by_pid", [buyonline_step_2_get_pid(), $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured").val()]);
+          buyonline_step_2_show_age();
+          buyonline_step_2_show_duration();
+        });
+        $(".webform-component--step-2").find("input").keyup(function(e){
+          form.trigger("get_deductible_coverage_by_pid", [buyonline_step_2_get_pid(), $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured").val()]);
+          buyonline_step_2_show_age();
+          buyonline_step_2_show_duration();
+        });
+        $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured").change(function(){
+
+        });
+        get_obj_product().change();
+
+      }
+
+      //step 3 is depended on step 2's insured info.
+      function buyonline_step_3_update() {
+
+        var all_insured_completion = buyonline_step_2_check_all_insured_completion();
+        for (var i = 0; i <= all_insured_completion.length - 1; i++) {
+          if (!all_insured_completion[i]) {
+            $(".webform-component--step-3--do-you-want-pre-existing-condition-covered-"+(i+1)).fadeOut().addClass("custom_hidden");
+          }
+          else {
+            $(".webform-component--step-3--do-you-want-pre-existing-condition-covered-"+(i+1)).fadeIn().removeClass("custom_hidden");
+          }
+        };
+
+      }
+      //check whether step 3 is completed.
+      function buyonline_step_3_check_completion() {
+        var fulfilled = true;
+        $(".webform-component--step-3").find(".webform-component-radios").each(function(){
+          if ($(this).find("input:radio:checked").length <= 0) {
+            fulfilled = false;
+          }
+        });
+        //check whether step 1, 2, 3 are all completed.
+        if (fulfilled && step_2_complete && step_1_complete) {
+          form.trigger("step_complete", [3]);          
+        }
+        else {
+          form.trigger("step_incomplete", [3]);          
+        }
+        return fulfilled;
+      }
+      //monitor step 3 element change event
+      function buyonline_step_3_monitor() {
+        $(".webform-component--step-3").find("input, select").change(function(){
+          buyonline_step_3_check_completion();
+        });
+        $(".webform-component--step-3").find("input, select").last().change();
+      }
+      //get individual insured spmcc info
+      function buyonline_step_3_get_insured_spmcc(delta) {
+        return $("#edit-submitted-step-3-do-you-want-pre-existing-condition-covered-"+delta).find("input:radio:checked").val();
+      }
+      //Get individual insured information
+      function buyonline_step_4_get_insured_info(delta) {
+        if (buyonline_step_2_check_insured_completion(delta)) {
+          var insured = [];
+          insured['first_name'] = $("#edit-submitted-step-2-traveller-information-insured-insured-"+delta+"-given-name").val();
+          insured['last_name'] = $("#edit-submitted-step-2-traveller-information-insured-insured-"+delta+"-surname").val();
+          insured['dob'] = buyonline_step_2_get_dob(delta);
+          insured['age'] = buyonline_step_2_get_age(delta);
+          insured['sex'] = $("#edit-submitted-step-2-traveller-information-insured-insured-"+delta+"-gender").val();
+          insured['spmcc'] = buyonline_step_3_get_insured_spmcc(delta);
+          return insured;
+        }
+      }
+      //Get all insured information
+      function buyonline_step_4_get_all_insured_info() {
+        var all_insured = [];
+        for (var delta = 1; delta <= 5; delta++) {
+          all_insured[delta-1] = buyonline_step_4_get_insured_info(delta);
+        };
+        return all_insured;
+      }
+      //Update total premium
+      function buyonline_step_4_update_total_premium() {
+        if ($(".total_premium").length > 0) {
+          var total_premium = 0;
+          if (buyonline_step_2_get_family_plan()) {
+            var max_premium = 0;
+            $(".insured .premium_amount").each(function(){
+              max_premium = max_premium > parseFloat($(this).text()) ? max_premium : parseFloat($(this).text());
+            });               
+            total_premium = max_premium * 2;
+          }
+          else {
+            $(".insured .premium_amount").each(function(){
+              total_premium += parseFloat($(this).text());
+            });            
+          }
+          //round it up;
+          total_premium = Math.round(total_premium * 100)/100;
+          $(".total_premium").find(".total_premium_amount").html(total_premium);
+          $("#edit-submitted-step-4-premium-total-premium").val(total_premium);
+        }
+      }
+
+      //monitor step 4 element change event - current not in use.
+      function buyonline_step_4_monitor() {
+         
+      }
+
+      //Show the review on step 4
+      function  buyonline_step_4_review() {
+        if (!step_1_complete || !step_2_complete || !step_3_complete) {
+          return ;
+        }
+        var price_entity_id   = buyonline_step_2_get_pid();
+        var application_date  = buyonline_get_today_date();
+        var arrival_date      = buyonline_step_2_get_arrival_date();
+        var effective_date    = buyonline_step_2_get_effective_date();
+        var expiry_date       = buyonline_step_2_get_expiry_date();
+        var trip_duration     = buyonline_step_2_get_duration();
+        var beneficiary       = buyonline_step_2_get_beneficiary();
+        var family_plan       = buyonline_step_2_get_family_plan();
+        var deductible        = buyonline_step_2_get_deductible();
+        var deductible_amount = deductible['value'];
+        var deductible_label  = deductible['label'];
+        var coverage          = buyonline_step_2_get_coverage();
+        var coverage_amount   = coverage['value'];
+        var coverage_label    = coverage['label'];
+
+        //policy summary
+        var application_date_dom  = "<div class='item application_date'><span class='label'>"+Drupal.t("Application Date")+"</span><span class='value'>"+application_date+"</span></div>";
+        var arrival_date_dom      = "<div class='item arrival_date'><span class='label'>"+Drupal.t("Arrival Date")+"</span><span class='value'>"+arrival_date+"</span></div>";
+        var effective_date_dom    = "<div class='item effective_date'><span class='label'>"+Drupal.t("Effective Date")+"</span><span class='value'>"+effective_date+"</span></div>";
+        var expiry_date_dom       = "<div class='item expiry_date'><span class='label'>"+Drupal.t("Expiry Date")+"</span><span class='value'>"+expiry_date+"</span></div>";
+        var trip_duration         = "<div class='item trip_duration'><span class='label'>"+Drupal.t("Trip Duration")+"</span><span class='value'>"+trip_duration+" "+Drupal.t("days")+"</span></div>";
+        var coverage_dom          = "<div class='item coverage'><span class='label'>"+Drupal.t("Coverage")+"</span><span class='value'>"+coverage_label+"</span></div>";
+        var deductible_dom        = "<div class='item deductible'><span class='label'>"+Drupal.t("Deductible")+"</span><span class='value'>"+deductible_label+"</span></div>";
+        var beneficiary_dom       = "<div class='item beneficiary'><span class='label'>"+Drupal.t("Beneficiary")+"</span><span class='value'>"+beneficiary+"</span></div>";
+        var family_plan_dom       = "<div class='item family_plan'><span class='label'>"+Drupal.t("Family Plan")+"</span><span class='value'>"+(family_plan ? "Yes" : "No")+"</span></div>";
+        var total_premium_dom     = "<div class='item total_premium'><span class='label'>"+Drupal.t("Total Premium")+"</span><span class='value'><span class='dollar_sign'>$</span><span class='total_premium_amount'>0</span></span></div>";
+        var policy_summary        = application_date_dom+arrival_date_dom+effective_date_dom+expiry_date_dom+trip_duration+family_plan_dom+coverage_dom+deductible_dom+beneficiary_dom+total_premium_dom;
+
+        //contact information
+        var contact_fn        = $("#edit-submitted-step-2-contact-information-given-name").val();
+        var contact_ln        = $("#edit-submitted-step-2-contact-information-surname").val();
+        var contact_email     = $("#edit-submitted-step-2-contact-information-email").val() ? ("<br>"+Drupal.t("Email: ")+$("#edit-submitted-step-2-contact-information-email").val()) : "";
+        var contact_hphone    = $("#edit-submitted-step-2-contact-information-home-phone").val() ? ("<br>"+Drupal.t("Home Phone: ")+$("#edit-submitted-step-2-contact-information-home-phone").val()) : "";
+        var contact_cphone    = $("#edit-submitted-step-2-contact-information-cell-phone").val() ? ("<br>"+Drupal.t("Cell Phone: ")+$("#edit-submitted-step-2-contact-information-cell-phone").val()) : "";
+        var contact_fax       = $("#edit-submitted-step-2-contact-information-fax-number").val() ? ("<br>"+Drupal.t("Fax Number: ")+$("#edit-submitted-step-2-contact-information-fax-number").val()) : "";
+        var contact_info      = contact_fn+" "+contact_ln+contact_email+contact_hphone+contact_cphone+contact_fax;
+
+        //canada address
+        var address_1         = $("#edit-submitted-step-2-canada-address-canadian-address-thoroughfare").val();
+        var address_2         = $("#edit-submitted-step-2-canada-address-canadian-address-premise").val() ? ("<br>"+$("#edit-submitted-step-2-canada-address-canadian-address-premise").val()) : "";
+        var city              = $("#edit-submitted-step-2-canada-address-canadian-address-locality").val() ? ("<br>"+$("#edit-submitted-step-2-canada-address-canadian-address-locality").val()) : "";
+        var province          = $("#edit-submitted-step-2-canada-address-canadian-address-administrative-area").val() ? (", "+$("#edit-submitted-step-2-canada-address-canadian-address-administrative-area").val()) : "";
+        var postal_code       = $("#edit-submitted-step-2-canada-address-canadian-address-postal-code").val() ? (" "+$("#edit-submitted-step-2-canada-address-canadian-address-postal-code").val()) : "";
+        var canada_address    = address_1+address_2+city+province+postal_code;
+
+        //traveller information
+        var family_plan_class   = family_plan ? "family_plan" : "";
+        var traveller_info      = ("<div class='item i_header'><div class='name'>"+Drupal.t("Name")+"</div><div class='birthday'>"+Drupal.t("Birthday")+"<span class='age'> "+Drupal.t("(age)")+"</span></div><div class='spmcc' title='"+Drupal.t("Stable pre-existing medical condition coverage")+"'>"+Drupal.t("SPMCC")+"</div><div class='premium'>"+Drupal.t("Premium")+"</div></div>");
+
+        //get the insured's premium
+        var insured_completion  = buyonline_step_2_check_all_insured_completion();
+        var insured_info        = buyonline_step_4_get_all_insured_info();
+
+        var ajax_premium_counter = buyonline_step_insured_completion_count();
+        for (var i = 0; i <= insured_completion.length - 1; i++) {
+          if (insured_completion[i]) {
+            //set up the counter. when the counter is 0, then trigger the total premium.
+            traveller_info += ("<div class='item "+family_plan_class+"' id='insured_person_"+i+"'><div class='name'>"+insured_info[i]['first_name']+" "+insured_info[i]['last_name']+"</div><div class='birthday'>"+insured_info[i]['dob']+"<span class='age'> ("+insured_info[i]['age']+" years old)</span></div><div class='spmcc' title='"+Drupal.t("Stable pre-existing medical condition coverage")+"'>"+insured_info[i]['spmcc']+"</div><div class='premium'><span class='dollar_sign'>$</span><span class='premium_amount'>0</span></div></div>");
+            //get the price
+            $.ajax({
+              type: "GET",
+              url: "/get-a-quote/visitor-to-canada-insurance/calculate-premium",
+              data: {
+                pid:          price_entity_id, 
+                effective:    effective_date,
+                expiry:       expiry_date,
+                coverage:     coverage_amount,
+                deductible:   deductible_amount,
+                insured_bod:  insured_info[i]['dob'],
+                storage:      {insured_id:i, age:insured_info[i]['age']}
+              }
+            })
+            .done(function( data ) {
+              ajax_premium_counter--;
+              if (typeof data.storage !== 'undefined' && typeof data.storage.insured_id !== 'undefined') {
+                var delta = parseInt(data.storage.insured_id)+1;
+                if ($("#insured_person_"+data.storage.insured_id).length) {
+                  //if neither spmcc premium nor no_spmcc premium is found, then triger the 'premium not found' event.
+                  if ((data.premium.spmcc == null) && (data.premium.no_spmcc == null)) {
+                    form.trigger("premium_not_found", [delta, data.storage.age]);
+                  }
+                  else {
+                    var found_premium = false;
+                    //if the premium of spmcc is same as price for no_spmcc, then disable no_spmcc.
+                    if (data.premium.spmcc == data.premium.no_spmcc) {
+                      found_premium = true;
+                      form.trigger("premium_not_found_no_spmcc", [delta, data.storage.age]);                    
+                    }
+                    else {
+                      //if the premium for spmcc is not found, then trigger event;
+                      if (data.premium.spmcc == null) {
+                        form.trigger("premium_not_found_spmcc", [delta, data.storage.age]);
+                      }
+                      else {
+                        found_premium = true;
+                        form.trigger("premium_found_spmcc", [delta, data.storage.age]);
+                      }
+                      //if the premium for no_spmcc is not found, then trigger event;
+                      if (data.premium.no_spmcc == null) {
+                        form.trigger("premium_not_found_no_spmcc", [delta, data.storage.age]);
+                      }
+                      else {
+                        found_premium = true;
+                        form.trigger("premium_found_no_spmcc", [delta, data.storage.age]);                    
+                      }
+                    }
+                    //if the desired premium is not found, then trigger the 'premium'.
+                    if (found_premium) {
+                      form.trigger("premium_found", [delta, data]);
+                    }
+                  }
+                }
+              }
+              //if all the insured have the price.
+              if (ajax_premium_counter == 0) {
+                form.trigger("total_premium_update");
+              }            
+            });
+          }
+        }; 
+        var review = $("<div class='review_wrapper'><div class='review'><div class='section policy_summary'><div class='s_header'>"+Drupal.t("Policy Summary")+"</div><div class='s_content'>"+policy_summary+"</div></div><div class='section insured'><div class='s_header'>"+Drupal.t("Traveller Information")+"</div><div class='s_content'>"+traveller_info+"</div></div><div class='section contact'><div class='s_header'>"+Drupal.t("Contact Information")+"</div><div class='s_content'>"+contact_info+"</div></div><div class='section address'><div class='s_header'>"+Drupal.t("Canada Address")+"</div><div class='s_content'>"+canada_address+"</div></div></div></div>");
+        $(".webform-component--step-4--review").html(review);
+
+      }
 
       var step_1_complete = false;
       var step_2_complete = false;
@@ -619,550 +1166,6 @@
       buyonline_step_3_monitor();
       buyonline_step_4_monitor();
     
-      //Verify whether effective date and expiry date are fulfilled.
-      function buyonline_step_2_effective_expiry_is_complete() {
-        var all_selected = true;
-        $(".webform-component--step-2--travel-dates--effective-date select").each(
-          function(){
-            if($(this).val() == "") {
-              all_selected = false;
-              return all_selected;
-            }
-          }
-        );
-        $(".webform-component--step-2--travel-dates--expiry-date select").each(
-          function(){
-            if ($(this).val() == "") {
-              all_selected = false;
-              return all_selected;
-            }
-          }
-        );
-        return all_selected;
-      }
-      
-      function buyonline_step_2_show_duration() {
-        var total_days = buyonline_step_2_get_duration();
-        if (typeof total_days !== 'undefined') {
-          if($("#duration_days").length) {
-            $("#duration_days #duration").html(Drupal.t("Duration")+": <b>"+total_days+" "+Drupal.t("days")+" </b>");
-          }
-          else {
-            $(".webform-component--step-2--travel-dates .fieldset-wrapper").append('<span id="duration_days"><span id="duration">'+Drupal.t("Duration")+': <b>'+total_days+" "+Drupal.t("days")+' </b></span></span>');
-          }          
-          if (total_days <= 0) {
-            $("#duration_days").addClass("warning");
-          }
-          else {
-            $("#duration_days").removeClass("warning");          
-          }
-        }
-        else {
-          if($("#duration_days").length) {
-            $("#duration_days").remove();
-          }
-        }
-      }
-      //get the total days of the policy
-      function buyonline_step_2_get_duration() {
-        if (buyonline_step_2_effective_expiry_is_complete()) {
-          var effective_year = $(".webform-component--step-2--travel-dates--effective-date .year").val();
-          var effective_day = $(".webform-component--step-2--travel-dates--effective-date .day").val();
-          var effective_month = $(".webform-component--step-2--travel-dates--effective-date .month").val();
-          
-          var expiry_month = $(".webform-component--step-2--travel-dates--expiry-date .month").val();
-          var expiry_day = $(".webform-component--step-2--travel-dates--expiry-date .day").val();
-          var expiry_year = $(".webform-component--step-2--travel-dates--expiry-date .year").val();
-          
-          var minutes = 1000*60;
-          var hours = minutes*60;
-          var days = hours*24;
-          var expiry_date = new Date();
-          expiry_date.setFullYear(expiry_year,expiry_month-1,expiry_day);
-          var effective_date = new Date();
-          effective_date.setFullYear(effective_year,effective_month-1,effective_day);
-          var t = expiry_date.getTime() - effective_date.getTime();
-          var total_days = 0;
-          total_days = Math.round(t/days)+1;
-          return total_days;
-        }
-      }
-      //get the individual birthday in following format: yyyy-mm-dd
-      function buyonline_step_2_get_dob(delta) {
-        if (buyonline_step_2_is_bdate_complete(delta)) {
-          var year = $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday .year").val();
-          var day = $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday .day").val();
-          var month = $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday .month").val();
-          if (day<10) { day = '0' + day; }
-          if (month<10) { month = '0'+ month; }
-          return year+"-"+month+"-"+day;
-        }        
-      }
-      //calculate the individual age bases on the birthday
-      function buyonline_step_2_get_age(delta) {
-        if (buyonline_step_2_is_bdate_complete(delta)) {
-          var dob_year = $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday .year").val();
-          var dob_day = $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday .day").val();
-          var dob_month = $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday .month").val();            
-          var minutes = 1000*60;
-          var hours = minutes*60;
-          var days = hours*24;          
-          var dob_date = new Date();
-          dob_date.setFullYear(dob_year,dob_month-1,dob_day);
-          var current_date = new Date();
-          var diff = current_date - dob_date;
-          var diffdays = diff / days;
-          var insured_age = Math.floor(diffdays / 365.25);
-          return insured_age;
-        }
-      }
-      //show the age tooltip
-      function buyonline_step_2_show_age() {
-        // var delta = event.data.element;
-        for (var delta = 1; delta <= 5; delta++) {
-          var insured_age = buyonline_step_2_get_age(delta);
-          if ($(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_information").length <= 0) {
-            $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .fieldset-wrapper").append("<div class='insured_information'></div>");
-          }
-          if (typeof insured_age !== 'undefined') {
-            if ($(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_age").length) {
-              $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_age .insured_age_duration").html(
-                Drupal.t("Age")+": <b>"+insured_age+" "+Drupal.t("year old")+" </b>"
-              );
-            }
-            else {
-              $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_information").append('<span class="insured_age"><span class="insured_age_duration">'+Drupal.t("Age")+': <b>'+insured_age+" "+Drupal.t("year old")+' </b></span></span>');
-            }
-            if (insured_age < 0) {
-              $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_age").addClass("warning");
-            }
-            else {
-              $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_age").removeClass("warning");          
-            }
-          }
-          else {
-            if ($(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_age").length) {
-              $(".webform-component--step-2--traveller-information-insured--insured-"+delta+" .insured_age").remove();
-            }
-          }          
-        };
-      }
-
-      function buyonline_step_2_is_bdate_complete(delta) {
-        var all_selected = true;
-        $(".webform-component--step-2--traveller-information-insured--insured-"+delta+"--birthday select").each(
-          function(){
-            if ($(this).val() == "") {
-              all_selected = false;
-              return all_selected;
-            }
-          }
-        );
-        return all_selected;
-      }
-      //check whether the insured info have been completed
-      function buyonline_step_2_check_insured_completion(delta) {
-        var insured_complete = true;
-        if ($(".webform-component--step-2--traveller-information-insured--insured-"+delta).length > 0) {
-          $(".webform-component--step-2--traveller-information-insured--insured-"+delta).find("input:not(:image), select").each(function(){
-            if ($(this).val() == false) {
-              insured_complete = false;
-            }
-          });
-          return insured_complete;
-        }
-      }
-      /*
-      * check all the insured info completion.
-      * return - an array with item value: true or false 
-      */
-      function buyonline_step_2_check_all_insured_completion() {
-        var insured_completion = [];
-        for (var i = 1; i <= 5; i++) {
-          insured_completion[i-1] = buyonline_step_2_check_insured_completion(i);
-        };
-        return insured_completion;
-      }
-
-      //get the count of completed insured info
-      function buyonline_step_insured_completion_count() {
-        var completion = buyonline_step_2_check_all_insured_completion();
-        var count = 0;
-        for (var i = completion.length - 1; i >= 0; i--) {
-          if (completion[i]) {
-            count++;
-          }
-        };
-        return count;
-      }
-      
-      //collapse the step
-      function buyonline_collapse_step(step_number) {
-        $("#webform-client-form-184 .webform-component--step-"+step_number).addClass("custom_collapsed disabled").find("> .fieldset-wrapper").hide();    
-      }
-
-      //check anytime whether step 1 is completed.
-      function buyonline_step_1_check_completion() {
-        if ($("#edit-submitted-step-1-for-all-members-1").prop("checked")) {
-          form.trigger("step_complete", [1]);
-          return true;
-        }
-        else {
-          form.trigger("step_incomplete", [1]);
-          return false;
-        }
-      }
-
-      //Hide form submit button
-      function buyonline_show_submit_btn(show){
-        if (show == true) {
-          $("#webform-client-form-184 .form-actions").show();         
-        }
-        else {
-          $("#webform-client-form-184 .form-actions").hide();        
-        }
-      }
-      //monitor step 1 element change event
-      function buyonline_step_1_monitor() {
-        $(".webform-component--step-1").find("input, select").change(function(){
-          buyonline_step_1_check_completion();
-        });
-        $(".webform-component--step-1").find("input, select").change();
-      }
-      //Auto expanse the step 2 accordion.
-      function buyonline_step_2_auto_expanse() {
-        form.find(".webform-component--step-1 .continue_btn a").click();
-      }
-      //get the price entity id
-      function buyonline_step_2_get_pid() {
-        var pid = get_obj_product().val();
-        return pid;
-      }
-      //get the beneficiary name
-      function buyonline_step_2_get_beneficiary() {
-        return $("#edit-submitted-step-2-insured-members-beneficiary-name").val();
-      }
-      //get the arrival date 
-      function buyonline_step_2_get_arrival_date() {
-        var month   = $("#edit-submitted-step-2-travel-dates-canada-arrival-date-month").val();
-        var day     = $("#edit-submitted-step-2-travel-dates-canada-arrival-date-day").val();
-        var year    = $("#edit-submitted-step-2-travel-dates-canada-arrival-date-year").val();
-        if (day<10) { day = '0' + day; }
-        if (month<10) { month = '0'+ month; }
-        return year+"-"+month+"-"+day;
-      }
-      //get the effective date 
-      function buyonline_step_2_get_effective_date() {
-        var month   = $("#edit-submitted-step-2-travel-dates-effective-date-month").val();
-        var day     = $("#edit-submitted-step-2-travel-dates-effective-date-day").val();
-        var year    = $("#edit-submitted-step-2-travel-dates-effective-date-year").val();
-        if (day < 10) { day = '0' + day; }
-        if (month < 10) { month = '0' + month; }
-        return year+"-"+month+"-"+day;
-      }
-      //get the expiry date 
-      function buyonline_step_2_get_expiry_date() {
-        var month = $("#edit-submitted-step-2-travel-dates-expiry-date-month").val();
-        var day = $("#edit-submitted-step-2-travel-dates-expiry-date-day").val();
-        var year = $("#edit-submitted-step-2-travel-dates-expiry-date-year").val();
-        if (day < 10) { day = '0' + day; }
-        if (month < 10) { month = '0' + month; }
-        return year+"-"+month+"-"+day;
-      }
-      //get the deductible 
-      function buyonline_step_2_get_deductible() {
-        var deductibles_obj = get_obj_deductibles();
-        var deductible = [];
-        if (deductibles_obj.val() !== "") {
-          deductible['value'] = deductibles_obj.val();
-          deductible['label'] = $("#edit-submitted-step-2-coverage-and-deductible-select-a-deductible-amount option:selected").text();
-        }
-        else {
-          deductible['value'] = "";
-          deductible['label'] = "";        
-        }
-        return deductible;          
-      }
-      //get the coverage 
-      function buyonline_step_2_get_coverage() {
-        var coverages_obj = get_obj_coverages();
-        var coverage = [];
-        if (coverages_obj.val() !== "") {
-          coverage['value'] = coverages_obj.val();
-          coverage['label'] = coverages_obj.find("option:selected").text();
-        }
-        else {
-          coverage['value'] = "";
-          coverage['label'] = "";         
-        }
-        return coverage;          
-      }
-      //get family plan
-      function buyonline_step_2_get_family_plan() {
-        if ($("#edit-submitted-step-2-insured-members-family-plan-1").is(':checked')) {
-          return 1;
-        }
-        return 0;
-      }
-      //check whether step 2 is completed.
-      function buyonline_step_2_check_completion() {
-
-        var fulfilled = true;
-        $(".webform-component--step-2").find(".required").each(function(){
-          if ($(this).val() == '') {
-            fulfilled = false;
-          }
-        });
-        if (fulfilled && buyonline_step_2_effective_expiry_is_complete() && step_1_complete) {
-          form.trigger("step_complete", [2]);
-          return true;
-        }
-        else {
-          form.trigger("step_incomplete", [2]);
-          return false;
-        }
-
-      }
-      //monitor step 2 element change event
-      function buyonline_step_2_monitor() {
-
-        $(".webform-component--step-2").find("select").change(function(e){
-          form.trigger("get_deductible_coverage_by_pid", [buyonline_step_2_get_pid(), $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured").val()]);
-          buyonline_step_2_show_age();
-          buyonline_step_2_show_duration();
-        });
-        $(".webform-component--step-2").find("input").keyup(function(e){
-          form.trigger("get_deductible_coverage_by_pid", [buyonline_step_2_get_pid(), $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured").val()]);
-          buyonline_step_2_show_age();
-          buyonline_step_2_show_duration();
-        });
-        $("#edit-submitted-step-2-coverage-and-deductible-coverage-sum-insured").change(function(){
-
-        });
-        get_obj_product().change();
-
-      }
-
-      //step 3 is depended on step 2's insured info.
-      function buyonline_step_3_update() {
-
-        var all_insured_completion = buyonline_step_2_check_all_insured_completion();
-        for (var i = 0; i <= all_insured_completion.length - 1; i++) {
-          if (!all_insured_completion[i]) {
-            $(".webform-component--step-3--do-you-want-pre-existing-condition-covered-"+(i+1)).fadeOut().addClass("custom_hidden");
-          }
-          else {
-            $(".webform-component--step-3--do-you-want-pre-existing-condition-covered-"+(i+1)).fadeIn().removeClass("custom_hidden");
-          }
-        };
-
-      }
-      //check whether step 3 is completed.
-      function buyonline_step_3_check_completion() {
-        var fulfilled = true;
-        $(".webform-component--step-3").find(".webform-component-radios").each(function(){
-          if ($(this).find("input:radio:checked").length <= 0) {
-            fulfilled = false;
-          }
-        });
-        //check whether step 1, 2, 3 are all completed.
-        if (fulfilled && step_2_complete && step_1_complete) {
-          form.trigger("step_complete", [3]);          
-        }
-        else {
-          form.trigger("step_incomplete", [3]);          
-        }
-        return fulfilled;
-      }
-      //monitor step 3 element change event
-      function buyonline_step_3_monitor() {
-        $(".webform-component--step-3").find("input, select").change(function(){
-          buyonline_step_3_check_completion();
-        });
-        $(".webform-component--step-3").find("input, select").last().change();
-      }
-      //get individual insured spmcc info
-      function buyonline_step_3_get_insured_spmcc(delta) {
-        return $("#edit-submitted-step-3-do-you-want-pre-existing-condition-covered-"+delta).find("input:radio:checked").val();
-      }
-      //Get individual insured information
-      function buyonline_step_4_get_insured_info(delta) {
-        if (buyonline_step_2_check_insured_completion(delta)) {
-          var insured = [];
-          insured['first_name'] = $("#edit-submitted-step-2-traveller-information-insured-insured-"+delta+"-given-name").val();
-          insured['last_name'] = $("#edit-submitted-step-2-traveller-information-insured-insured-"+delta+"-surname").val();
-          insured['dob'] = buyonline_step_2_get_dob(delta);
-          insured['age'] = buyonline_step_2_get_age(delta);
-          insured['sex'] = $("#edit-submitted-step-2-traveller-information-insured-insured-"+delta+"-gender").val();
-          insured['spmcc'] = buyonline_step_3_get_insured_spmcc(delta);
-          return insured;
-        }
-      }
-      //Get all insured information
-      function buyonline_step_4_get_all_insured_info() {
-        var all_insured = [];
-        for (var delta = 1; delta <= 5; delta++) {
-          all_insured[delta-1] = buyonline_step_4_get_insured_info(delta);
-        };
-        return all_insured;
-      }
-      //Update total premium
-      function buyonline_step_4_update_total_premium() {
-        if ($(".total_premium").length > 0) {
-          var total_premium = 0;
-          if (buyonline_step_2_get_family_plan()) {
-            var max_premium = 0;
-            $(".insured .premium_amount").each(function(){
-              max_premium = max_premium > parseFloat($(this).text()) ? max_premium : parseFloat($(this).text());
-            });               
-            total_premium = max_premium * 2;
-          }
-          else {
-            $(".insured .premium_amount").each(function(){
-              total_premium += parseFloat($(this).text());
-            });            
-          }
-          //round it up;
-          total_premium = Math.round(total_premium * 100)/100;
-          $(".total_premium").find(".total_premium_amount").html(total_premium);
-          $("#edit-submitted-step-4-premium-total-premium").val(total_premium);
-        }
-      }
-
-      //monitor step 4 element change event - current not in use.
-      function buyonline_step_4_monitor() {
-         
-      }
-
-      //Show the review on step 4
-      function  buyonline_step_4_review() {
-        if (!step_1_complete || !step_2_complete || !step_3_complete) {
-          return ;
-        }
-        var price_entity_id   = buyonline_step_2_get_pid();
-        var application_date  = buyonline_get_today_date();
-        var arrival_date      = buyonline_step_2_get_arrival_date();
-        var effective_date    = buyonline_step_2_get_effective_date();
-        var expiry_date       = buyonline_step_2_get_expiry_date();
-        var trip_duration     = buyonline_step_2_get_duration();
-        var beneficiary       = buyonline_step_2_get_beneficiary();
-        var family_plan       = buyonline_step_2_get_family_plan();
-        var deductible        = buyonline_step_2_get_deductible();
-        var deductible_amount = deductible['value'];
-        var deductible_label  = deductible['label'];
-        var coverage          = buyonline_step_2_get_coverage();
-        var coverage_amount   = coverage['value'];
-        var coverage_label    = coverage['label'];
-
-        //policy summary
-        var application_date_dom  = "<div class='item application_date'><span class='label'>"+Drupal.t("Application Date")+"</span><span class='value'>"+application_date+"</span></div>";
-        var arrival_date_dom      = "<div class='item arrival_date'><span class='label'>"+Drupal.t("Arrival Date")+"</span><span class='value'>"+arrival_date+"</span></div>";
-        var effective_date_dom    = "<div class='item effective_date'><span class='label'>"+Drupal.t("Effective Date")+"</span><span class='value'>"+effective_date+"</span></div>";
-        var expiry_date_dom       = "<div class='item expiry_date'><span class='label'>"+Drupal.t("Expiry Date")+"</span><span class='value'>"+expiry_date+"</span></div>";
-        var trip_duration         = "<div class='item trip_duration'><span class='label'>"+Drupal.t("Trip Duration")+"</span><span class='value'>"+trip_duration+" "+Drupal.t("days")+"</span></div>";
-        var coverage_dom          = "<div class='item coverage'><span class='label'>"+Drupal.t("Coverage")+"</span><span class='value'>"+coverage_label+"</span></div>";
-        var deductible_dom        = "<div class='item deductible'><span class='label'>"+Drupal.t("Deductible")+"</span><span class='value'>"+deductible_label+"</span></div>";
-        var beneficiary_dom       = "<div class='item beneficiary'><span class='label'>"+Drupal.t("Beneficiary")+"</span><span class='value'>"+beneficiary+"</span></div>";
-        var family_plan_dom       = "<div class='item family_plan'><span class='label'>"+Drupal.t("Family Plan")+"</span><span class='value'>"+(family_plan ? "Yes" : "No")+"</span></div>";
-        var total_premium_dom     = "<div class='item total_premium'><span class='label'>"+Drupal.t("Total Premium")+"</span><span class='value'><span class='dollar_sign'>$</span><span class='total_premium_amount'>0</span></span></div>";
-        var policy_summary        = application_date_dom+arrival_date_dom+effective_date_dom+expiry_date_dom+trip_duration+family_plan_dom+coverage_dom+deductible_dom+beneficiary_dom+total_premium_dom;
-
-        //contact information
-        var contact_fn        = $("#edit-submitted-step-2-contact-information-given-name").val();
-        var contact_ln        = $("#edit-submitted-step-2-contact-information-surname").val();
-        var contact_email     = $("#edit-submitted-step-2-contact-information-email").val() ? ("<br>"+Drupal.t("Email: ")+$("#edit-submitted-step-2-contact-information-email").val()) : "";
-        var contact_hphone    = $("#edit-submitted-step-2-contact-information-home-phone").val() ? ("<br>"+Drupal.t("Home Phone: ")+$("#edit-submitted-step-2-contact-information-home-phone").val()) : "";
-        var contact_cphone    = $("#edit-submitted-step-2-contact-information-cell-phone").val() ? ("<br>"+Drupal.t("Cell Phone: ")+$("#edit-submitted-step-2-contact-information-cell-phone").val()) : "";
-        var contact_fax       = $("#edit-submitted-step-2-contact-information-fax-number").val() ? ("<br>"+Drupal.t("Fax Number: ")+$("#edit-submitted-step-2-contact-information-fax-number").val()) : "";
-        var contact_info      = contact_fn+" "+contact_ln+contact_email+contact_hphone+contact_cphone+contact_fax;
-
-        //canada address
-        var address_1         = $("#edit-submitted-step-2-canada-address-canadian-address-thoroughfare").val();
-        var address_2         = $("#edit-submitted-step-2-canada-address-canadian-address-premise").val() ? ("<br>"+$("#edit-submitted-step-2-canada-address-canadian-address-premise").val()) : "";
-        var city              = $("#edit-submitted-step-2-canada-address-canadian-address-locality").val() ? ("<br>"+$("#edit-submitted-step-2-canada-address-canadian-address-locality").val()) : "";
-        var province          = $("#edit-submitted-step-2-canada-address-canadian-address-administrative-area").val() ? (", "+$("#edit-submitted-step-2-canada-address-canadian-address-administrative-area").val()) : "";
-        var postal_code       = $("#edit-submitted-step-2-canada-address-canadian-address-postal-code").val() ? (" "+$("#edit-submitted-step-2-canada-address-canadian-address-postal-code").val()) : "";
-        var canada_address    = address_1+address_2+city+province+postal_code;
-
-        //traveller information
-        var family_plan_class   = family_plan ? "family_plan" : "";
-        var traveller_info      = ("<div class='item i_header'><div class='name'>"+Drupal.t("Name")+"</div><div class='birthday'>"+Drupal.t("Birthday")+"<span class='age'> "+Drupal.t("(age)")+"</span></div><div class='spmcc' title='"+Drupal.t("Stable pre-existing medical condition coverage")+"'>"+Drupal.t("SPMCC")+"</div><div class='premium'>"+Drupal.t("Premium")+"</div></div>");
-
-        //get the insured's premium
-        var insured_completion  = buyonline_step_2_check_all_insured_completion();
-        var insured_info        = buyonline_step_4_get_all_insured_info();
-
-        var ajax_premium_counter = buyonline_step_insured_completion_count();
-        for (var i = 0; i <= insured_completion.length - 1; i++) {
-          if (insured_completion[i]) {
-            //set up the counter. when the counter is 0, then trigger the total premium.
-            traveller_info += ("<div class='item "+family_plan_class+"' id='insured_person_"+i+"'><div class='name'>"+insured_info[i]['first_name']+" "+insured_info[i]['last_name']+"</div><div class='birthday'>"+insured_info[i]['dob']+"<span class='age'> ("+insured_info[i]['age']+" years old)</span></div><div class='spmcc' title='"+Drupal.t("Stable pre-existing medical condition coverage")+"'>"+insured_info[i]['spmcc']+"</div><div class='premium'><span class='dollar_sign'>$</span><span class='premium_amount'>0</span></div></div>");
-            //get the price
-            $.ajax({
-              type: "GET",
-              url: "/get-a-quote/visitor-to-canada-insurance/calculate-premium",
-              data: {
-                pid:          price_entity_id, 
-                effective:    effective_date,
-                expiry:       expiry_date,
-                coverage:     coverage_amount,
-                deductible:   deductible_amount,
-                insured_bod:  insured_info[i]['dob'],
-                storage:      {insured_id:i, age:insured_info[i]['age']}
-              }
-            })
-            .done(function( data ) {
-              ajax_premium_counter--;
-              if (typeof data.storage !== 'undefined' && typeof data.storage.insured_id !== 'undefined') {
-                var delta = parseInt(data.storage.insured_id)+1;
-                if ($("#insured_person_"+data.storage.insured_id).length) {
-                  //if neither spmcc premium nor no_spmcc premium is found, then triger the 'premium not found' event.
-                  if ((data.premium.spmcc == null) && (data.premium.no_spmcc == null)) {
-                    form.trigger("premium_not_found", [delta, data.storage.age]);
-                  }
-                  else {
-                    var found_premium = false;
-                    //if the premium of spmcc is same as price for no_spmcc, then disable no_spmcc.
-                    if (data.premium.spmcc == data.premium.no_spmcc) {
-                      found_premium = true;
-                      form.trigger("premium_not_found_no_spmcc", [delta, data.storage.age]);                    
-                    }
-                    else {
-                      //if the premium for spmcc is not found, then trigger event;
-                      if (data.premium.spmcc == null) {
-                        form.trigger("premium_not_found_spmcc", [delta, data.storage.age]);
-                      }
-                      else {
-                        found_premium = true;
-                        form.trigger("premium_found_spmcc", [delta, data.storage.age]);
-                      }
-                      //if the premium for no_spmcc is not found, then trigger event;
-                      if (data.premium.no_spmcc == null) {
-                        form.trigger("premium_not_found_no_spmcc", [delta, data.storage.age]);
-                      }
-                      else {
-                        found_premium = true;
-                        form.trigger("premium_found_no_spmcc", [delta, data.storage.age]);                    
-                      }
-                    }
-                    //if the desired premium is not found, then trigger the 'premium'.
-                    if (found_premium) {
-                      form.trigger("premium_found", [delta, data]);
-                    }
-                  }
-                }
-              }
-              //if all the insured have the price.
-              if (ajax_premium_counter == 0) {
-                form.trigger("total_premium_update");
-              }            
-            });
-          }
-        }; 
-        var review = $("<div class='review_wrapper'><div class='review'><div class='section policy_summary'><div class='s_header'>"+Drupal.t("Policy Summary")+"</div><div class='s_content'>"+policy_summary+"</div></div><div class='section insured'><div class='s_header'>"+Drupal.t("Traveller Information")+"</div><div class='s_content'>"+traveller_info+"</div></div><div class='section contact'><div class='s_header'>"+Drupal.t("Contact Information")+"</div><div class='s_content'>"+contact_info+"</div></div><div class='section address'><div class='s_header'>"+Drupal.t("Canada Address")+"</div><div class='s_content'>"+canada_address+"</div></div></div></div>");
-        $(".webform-component--step-4--review").html(review);
-
-      }
     }
   });
 
