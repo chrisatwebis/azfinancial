@@ -153,7 +153,7 @@
 					<span class="label"><?php print t("Beneficiary");?></span><span class="value"><?php print $summary['beneficiary'];?></span>
 				</div>
 				<div class="item total_premium">
-					<span class="label"><?php print t("Total Premium");?></span><span class="value"><span class="dollar_sign">$</span><span class="total_premium_amount"><?php print $summary['total_premium']?></span></span>
+					<span class="label"><?php print t("Total Premium");?></span><span class="value"><span class="total_premium_amount"><?php print $summary['total_premium']?></span></span>
 				</div>
 			</div>
 		</div>
@@ -186,7 +186,7 @@
 						<div class="name"><?php print $summary['insured_2']['given_name']." ".$summary['insured_2']['surname'];?></div>
 						<div class="birthday"><?php print $summary['insured_2']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_2']['age']))?></span></div>
 						<div class="spmcc"><?php print $summary['insured_2']['spmcc'];?></div>
-						<div class="premium"><span class="dollar_sign">$</span><span class="premium_amount"><?php print $summary['insured_2']['premium'];?></span></div>
+						<div class="premium"><span class="premium_amount"><?php print $summary['insured_2']['premium'];?></span></div>
 					</div>
 				</div>
 				<?php
