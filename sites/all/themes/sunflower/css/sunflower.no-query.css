@@ -676,12 +676,12 @@ td, th {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_block\.scss}line{font-family:\00003565}}
   #block-block-16 {
-    float: left;
+    float: right;
     color: white; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_block\.scss}line{font-family:\00003570}}
   #block-menu-menu-footer-menu {
-    float: right; }
+    float: left; }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_block\.scss}line{font-family:\00003574}}
   #block-block-17 {
