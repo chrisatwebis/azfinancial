@@ -19,7 +19,7 @@
  * when using the "default" e-mail template.
  */
 ?>
-12345
+
 <?php print ($email['html'] ? '<p>' : '') . t('Submitted on [submission:date:long]'). ($email['html'] ? '</p>' : ''); ?>
 
 <?php if ($user->uid): ?>
@@ -31,6 +31,222 @@
 <?php print ($email['html'] ? '<p>' : '') . t('Submitted values are') . ':' . ($email['html'] ? '</p>' : ''); ?>
 
 [submission:values]
+<?php 
+	dpm($submission); dpm($node);
+	setlocale(LC_MONETARY, 'en_US');
+	$submission_data = $submission->data;
+	$submission_def = $node->webform['components'];
+	$mapping = array();
+	foreach ($submission_def as $key => $value) {
+		$mapping[$value['form_key']] = $value['cid'];
+	}
+	
+	$summary = array(
+		'arrival_date' 		=> $submission_data[9][0],
+		'effective_date' 	=> $submission_data[10][0],
+		'expiry_date' 		=> $submission_data[11][0],
+		'family_plan'	 		=> !empty($submission_data[14][0]) ? t("Yes") : t("No"),
+		'coverage'				=> money_format('%.0n', (float)$submission_data[16][0])." CAD",
+		'deductible'			=> money_format('%.0n', (float)$submission_data[17][0])." CAD",
+		'beneficiary' 		=> $submission_data[13][0],
+		'total_premium'		=> money_format('%.0n', (float)$submission_data[74][0])." CAD",
+		'insured_1'				=> array(
+			'given_name'		=> $submission_data[22][0],
+			'surname'				=> $submission_data[21][0],
+			'birthday'			=> $submission_data[23][0],
+			'gender'				=> $submission_data[24][0],
+			'age'						=> sunflower_age_by_birthday($submission_data[23][0]),
+			'spmcc'					=> $submission_data[57][0],
+			'premium'				=> money_format('%.0n', (float)$submission_data[69][0])." CAD",
+		),
+		'insured_2'				=> array(
+			'given_name'		=> $submission_data[27][0],
+			'surname'				=> $submission_data[26][0],
+			'birthday'			=> $submission_data[28][0],
+			'gender'				=> $submission_data[29][0],			
+			'age'						=> sunflower_age_by_birthday($submission_data[28][0]),
+			'spmcc'					=> $submission_data[58][0],
+			'premium'				=> money_format('%.0n', (float)$submission_data[70][0])." CAD",
+		),
+		'insured_3'				=> array(
+			'given_name'		=> $submission_data[32][0],
+			'surname'				=> $submission_data[31][0],
+			'birthday'			=> $submission_data[33][0],
+			'gender'				=> $submission_data[34][0],			
+			'age'						=> sunflower_age_by_birthday($submission_data[33][0]),
+			'spmcc'					=> $submission_data[59][0],
+			'premium'				=> money_format('%.0n', (float)$submission_data[71][0])." CAD",
+		),
+		'insured_4'				=> array(
+			'given_name'		=> $submission_data[37][0],
+			'surname'				=> $submission_data[36][0],
+			'birthday'			=> $submission_data[38][0],
+			'gender'				=> $submission_data[39][0],			
+			'age'						=> sunflower_age_by_birthday($submission_data[38][0]),
+			'spmcc'					=> $submission_data[60][0],
+			'premium'				=> money_format('%.0n', (float)$submission_data[72][0])." CAD",
+		),
+		'insured_5'				=> array(
+			'given_name'		=> $submission_data[42][0],
+			'surname'				=> $submission_data[41][0],
+			'birthday'			=> $submission_data[43][0],
+			'gender'				=> $submission_data[44][0],			
+			'age'						=> sunflower_age_by_birthday($submission_data[43][0]),
+			'spmcc'					=> $submission_data[61][0],
+			'premium'				=> money_format('%.0n', (float)$submission_data[73][0])." CAD",
+		),
+		'contact_info'		=> array(
+			'given_name'		=> $submission_data[50][0],
+			'surname'				=> $submission_data[51][0],
+			'email'					=> $submission_data[52][0],
+			'home_phone'		=> $submission_data[48][0],
+			'cell'					=> $submission_data[47][0],
+			'fax'						=> $submission_data[49][0],
+			'address'				=> $submission_data[45][0],
+		),
+	);
+
+	$start_date = new DateTime($summary['effective_date']);
+	$end_date = new DateTime($summary['expiry_date']);
+	$interval = date_diff($end_date, $start_date);
+	$summary['trip_duration'] = $interval->format('%a');
+	if (!empty($summary['contact_info']['address'])) {
+		$address  = !empty($summary['contact_info']['address']['thoroughfare']) ? $summary['contact_info']['address']['thoroughfare'] : "";
+		$address .= !empty($summary['contact_info']['address']['premise']) ? "<br>".$summary['contact_info']['address']['premise'] : "";
+		$address .= !empty($summary['contact_info']['address']['dependent_locality']) ? "<br>".$summary['contact_info']['address']['dependent_locality'] : "";
+		$address .= !empty($summary['contact_info']['address']['locality']) ? "<br>".$summary['contact_info']['address']['locality'] : "";
+		$address .= !empty($summary['contact_info']['address']['administrative_area']) ? ", ".$summary['contact_info']['address']['administrative_area'] : "";
+		$address .= !empty($summary['contact_info']['address']['postal_code']) ? " ".$summary['contact_info']['address']['postal_code'] : "";
+		$summary['contact_info']['address'] = $address;
+	}
+?>
+<div class="policy_review_wrapper">
+	<div class="review">
+		<div class="section policy_summary">
+			<div class="s_header"><?php print t("Policy Summary");?></div>
+			<div class="s_content">
+				<div class="item application_date">
+					<span class="label"><?php print ("Application Date");?></span><span class="value"><?php print date("Y-m-d");?></span>
+				</div>
+				<div class="item arrival_date">
+					<span class="label"><?php print t("Arrival Date");?></span><span class="value"><?php print $summary['arrival_date'];?></span>
+				</div>
+				<div class="item effective_date">
+					<span class="label"><?php print t("Effective Date");?></span><span class="value"><?php print $summary['effective_date'];?></span>
+				</div>
+				<div class="item expiry_date">
+					<span class="label"><?php print t("Expiry Date");?></span><span class="value"><?php print $summary['expiry_date'];?></span>
+				</div>
+				<div class="item trip_duration">
+					<span class="label"><?php print t("Trip Duration");?></span><span class="value"><?php print t("@num days", array("@num" => $summary['trip_duration']));?></span>
+				</div>
+				<div class="item family_plan">
+					<span class="label"><?php print t("Family Plan");?></span><span class="value"><?php print $summary['family_plan']; ?></span>
+				</div>
+				<div class="item coverage">
+					<span class="label"><?php print t("Coverage");?></span><span class="value"><?php print $summary['coverage'];?></span>
+				</div>
+				<div class="item deductible">
+					<span class="label"><?php print t("Deductible");?></span><span class="value"><?php print $summary['deductible'];?></span>
+				</div>
+				<div class="item beneficiary">
+					<span class="label"><?php print t("Beneficiary");?></span><span class="value"><?php print $summary['beneficiary'];?></span>
+				</div>
+				<div class="item total_premium">
+					<span class="label"><?php print t("Total Premium");?></span><span class="value"><span class="dollar_sign">$</span><span class="total_premium_amount"><?php print $summary['total_premium']?></span></span>
+				</div>
+			</div>
+		</div>
+		<div class="section insured">
+			<div class="s_header"><?php print t("Traveller Information");?></div>
+			<div class="s_content">
+				<div class="item i_header">
+					<div class="name"><?php print t("Name");?></div>
+					<div class="birthday"><?php print t("Birthday");?><span class="age"> <?php print t("(age)");?></span></div>
+					<div class="spmcc" ><?php print t("SPMCC");?></div>
+					<div class="premium"><?php print t("Premium");?></div>
+				</div>
+				<?php 
+					if (!empty($summary['insured_1']['given_name'])) {
+				?>
+				<div class="item " id="insured_person_1">
+						<div class="name"><?php print $summary['insured_1']['given_name']." ".$summary['insured_1']['surname'];?></div>
+						<div class="birthday"><?php print $summary['insured_1']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_1']['age']))?></span></div>
+						<div class="spmcc"><?php print $summary['insured_1']['spmcc'];?></div>
+						<div class="premium"><span class="dollar_sign">$</span><span class="premium_amount"><?php print $summary['insured_1']['premium'];?></span></div>
+					</div>
+				</div>
+				<?php
+					}
+				?>
+				<?php 
+					if (!empty($summary['insured_2']['given_name'])) {
+				?>
+				<div class="item " id="insured_person_2">
+						<div class="name"><?php print $summary['insured_2']['given_name']." ".$summary['insured_2']['surname'];?></div>
+						<div class="birthday"><?php print $summary['insured_2']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_2']['age']))?></span></div>
+						<div class="spmcc"><?php print $summary['insured_2']['spmcc'];?></div>
+						<div class="premium"><span class="dollar_sign">$</span><span class="premium_amount"><?php print $summary['insured_2']['premium'];?></span></div>
+					</div>
+				</div>
+				<?php
+					}
+				?>
+				<?php 
+					if (!empty($summary['insured_3']['given_name'])) {
+				?>
+				<div class="item " id="insured_person_3">
+						<div class="name"><?php print $summary['insured_3']['given_name']." ".$summary['insured_3']['surname'];?></div>
+						<div class="birthday"><?php print $summary['insured_3']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_3']['age']))?></span></div>
+						<div class="spmcc"><?php print $summary['insured_3']['spmcc'];?></div>
+						<div class="premium"><span class="dollar_sign">$</span><span class="premium_amount"><?php print $summary['insured_3']['premium'];?></span></div>
+					</div>
+				</div>
+				<?php
+					}
+				?>
+				<?php 
+					if (!empty($summary['insured_4']['given_name'])) {
+				?>
+				<div class="item " id="insured_person_4">
+						<div class="name"><?php print $summary['insured_4']['given_name']." ".$summary['insured_4']['surname'];?></div>
+						<div class="birthday"><?php print $summary['insured_4']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_4']['age']))?></span></div>
+						<div class="spmcc"><?php print $summary['insured_4']['spmcc'];?></div>
+						<div class="premium"><span class="dollar_sign">$</span><span class="premium_amount"><?php print $summary['insured_4']['premium'];?></span></div>
+					</div>
+				</div>
+				<?php
+					}
+				?>
+				<?php 
+					if (!empty($summary['insured_5']['given_name'])) {
+				?>
+				<div class="item " id="insured_person_5">
+						<div class="name"><?php print $summary['insured_5']['given_name']." ".$summary['insured_5']['surname'];?></div>
+						<div class="birthday"><?php print $summary['insured_5']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_5']['age']))?></span></div>
+						<div class="spmcc"><?php print $summary['insured_5']['spmcc'];?></div>
+						<div class="premium"><span class="dollar_sign">$</span><span class="premium_amount"><?php print $summary['insured_5']['premium'];?></span></div>
+					</div>
+				</div>
+				<?php
+					}
+				?>
+		</div>
+		<div class="section contact">
+			<div class="s_header"><?php print t("Contact Information");?></div>
+			<div class="s_content">
+				<div class='name'><?php print $summary['contact_info']['given_name'];?></div>
+				<div class='email'><span class='label'>Email: </span><span class='data'><?php print $summary['contact_info']['email'];?></span></div>
+				<div class='home_phone'><span class='label'>Home Phone: </span><span class='data'><?php print $summary['contact_info']['home_phone'];?></span></div>
+				<div class='cell'><span class='label'>Cell: </span><span class='data'><?php print $summary['contact_info']['cell'];?></span></div>
+				<div class='fax'><span class='label'>Fax: </span><span class='data'><?php print $summary['contact_info']['fax'];?></span></div>
+		</div>
+		<div class="section address">
+			<div class="s_header"><?php print t("Canada Address");?></div>
+			<div class="s_content"><?php print $summary['contact_info']['address'];?></div>
+		</div>
+	</div>
+</div>
 
 <?php print ($email['html'] ? '<p>' : '') . t('The results of this submission may be viewed at:') . ($email['html'] ? '</p>' : '') ?>
 
