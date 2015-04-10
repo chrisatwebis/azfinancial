@@ -22,7 +22,6 @@
 ?>
 
 <?php 
-	dpm($email);
 	setlocale(LC_MONETARY, 'en_US');
 	$submission_data = $submission->data;
 	$submission_def = $node->webform['components'];
@@ -250,6 +249,14 @@
 	</div>
 </div>
 
+<?php
+	if (!empty($email['eid']) && $email['eid'] != '2') {
+?>
+
 <?php print ($email['html'] ? '<p>' : '') . t('The results of this submission may be viewed at:') . ($email['html'] ? '</p>' : '') ?>
 
 <?php print ($email['html'] ? '<p>' : ''); ?>[submission:url]<?php print ($email['html'] ? '</p>' : ''); ?>
+
+<?php
+	}
+?>
