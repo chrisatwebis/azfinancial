@@ -260,4 +260,12 @@
 
 <?php
 	}
+	else {
+?>
+
+<?php print ($email['html'] ? '<p>' : '') . t('We will contact you within 24 hours.') . ($email['html'] ? '</p>' : '') ?>
+
+<?php print ($email['html'] ? '<p>' : '') . t('-- Your Insurance Experts') . ($email['html'] ? '</p>' : '') ?>
+<?php		
+	}
 ?>
