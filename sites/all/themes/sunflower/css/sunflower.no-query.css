@@ -140,10 +140,8 @@ input[type=text], input[type=password], input[type=email], textarea {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/base\/_forms\.scss}line{font-family:\0000328}}
 select {
-  -webkit-appearance: none;
   text-indent: 0.01px;
   text-overflow: "";
-  -moz-appearance: none;
   box-shadow: 0px 0px 0px transparent;
   border: 1px solid #e5e5e5;
   border-radius: 5px;
@@ -151,17 +149,16 @@ select {
   font-size: 14px;
   line-height: 18px;
   margin: 0px;
-  padding: 5px 22px 5px 8px;
+  padding: 5px 8px 5px 8px;
   border: 1px solid #999999;
-  height: 32px;
-  background: url('../images/select_icon.png?1407995456') no-repeat right center white !important; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/base\/_forms\.scss}line{font-family:\0000344}}
+  height: 32px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/base\/_forms\.scss}line{font-family:\0000347}}
   select option {
     -moz-appearance: none;
     -webkit-appearance: none;
     padding: 4px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/base\/_forms\.scss}line{font-family:\0000354}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/base\/_forms\.scss}line{font-family:\0000357}}
 .ife_messages.error {
   padding: 5px 5px 5px 30px;
   color: red;
@@ -169,7 +166,7 @@ select {
   clear: both;
   border: 0px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/base\/_forms\.scss}line{font-family:\0000362}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/base\/_forms\.scss}line{font-family:\0000365}}
 label.error {
   padding: 5px 5px 5px 30px;
   color: red;
@@ -178,7 +175,7 @@ label.error {
   display: block; }
 
 @-moz-document url-prefix() {
-  /* line 70, ../sass/base/_forms.scss */
+  /* line 73, ../sass/base/_forms.scss */
   select {
     background-image: none; } }
 
