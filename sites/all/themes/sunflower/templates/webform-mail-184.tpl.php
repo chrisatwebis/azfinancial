@@ -122,57 +122,57 @@
 <div class="policy_review_wrapper">
 	<div class="review">
 		<div class="section policy_summary">
-			<div class="s_header"><?php print t("Policy Summary");?></div>
-			<div class="s_content">
-				<div class="item application_date">
-					<span class="label"><?php print ("Application Date");?></span><span class="value"><?php print date("Y-m-d");?></span>
+			<div class="s_header" style="background: #e5e5e5;font-size: 16px;padding: 10px 15px;color: #ca9f03;"><?php print t("Policy Summary");?></div>
+			<div class="s_content" style="background: white;padding: 10px 15px;font-size: 14px;line-height: 150%;margin-bottom: 10px;overflow: hidden;">
+				<div class="item application_date" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 1.69492%;">
+					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print ("Application Date");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print date("Y-m-d");?></span>
 				</div>
-				<div class="item arrival_date">
-					<span class="label"><?php print t("Arrival Date");?></span><span class="value"><?php print $summary['arrival_date'];?></span>
+				<div class="item arrival_date" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 0;">
+					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Arrival Date");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['arrival_date'];?></span>
 				</div>
-				<div class="item effective_date">
-					<span class="label"><?php print t("Effective Date");?></span><span class="value"><?php print $summary['effective_date'];?></span>
+				<div class="item effective_date" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 1.69492%;">
+					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Effective Date");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['effective_date'];?></span>
 				</div>
-				<div class="item expiry_date">
-					<span class="label"><?php print t("Expiry Date");?></span><span class="value"><?php print $summary['expiry_date'];?></span>
+				<div class="item expiry_date" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 0;">
+					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Expiry Date");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['expiry_date'];?></span>
 				</div>
-				<div class="item trip_duration">
-					<span class="label"><?php print t("Trip Duration");?></span><span class="value"><?php print t("@num days", array("@num" => $summary['trip_duration']));?></span>
+				<div class="item trip_duration" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 1.69492%;">
+					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Trip Duration");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print t("@num days", array("@num" => $summary['trip_duration']));?></span>
 				</div>
-				<div class="item family_plan">
-					<span class="label"><?php print t("Family Plan");?></span><span class="value"><?php print $summary['family_plan']; ?></span>
+				<div class="item family_plan" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 0;">
+					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Family Plan");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['family_plan']; ?></span>
 				</div>
-				<div class="item coverage">
-					<span class="label"><?php print t("Coverage");?></span><span class="value"><?php print $summary['coverage'];?></span>
+				<div class="item coverage" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 1.69492%;">
+					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Coverage");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['coverage'];?></span>
 				</div>
-				<div class="item deductible">
-					<span class="label"><?php print t("Deductible");?></span><span class="value"><?php print $summary['deductible'];?></span>
+				<div class="item deductible" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 0;">
+					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Deductible");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['deductible'];?></span>
 				</div>
-				<div class="item beneficiary">
-					<span class="label"><?php print t("Beneficiary");?></span><span class="value"><?php print $summary['beneficiary'];?></span>
+				<div class="item beneficiary" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 1.69492%;">
+					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Beneficiary");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['beneficiary'];?></span>
 				</div>
-				<div class="item total_premium">
-					<span class="label"><?php print t("Total Premium");?></span><span class="value"><span class="total_premium_amount"><?php print $summary['total_premium']?></span></span>
+				<div class="item total_premium" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 0;">
+					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Total Premium");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><span class="total_premium_amount"><?php print $summary['total_premium']?></span></span>
 				</div>
 			</div>
 		</div>
 		<div class="section insured">
-			<div class="s_header"><?php print t("Traveller Information");?></div>
-			<div class="s_content">
-				<div class="item i_header">
-					<div class="name"><?php print t("Name");?></div>
-					<div class="birthday"><?php print t("Birthday");?><span class="age"> <?php print t("(age)");?></span></div>
-					<div class="spmcc" ><?php print t("SPMCC");?></div>
-					<div class="premium"><?php print t("Premium");?></div>
+			<div class="s_header" style="background: #e5e5e5;font-size: 16px;padding: 10px 15px;color: #ca9f03;"><?php print t("Traveller Information");?></div>
+			<div class="s_content" style="background: white;padding: 10px 15px;font-size: 14px;line-height: 150%;margin-bottom: 10px;overflow: hidden;">
+				<div class="item i_header" style="margin: 5px 0;font-weight: bold;overflow: hidden;">
+					<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print t("Name");?></div>
+					<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print t("Birthday");?><span class="age"> <?php print t("(age)");?></span></div>
+					<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print t("SPMCC");?></div>
+					<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><?php print t("Premium");?></div>
 				</div>
 				<?php 
 					if (!empty($summary['insured_1']['given_name'])) {
 				?>
-				<div class="item " id="insured_person_1">
-						<div class="name"><?php print $summary['insured_1']['given_name']." ".$summary['insured_1']['surname'];?></div>
-						<div class="birthday"><?php print $summary['insured_1']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_1']['age']))?></span></div>
-						<div class="spmcc"><?php print $summary['insured_1']['spmcc'];?></div>
-						<div class="premium"><span class="premium_amount"><?php print $summary['insured_1']['premium'];?></span></div>
+				<div class="item " id="insured_person_1" style="margin: 5px 0;overflow: hidden;">
+						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_1']['given_name']." ".$summary['insured_1']['surname'];?></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_1']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_1']['age']))?></span></div>
+						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_1']['spmcc'];?></div>
+						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="premium_amount"><?php print $summary['insured_1']['premium'];?></span></div>
 					</div>
 				</div>
 				<?php
@@ -181,11 +181,11 @@
 				<?php 
 					if (!empty($summary['insured_2']['given_name'])) {
 				?>
-				<div class="item " id="insured_person_2">
-						<div class="name"><?php print $summary['insured_2']['given_name']." ".$summary['insured_2']['surname'];?></div>
-						<div class="birthday"><?php print $summary['insured_2']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_2']['age']))?></span></div>
-						<div class="spmcc"><?php print $summary['insured_2']['spmcc'];?></div>
-						<div class="premium"><span class="premium_amount"><?php print $summary['insured_2']['premium'];?></span></div>
+				<div class="item " id="insured_person_2" style="margin: 5px 0;overflow: hidden;">
+						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_2']['given_name']." ".$summary['insured_2']['surname'];?></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_2']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_2']['age']))?></span></div>
+						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_2']['spmcc'];?></div>
+						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="premium_amount"><?php print $summary['insured_2']['premium'];?></span></div>
 					</div>
 				</div>
 				<?php
@@ -194,11 +194,11 @@
 				<?php 
 					if (!empty($summary['insured_3']['given_name'])) {
 				?>
-				<div class="item " id="insured_person_3">
-						<div class="name"><?php print $summary['insured_3']['given_name']." ".$summary['insured_3']['surname'];?></div>
-						<div class="birthday"><?php print $summary['insured_3']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_3']['age']))?></span></div>
-						<div class="spmcc"><?php print $summary['insured_3']['spmcc'];?></div>
-						<div class="premium"><span class="premium_amount"><?php print $summary['insured_3']['premium'];?></span></div>
+				<div class="item " id="insured_person_3" style="margin: 5px 0;overflow: hidden;">
+						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_3']['given_name']." ".$summary['insured_3']['surname'];?></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_3']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_3']['age']))?></span></div>
+						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_3']['spmcc'];?></div>
+						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="premium_amount"><?php print $summary['insured_3']['premium'];?></span></div>
 					</div>
 				</div>
 				<?php
@@ -207,11 +207,11 @@
 				<?php 
 					if (!empty($summary['insured_4']['given_name'])) {
 				?>
-				<div class="item " id="insured_person_4">
-						<div class="name"><?php print $summary['insured_4']['given_name']." ".$summary['insured_4']['surname'];?></div>
-						<div class="birthday"><?php print $summary['insured_4']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_4']['age']))?></span></div>
-						<div class="spmcc"><?php print $summary['insured_4']['spmcc'];?></div>
-						<div class="premium"><span class="premium_amount"><?php print $summary['insured_4']['premium'];?></span></div>
+				<div class="item " id="insured_person_4" style="margin: 5px 0;overflow: hidden;">
+						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_4']['given_name']." ".$summary['insured_4']['surname'];?></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_4']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_4']['age']))?></span></div>
+						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_4']['spmcc'];?></div>
+						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="premium_amount"><?php print $summary['insured_4']['premium'];?></span></div>
 					</div>
 				</div>
 				<?php
@@ -220,11 +220,11 @@
 				<?php 
 					if (!empty($summary['insured_5']['given_name'])) {
 				?>
-				<div class="item " id="insured_person_5">
-						<div class="name"><?php print $summary['insured_5']['given_name']." ".$summary['insured_5']['surname'];?></div>
-						<div class="birthday"><?php print $summary['insured_5']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_5']['age']))?></span></div>
-						<div class="spmcc"><?php print $summary['insured_5']['spmcc'];?></div>
-						<div class="premium"><span class="dollar_sign">$</span><span class="premium_amount"><?php print $summary['insured_5']['premium'];?></span></div>
+				<div class="item " id="insured_person_5" style="margin: 5px 0;overflow: hidden;">
+						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_5']['given_name']." ".$summary['insured_5']['surname'];?></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_5']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_5']['age']))?></span></div>
+						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_5']['spmcc'];?></div>
+						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="dollar_sign">$</span><span class="premium_amount"><?php print $summary['insured_5']['premium'];?></span></div>
 					</div>
 				</div>
 				<?php
@@ -232,8 +232,8 @@
 				?>
 		</div>
 		<div class="section contact">
-			<div class="s_header"><?php print t("Contact Information");?></div>
-			<div class="s_content">
+			<div class="s_header" style="background: #e5e5e5;font-size: 16px;padding: 10px 15px;color: #ca9f03;"><?php print t("Contact Information");?></div>
+			<div class="s_content" style="background: white;padding: 10px 15px;font-size: 14px;line-height: 150%;margin-bottom: 10px;overflow: hidden;">
 				<div class='name'><?php print $summary['contact_info']['given_name'];?></div>
 				<div class='email'><span class='label'>Email: </span><span class='data'><?php print $summary['contact_info']['email'];?></span></div>
 				<div class='home_phone'><span class='label'>Home Phone: </span><span class='data'><?php print $summary['contact_info']['home_phone'];?></span></div>
@@ -241,8 +241,8 @@
 				<div class='fax'><span class='label'>Fax: </span><span class='data'><?php print $summary['contact_info']['fax'];?></span></div>
 		</div>
 		<div class="section address">
-			<div class="s_header"><?php print t("Canada Address");?></div>
-			<div class="s_content"><?php print $summary['contact_info']['address'];?></div>
+			<div class="s_header" style="background: #e5e5e5;font-size: 16px;padding: 10px 15px;color: #ca9f03;"><?php print t("Canada Address");?></div>
+			<div class="s_content" style="background: white;padding: 10px 15px;font-size: 14px;line-height: 150%;margin-bottom: 10px;overflow: hidden;"><?php print $summary['contact_info']['address'];?></div>
 		</div>
 	</div>
 </div>
