@@ -110,7 +110,8 @@
 	}
 	else {
 		print ($email['html'] ? '<p>' : '') . t('Hello Administrator,'). ($email['html'] ? '</p>' : ''); 
-		print ($email['html'] ? '<p>' : '') . t('You have a new submission! Submitted on [submission:date:long]'). ($email['html'] ? '</p>' : ''); 
+		print ($email['html'] ? '<p>' : '') . t('You have a new submission!'). ($email['html'] ? '</p>' : ''); 
+		print ($email['html'] ? '<p>' : '') . t('Submitted on [submission:date:long]'). ($email['html'] ? '</p>' : ''); 
 		if ($user->uid){
 			print ($email['html'] ? '<p>' : '') . t('Submitted by user: [submission:user]') . ($email['html'] ? '</p>' : '');
 		}
