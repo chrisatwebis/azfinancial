@@ -21,18 +21,8 @@
  */
 ?>
 
-<?php print ($email['html'] ? '<p>' : '') . t('Submitted on [submission:date:long]'). ($email['html'] ? '</p>' : ''); ?>
-
-<?php if ($user->uid): ?>
-<?php print ($email['html'] ? '<p>' : '') . t('Submitted by user: [submission:user]') . ($email['html'] ? '</p>' : ''); ?>
-<?php else: ?>
-<?php print ($email['html'] ? '<p>' : '') . t('Submitted by anonymous user: [submission:ip-address]') . ($email['html'] ? '</p>' : ''); ?>
-<?php endif; ?>
-
-<?php print ($email['html'] ? '<p>' : '') . t('Submitted values are') . ':' . ($email['html'] ? '</p>' : ''); ?>
-
 <?php 
-
+	dpm($email);
 	setlocale(LC_MONETARY, 'en_US');
 	$submission_data = $submission->data;
 	$submission_def = $node->webform['components'];
@@ -115,7 +105,23 @@
 		$address .= !empty($summary['contact_info']['address']['postal_code']) ? " ".$summary['contact_info']['address']['postal_code'] : "";
 		$summary['contact_info']['address'] = $address;
 	}
+	if (!empty($email['eid']) && $email['eid'] == '2') {
+		print ($email['html'] ? '<p>' : '') . t('Hi @name,', array("@name" => $summary['contact_info']['given_name'])). ($email['html'] ? '</p>' : '');
+		print ($email['html'] ? '<p>' : '') . t('Thank you for contacting us, your submission has been received. Here is the summary of your policy:'). ($email['html'] ? '</p>' : '');
+	}
+	else {
+		print ($email['html'] ? '<p>' : '') . t('Hello Administrator,'). ($email['html'] ? '</p>' : ''); 
+		print ($email['html'] ? '<p>' : '') . t('You have a new submission! Submitted on [submission:date:long]'). ($email['html'] ? '</p>' : ''); 
+		if ($user->uid){
+			print ($email['html'] ? '<p>' : '') . t('Submitted by user: [submission:user]') . ($email['html'] ? '</p>' : '');
+		}
+		else{
+			print ($email['html'] ? '<p>' : '') . t('Submitted by anonymous user: [submission:ip-address]') . ($email['html'] ? '</p>' : '');
+		}
+		print ($email['html'] ? '<p>' : '') . t('Here is the summary of the policy:') . ':' . ($email['html'] ? '</p>' : '');
+	}
 ?>
+
 <div class="policy_review_wrapper">
 	<div class="review">
 		<div class="section policy_summary">
