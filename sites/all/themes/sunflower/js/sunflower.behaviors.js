@@ -242,6 +242,7 @@
 
       //hide the 'submit' button
       buyonline_show_submit_btn(false);
+      $("#webform-client-form-184 .form-actions").appendTo($("#webform-client-form-184 .webform-component--step-4 > .fieldset-wrapper"));
 
       //make legend of the fieldsets of step 1,2,3,4 as accordion header
       $.each([1,2,3,4], function(index, value) { 

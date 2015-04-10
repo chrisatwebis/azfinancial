@@ -19,6 +19,7 @@
  * when using the "default" e-mail template.
  */
 ?>
+12345
 <?php print ($email['html'] ? '<p>' : '') . t('Submitted on [submission:date:long]'). ($email['html'] ? '</p>' : ''); ?>
 
 <?php if ($user->uid): ?>
