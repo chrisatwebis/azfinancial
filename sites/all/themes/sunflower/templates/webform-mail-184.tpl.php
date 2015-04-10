@@ -17,6 +17,7 @@
  *
  * The $email['email'] variable can be used to send different e-mails to different users
  * when using the "default" e-mail template.
+ [submission:values]
  */
 ?>
 
@@ -30,9 +31,7 @@
 
 <?php print ($email['html'] ? '<p>' : '') . t('Submitted values are') . ':' . ($email['html'] ? '</p>' : ''); ?>
 
-[submission:values]
 <?php 
-	dpm($submission); dpm($node);
 	setlocale(LC_MONETARY, 'en_US');
 	$submission_data = $submission->data;
 	$submission_def = $node->webform['components'];
@@ -173,7 +172,7 @@
 						<div class="name"><?php print $summary['insured_1']['given_name']." ".$summary['insured_1']['surname'];?></div>
 						<div class="birthday"><?php print $summary['insured_1']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_1']['age']))?></span></div>
 						<div class="spmcc"><?php print $summary['insured_1']['spmcc'];?></div>
-						<div class="premium"><span class="dollar_sign">$</span><span class="premium_amount"><?php print $summary['insured_1']['premium'];?></span></div>
+						<div class="premium"><span class="premium_amount"><?php print $summary['insured_1']['premium'];?></span></div>
 					</div>
 				</div>
 				<?php
@@ -199,7 +198,7 @@
 						<div class="name"><?php print $summary['insured_3']['given_name']." ".$summary['insured_3']['surname'];?></div>
 						<div class="birthday"><?php print $summary['insured_3']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_3']['age']))?></span></div>
 						<div class="spmcc"><?php print $summary['insured_3']['spmcc'];?></div>
-						<div class="premium"><span class="dollar_sign">$</span><span class="premium_amount"><?php print $summary['insured_3']['premium'];?></span></div>
+						<div class="premium"><span class="premium_amount"><?php print $summary['insured_3']['premium'];?></span></div>
 					</div>
 				</div>
 				<?php
@@ -212,7 +211,7 @@
 						<div class="name"><?php print $summary['insured_4']['given_name']." ".$summary['insured_4']['surname'];?></div>
 						<div class="birthday"><?php print $summary['insured_4']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_4']['age']))?></span></div>
 						<div class="spmcc"><?php print $summary['insured_4']['spmcc'];?></div>
-						<div class="premium"><span class="dollar_sign">$</span><span class="premium_amount"><?php print $summary['insured_4']['premium'];?></span></div>
+						<div class="premium"><span class="premium_amount"><?php print $summary['insured_4']['premium'];?></span></div>
 					</div>
 				</div>
 				<?php
