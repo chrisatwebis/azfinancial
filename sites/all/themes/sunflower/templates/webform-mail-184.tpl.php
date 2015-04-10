@@ -124,35 +124,35 @@
 		<div class="section policy_summary">
 			<div class="s_header" style="background: #e5e5e5;font-size: 16px;padding: 10px 15px;color: #ca9f03;"><?php print t("Policy Summary");?></div>
 			<div class="s_content" style="background: white;padding: 10px 15px;font-size: 14px;line-height: 150%;margin-bottom: 10px;overflow: hidden;">
-				<div class="item application_date" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 1.69492%;">
-					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print ("Application Date");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print date("Y-m-d");?></span>
+				<div class="item application_date" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 45%;float: left;margin-right: 1.69492%;">
+					<span class="label" style="width: 45%;float: left;margin-right: 1.69492%;"><?php print ("Application Date");?></span><span class="value" style="width: 45%;float: right;margin-right: 0;font-weight: bold;"><?php print date("Y-m-d");?></span>
 				</div>
-				<div class="item arrival_date" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 0;">
-					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Arrival Date");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['arrival_date'];?></span>
+				<div class="item arrival_date" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 45%;float: right;margin-right: 0;">
+					<span class="label" style="width: 45%;float: left;margin-right: 1.69492%;"><?php print t("Arrival Date");?></span><span class="value" style="width: 45%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['arrival_date'];?></span>
 				</div>
-				<div class="item effective_date" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 1.69492%;">
-					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Effective Date");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['effective_date'];?></span>
+				<div class="item effective_date" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 45%;float: left;margin-right: 1.69492%;">
+					<span class="label" style="width: 45%;float: left;margin-right: 1.69492%;"><?php print t("Effective Date");?></span><span class="value" style="width: 45%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['effective_date'];?></span>
 				</div>
-				<div class="item expiry_date" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 0;">
-					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Expiry Date");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['expiry_date'];?></span>
+				<div class="item expiry_date" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 45%;float: right;margin-right: 0;">
+					<span class="label" style="width: 45%;float: left;margin-right: 1.69492%;"><?php print t("Expiry Date");?></span><span class="value" style="width: 45%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['expiry_date'];?></span>
 				</div>
-				<div class="item trip_duration" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 1.69492%;">
-					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Trip Duration");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print t("@num days", array("@num" => $summary['trip_duration']));?></span>
+				<div class="item trip_duration" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 45%;float: left;margin-right: 1.69492%;">
+					<span class="label" style="width: 45%;float: left;margin-right: 1.69492%;"><?php print t("Trip Duration");?></span><span class="value" style="width: 45%;float: right;margin-right: 0;font-weight: bold;"><?php print t("@num days", array("@num" => $summary['trip_duration']));?></span>
 				</div>
-				<div class="item family_plan" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 0;">
-					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Family Plan");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['family_plan']; ?></span>
+				<div class="item family_plan" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 45%;float: right;margin-right: 0;">
+					<span class="label" style="width: 45%;float: left;margin-right: 1.69492%;"><?php print t("Family Plan");?></span><span class="value" style="width: 45%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['family_plan']; ?></span>
 				</div>
-				<div class="item coverage" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 1.69492%;">
-					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Coverage");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['coverage'];?></span>
+				<div class="item coverage" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 45%;float: left;margin-right: 1.69492%;">
+					<span class="label" style="width: 45%;float: left;margin-right: 1.69492%;"><?php print t("Coverage");?></span><span class="value" style="width: 45%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['coverage'];?></span>
 				</div>
-				<div class="item deductible" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 0;">
-					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Deductible");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['deductible'];?></span>
+				<div class="item deductible" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 45%;float: right;margin-right: 0;">
+					<span class="label" style="width: 45%;float: left;margin-right: 1.69492%;"><?php print t("Deductible");?></span><span class="value" style="width: 45%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['deductible'];?></span>
 				</div>
-				<div class="item beneficiary" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 1.69492%;">
-					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Beneficiary");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['beneficiary'];?></span>
+				<div class="item beneficiary" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 45%;float: left;margin-right: 1.69492%;">
+					<span class="label" style="width: 45%;float: left;margin-right: 1.69492%;"><?php print t("Beneficiary");?></span><span class="value" style="width: 45%;float: right;margin-right: 0;font-weight: bold;"><?php print $summary['beneficiary'];?></span>
 				</div>
-				<div class="item total_premium" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 49.15254%;float: left;margin-right: 0;">
-					<span class="label" style="width: 49.15254%;float: left;margin-right: 1.69492%;"><?php print t("Total Premium");?></span><span class="value" style="width: 49.15254%;float: right;margin-right: 0;font-weight: bold;"><span class="total_premium_amount"><?php print $summary['total_premium']?></span></span>
+				<div class="item total_premium" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;padding: 10px;width: 45%;float: right;margin-right: 0;">
+					<span class="label" style="width: 45%;float: left;margin-right: 1.69492%;"><?php print t("Total Premium");?></span><span class="value" style="width: 45%;float: right;margin-right: 0;font-weight: bold;"><span class="total_premium_amount"><?php print $summary['total_premium']?></span></span>
 				</div>
 			</div>
 		</div>
