@@ -449,11 +449,11 @@ td, th {
       color: #ca9f03; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_block\.scss}line{font-family:\00003294}}
   #block-views-custom-content-block-4 .block__content .view-content {
-    padding: 20px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #1e5a87; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_block\.scss}line{font-family:\00003298}}
     #block-views-custom-content-block-4 .block__content .view-content .views-row .views-field-body {
-      padding-bottom: 20px;
+      margin-bottom: 20px;
       font-style: italic;
       font-size: 13px;
       word-wrap: break-word;
