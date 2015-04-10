@@ -2981,10 +2981,7 @@ input.webform-calendar {
     .node-type-webform .webform-client-form .webform-component--step-2--travel-dates .webform-component-date.webform-component--step-2--travel-dates--expiry-date {
       width: 32.20339%;
       float: right;
-      margin-right: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/components\/_webform\.scss}line{font-family:\00003604}}
-    .node-type-webform .webform-client-form .webform-component--step-2--travel-dates .webform-component-date select {
-      padding: 6px 26px 6px 8px; } }
+      margin-right: 0; } }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/drupal\/sites\/all\/themes\/sunflower\/sass\/sunflower\.styles\.scss}line{font-family:\0000327}}
 .l-page {
   position: relative;
