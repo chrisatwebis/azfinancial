@@ -142,7 +142,7 @@ function webis_insurance_quoting_engine_visitor_canada_price_search($mode = HORI
 	//total days
 	$days = (($end_time - $start_time)/(60*60*24))+1;
 	$days = round($days);
-  setlocale(LC_MONETARY, 'en_US');
+  setlocale(LC_MONETARY, 'en_US.UTF-8');
 
   $previous_level_amount = webis_insurance_quoting_engine_vtc_get_previous_coverage($coverage);
   $next_level_amount = webis_insurance_quoting_engine_vtc_get_next_coverage($coverage);;
