@@ -22,7 +22,7 @@
 ?>
 
 <?php 
-	setlocale(LC_MONETARY, 'en_US');
+	setlocale(LC_MONETARY, 'en_US.UTF-8');
 	$submission_data = $submission->data;
 	$submission_def = $node->webform['components'];
 	
@@ -31,10 +31,10 @@
 		'effective_date' 	=> $submission_data[10][0],
 		'expiry_date' 		=> $submission_data[11][0],
 		'family_plan'	 		=> !empty($submission_data[14][0]) ? t("Yes") : t("No"),
-		'coverage'				=> money_format('%i', (float)$submission_data[16][0])." CAD",
-		'deductible'			=> money_format('%i', (float)$submission_data[17][0])." CAD",
+		'coverage'				=> money_format('%.2n', (float)$submission_data[16][0])." CAD",
+		'deductible'			=> money_format('%.2n', (float)$submission_data[17][0])." CAD",
 		'beneficiary' 		=> $submission_data[13][0],
-		'total_premium'		=> money_format('%i', (float)$submission_data[74][0])." CAD",
+		'total_premium'		=> money_format('%.2n', (float)$submission_data[74][0])." CAD",
 		'insured_1'				=> array(
 			'given_name'		=> $submission_data[22][0],
 			'surname'				=> $submission_data[21][0],
@@ -42,7 +42,7 @@
 			'gender'				=> $submission_data[24][0],
 			// 'age'						=> sunflower_age_by_birthday($submission_data[23][0]),
 			'spmcc'					=> $submission_data[57][0],
-			'premium'				=> money_format('%i', (float)$submission_data[69][0])." CAD",
+			'premium'				=> money_format('%.2n', (float)$submission_data[69][0])." CAD",
 		),
 		'insured_2'				=> array(
 			'given_name'		=> $submission_data[27][0],
@@ -51,7 +51,7 @@
 			'gender'				=> $submission_data[29][0],			
 			// 'age'						=> sunflower_age_by_birthday($submission_data[28][0]),
 			'spmcc'					=> $submission_data[58][0],
-			'premium'				=> money_format('%i', (float)$submission_data[70][0])." CAD",
+			'premium'				=> money_format('%.2n', (float)$submission_data[70][0])." CAD",
 		),
 		'insured_3'				=> array(
 			'given_name'		=> $submission_data[32][0],
@@ -60,7 +60,7 @@
 			'gender'				=> $submission_data[34][0],			
 			// 'age'						=> sunflower_age_by_birthday($submission_data[33][0]),
 			'spmcc'					=> $submission_data[59][0],
-			'premium'				=> money_format('%i', (float)$submission_data[71][0])." CAD",
+			'premium'				=> money_format('%.2n', (float)$submission_data[71][0])." CAD",
 		),
 		'insured_4'				=> array(
 			'given_name'		=> $submission_data[37][0],
@@ -69,7 +69,7 @@
 			'gender'				=> $submission_data[39][0],			
 			// 'age'						=> sunflower_age_by_birthday($submission_data[38][0]),
 			'spmcc'					=> $submission_data[60][0],
-			'premium'				=> money_format('%i', (float)$submission_data[72][0])." CAD",
+			'premium'				=> money_format('%.2n', (float)$submission_data[72][0])." CAD",
 		),
 		'insured_5'				=> array(
 			'given_name'		=> $submission_data[42][0],
@@ -78,7 +78,7 @@
 			'gender'				=> $submission_data[44][0],			
 			// 'age'						=> sunflower_age_by_birthday($submission_data[43][0]),
 			'spmcc'					=> $submission_data[61][0],
-			'premium'				=> money_format('%i', (float)$submission_data[73][0])." CAD",
+			'premium'				=> money_format('%.2n', (float)$submission_data[73][0])." CAD",
 		),
 		'contact_info'		=> array(
 			'given_name'		=> $submission_data[50][0],
