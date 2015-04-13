@@ -173,7 +173,7 @@ function webis_insurance_quoting_engine_visitor_canada_price_search($mode = HORI
   			<span class="item age"><span class="label">'.t("Age:").'</span><span class="value">'.$current_age.'</span></span>
   		  <span class="item effective_date_age"><span class="label">'.t("Effective Date Age:").'</span><span class="value">'.$effective_date_age.'</span></span>
         <span class="item duration"><span class="label">'.t("Trip Duration:").'</span><span class="value">'.format_plural($days, "1 day", "@count days").'</span></span>
-  			<span class="item last-item coverage"><span class="label">'.t("Coverage:").'</span><span class="value">'.money_format('%.0n', $coverage).'</span></span>
+  			<span class="item last-item coverage"><span class="label">'.t("Coverage:").'</span><span class="value">'.money_format('%.2n', $coverage).'</span></span>
   		</div>
       <div class="price_search_compare_btns">
         <span class="compare_btn previous_level">'.$previous_link.'</span>
@@ -381,7 +381,7 @@ function webis_insurance_quoting_engine_render_price_search_horizontal($plan_pri
   $search_price_result .= "<div class='plan_result_content'>";
   foreach ($deductibles as $key => $deductible) {
     $search_price_result .= "<div class='deductible deductible_".$deductible."'>";
-    $search_price_result .= "<div class='deductible_header'><span class='label'>".t("Deductible").":</span><span class='value'>".money_format('%.0n', $deductible)."</span></div>";
+    $search_price_result .= "<div class='deductible_header'><span class='label'>".t("Deductible").":</span><span class='value'>".money_format('%.2n', $deductible)."</span></div>";
     $search_price_result .= "<div class='deductible_content'>";
     foreach ($plan_prices as $key => $plan_price) {
       if ($key == count($plan_prices)) {
