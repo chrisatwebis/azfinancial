@@ -31,8 +31,8 @@
 		'effective_date' 	=> $submission_data[10][0],
 		'expiry_date' 		=> $submission_data[11][0],
 		'family_plan'	 		=> !empty($submission_data[14][0]) ? t("Yes") : t("No"),
-		'coverage'				=> money_format('%.2n', (float)$submission_data[16][0])." CAD",
-		'deductible'			=> money_format('%.2n', (float)$submission_data[17][0])." CAD",
+		'coverage'				=> money_format('%.0n', (float)$submission_data[16][0])." CAD",
+		'deductible'			=> money_format('%.0n', (float)$submission_data[17][0])." CAD",
 		'beneficiary' 		=> $submission_data[13][0],
 		'total_premium'		=> money_format('%.2n', (float)$submission_data[74][0])." CAD",
 		'insured_1'				=> array(
