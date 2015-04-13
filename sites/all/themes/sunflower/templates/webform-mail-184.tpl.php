@@ -164,7 +164,7 @@
 			<div class="s_content" style="background: white;padding: 10px 15px;font-size: 14px;line-height: 150%;margin-bottom: 10px;overflow: hidden;">
 				<div class="item i_header" style="margin: 5px 0;font-weight: bold;overflow: hidden;">
 					<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print t("Name (Gender)");?></div>
-					<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print t("Birthday");?><span class="age"> <?php print t("(age)");?></span></div>
+					<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print t("Birthday");?></div>
 					<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print t("SPMCC");?></div>
 					<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><?php print t("Premium");?></div>
 				</div>
@@ -173,7 +173,7 @@
 				?>
 				<div class="item " id="insured_person_1" style="margin: 5px 0;overflow: hidden;">
 						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_1']['given_name']." ".$summary['insured_1']['surname']." (".$summary['insured_1']['gender'].")";?></div>
-						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_1']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_1']['age']))?></span></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_1']['birthday'];?></div>
 						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_1']['spmcc'];?></div>
 						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="premium_amount"><?php print $summary['insured_1']['premium'];?></span></div>
 					</div>
@@ -186,7 +186,7 @@
 				?>
 				<div class="item " id="insured_person_2" style="margin: 5px 0;overflow: hidden;">
 						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_2']['given_name']." ".$summary['insured_2']['surname']." (".$summary['insured_2']['gender'].")";?></div>
-						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_2']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_2']['age']))?></span></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_2']['birthday'];?></div>
 						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_2']['spmcc'];?></div>
 						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="premium_amount"><?php print $summary['insured_2']['premium'];?></span></div>
 					</div>
@@ -199,7 +199,7 @@
 				?>
 				<div class="item " id="insured_person_3" style="margin: 5px 0;overflow: hidden;">
 						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_3']['given_name']." ".$summary['insured_3']['surname']." (".$summary['insured_3']['gender'].")";?></div>
-						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_3']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_3']['age']))?></span></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_3']['birthday'];?></div>
 						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_3']['spmcc'];?></div>
 						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="premium_amount"><?php print $summary['insured_3']['premium'];?></span></div>
 					</div>
@@ -212,7 +212,7 @@
 				?>
 				<div class="item " id="insured_person_4" style="margin: 5px 0;overflow: hidden;">
 						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_4']['given_name']." ".$summary['insured_4']['surname']." (".$summary['insured_4']['gender'].")";?></div>
-						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_4']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_4']['age']))?></span></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_4']['birthday'];?></div>
 						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_4']['spmcc'];?></div>
 						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="premium_amount"><?php print $summary['insured_4']['premium'];?></span></div>
 					</div>
@@ -225,7 +225,7 @@
 				?>
 				<div class="item " id="insured_person_5" style="margin: 5px 0;overflow: hidden;">
 						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_5']['given_name']." ".$summary['insured_5']['surname']." (".$summary['insured_5']['gender'].")";?></div>
-						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_5']['birthday'];?><span class="age"> <?php print t("(@num years old)", array("@num" => $summary['insured_5']['age']))?></span></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_5']['birthday'];?></div>
 						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_5']['spmcc'];?></div>
 						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="dollar_sign">$</span><span class="premium_amount"><?php print $summary['insured_5']['premium'];?></span></div>
 					</div>
