@@ -483,6 +483,11 @@
         var pid = get_obj_product().val();
         return pid;
       }
+      //get the insurance product title
+      function buyonline_step_2_get_insurance_title() {
+        var insurance_title = get_obj_product().find("option:selected").text();
+        return insurance_title;
+      }
       //get the beneficiary name
       function buyonline_step_2_get_beneficiary() {
         return $("#edit-submitted-step-2-insured-members-beneficiary-name").val();
@@ -638,7 +643,7 @@
           insured['last_name'] = $("#edit-submitted-step-2-traveller-information-insured-insured-"+delta+"-surname").val();
           insured['dob'] = buyonline_step_2_get_dob(delta);
           insured['age'] = buyonline_step_2_get_age(delta);
-          insured['sex'] = $("#edit-submitted-step-2-traveller-information-insured-insured-"+delta+"-gender").val();
+          insured['gender'] = $("#edit-submitted-step-2-traveller-information-insured-insured-"+delta+"-gender").val();
           insured['spmcc'] = buyonline_step_3_get_insured_spmcc(delta);
           return insured;
         }
@@ -685,6 +690,7 @@
           return ;
         }
         var price_entity_id   = buyonline_step_2_get_pid();
+        var insurance_product = buyonline_step_2_get_insurance_title();
         var application_date  = buyonline_get_today_date();
         var arrival_date      = buyonline_step_2_get_arrival_date();
         var effective_date    = buyonline_step_2_get_effective_date();
@@ -700,6 +706,7 @@
         var coverage_label    = coverage['label'];
 
         //policy summary
+        var insurance_dom         = "<div class='item insurance_product'><span class='label'>"+Drupal.t("Insurance")+"</span><span class='value'>"+insurance_product+"</span></div>";
         var application_date_dom  = "<div class='item application_date'><span class='label'>"+Drupal.t("Application Date")+"</span><span class='value'>"+application_date+"</span></div>";
         var arrival_date_dom      = "<div class='item arrival_date'><span class='label'>"+Drupal.t("Arrival Date")+"</span><span class='value'>"+arrival_date+"</span></div>";
         var effective_date_dom    = "<div class='item effective_date'><span class='label'>"+Drupal.t("Effective Date")+"</span><span class='value'>"+effective_date+"</span></div>";
@@ -710,7 +717,7 @@
         var beneficiary_dom       = "<div class='item beneficiary'><span class='label'>"+Drupal.t("Beneficiary")+"</span><span class='value'>"+beneficiary+"</span></div>";
         var family_plan_dom       = "<div class='item family_plan'><span class='label'>"+Drupal.t("Family Plan")+"</span><span class='value'>"+(family_plan ? "Yes" : "No")+"</span></div>";
         var total_premium_dom     = "<div class='item total_premium'><span class='label'>"+Drupal.t("Total Premium")+"</span><span class='value'><span class='dollar_sign'>$</span><span class='total_premium_amount'>0</span></span></div>";
-        var policy_summary        = application_date_dom+arrival_date_dom+effective_date_dom+expiry_date_dom+trip_duration+family_plan_dom+coverage_dom+deductible_dom+beneficiary_dom+total_premium_dom;
+        var policy_summary        = insurance_dom+application_date_dom+arrival_date_dom+effective_date_dom+expiry_date_dom+trip_duration+family_plan_dom+coverage_dom+deductible_dom+beneficiary_dom+total_premium_dom;
 
         //contact information
         var contact_fn        = $("#edit-submitted-step-2-contact-information-given-name").val();
@@ -731,7 +738,7 @@
 
         //traveller information
         var family_plan_class   = family_plan ? "family_plan" : "";
-        var traveller_info      = ("<div class='item i_header'><div class='name'>"+Drupal.t("Name")+"</div><div class='birthday'>"+Drupal.t("Birthday")+"<span class='age'> "+Drupal.t("(age)")+"</span></div><div class='spmcc' title='"+Drupal.t("Stable pre-existing medical condition coverage")+"'>"+Drupal.t("SPMCC")+"</div><div class='premium'>"+Drupal.t("Premium")+"</div></div>");
+        var traveller_info      = ("<div class='item i_header'><div class='name'>"+Drupal.t("Name")+"<span class='gender'> "+Drupal.t("(Gender)")+"</span></div><div class='birthday'>"+Drupal.t("Birthday")+"<span class='age'> "+Drupal.t("(age)")+"</span></div><div class='spmcc' title='"+Drupal.t("Stable pre-existing medical condition coverage")+"'>"+Drupal.t("SPMCC")+"</div><div class='premium'>"+Drupal.t("Premium")+"</div></div>");
 
         //get the insured's premium
         var insured_completion  = buyonline_step_2_check_all_insured_completion();
@@ -741,7 +748,7 @@
         for (var i = 0; i <= insured_completion.length - 1; i++) {
           if (insured_completion[i]) {
             //set up the counter. when the counter is 0, then trigger the total premium.
-            traveller_info += ("<div class='item "+family_plan_class+"' id='insured_person_"+i+"'><div class='name'>"+insured_info[i]['first_name']+" "+insured_info[i]['last_name']+"</div><div class='birthday'>"+insured_info[i]['dob']+"<span class='age'> ("+insured_info[i]['age']+" years old)</span></div><div class='spmcc' title='"+Drupal.t("Stable pre-existing medical condition coverage")+"'>"+insured_info[i]['spmcc']+"</div><div class='premium'><span class='dollar_sign'>$</span><span class='premium_amount'>0</span></div></div>");
+            traveller_info += ("<div class='item "+family_plan_class+"' id='insured_person_"+i+"'><div class='name'>"+insured_info[i]['first_name']+" "+insured_info[i]['last_name']+"<span class='gender'> ("+Drupal.t(insured_info[i]['gender'])+")</span></div><div class='birthday'>"+insured_info[i]['dob']+"<span class='age'> ("+insured_info[i]['age']+" yrs old)</span></div><div class='spmcc' title='"+Drupal.t("Stable pre-existing medical condition coverage")+"'>"+insured_info[i]['spmcc']+"</div><div class='premium'><span class='dollar_sign'>$</span><span class='premium_amount'>0</span></div></div>");
             //get the price
             $.ajax({
               type: "GET",

@@ -25,8 +25,10 @@
 	setlocale(LC_MONETARY, 'en_US.UTF-8');
 	$submission_data = $submission->data;
 	$submission_def = $node->webform['components'];
-	
+	dpm($submission_data);
+	dpm($submission_def);
 	$summary = array(
+		'insurance_nid'		=> $submission_data[7][0],
 		'arrival_date' 		=> $submission_data[9][0],
 		'effective_date' 	=> $submission_data[10][0],
 		'expiry_date' 		=> $submission_data[11][0],
@@ -40,7 +42,7 @@
 			'surname'				=> $submission_data[21][0],
 			'birthday'			=> $submission_data[23][0],
 			'gender'				=> $submission_data[24][0],
-			// 'age'						=> sunflower_age_by_birthday($submission_data[23][0]),
+			'age'						=> sunflower_age_by_birthday($submission_data[23][0]),
 			'spmcc'					=> $submission_data[57][0],
 			'premium'				=> money_format('%.2n', (float)$submission_data[69][0])." CAD",
 		),
@@ -49,7 +51,7 @@
 			'surname'				=> $submission_data[26][0],
 			'birthday'			=> $submission_data[28][0],
 			'gender'				=> $submission_data[29][0],			
-			// 'age'						=> sunflower_age_by_birthday($submission_data[28][0]),
+			'age'						=> sunflower_age_by_birthday($submission_data[28][0]),
 			'spmcc'					=> $submission_data[58][0],
 			'premium'				=> money_format('%.2n', (float)$submission_data[70][0])." CAD",
 		),
@@ -58,7 +60,7 @@
 			'surname'				=> $submission_data[31][0],
 			'birthday'			=> $submission_data[33][0],
 			'gender'				=> $submission_data[34][0],			
-			// 'age'						=> sunflower_age_by_birthday($submission_data[33][0]),
+			'age'						=> sunflower_age_by_birthday($submission_data[33][0]),
 			'spmcc'					=> $submission_data[59][0],
 			'premium'				=> money_format('%.2n', (float)$submission_data[71][0])." CAD",
 		),
@@ -67,7 +69,7 @@
 			'surname'				=> $submission_data[36][0],
 			'birthday'			=> $submission_data[38][0],
 			'gender'				=> $submission_data[39][0],			
-			// 'age'						=> sunflower_age_by_birthday($submission_data[38][0]),
+			'age'						=> sunflower_age_by_birthday($submission_data[38][0]),
 			'spmcc'					=> $submission_data[60][0],
 			'premium'				=> money_format('%.2n', (float)$submission_data[72][0])." CAD",
 		),
@@ -76,7 +78,7 @@
 			'surname'				=> $submission_data[41][0],
 			'birthday'			=> $submission_data[43][0],
 			'gender'				=> $submission_data[44][0],			
-			// 'age'						=> sunflower_age_by_birthday($submission_data[43][0]),
+			'age'						=> sunflower_age_by_birthday($submission_data[43][0]),
 			'spmcc'					=> $submission_data[61][0],
 			'premium'				=> money_format('%.2n', (float)$submission_data[73][0])." CAD",
 		),
@@ -90,7 +92,16 @@
 			'address'				=> $submission_data[45][0],
 		),
 	);
+	
+	//get the insurance title
+	$options = array();
+  $items = explode("\n", $submission_def[7]['extra']['items']);
+  foreach ($items as $item) {
+    $item_parts = explode('|', $item);
+    if (isset($item_parts[0]) && isset($item_parts[1])) $options[$item_parts[0]] = $item_parts[1];
+  }
 
+	$insurance = $options[$summary['insurance_nid']];
 	$start_date = new DateTime($summary['effective_date']);
 	$end_date = new DateTime($summary['expiry_date']);
 	$interval = date_diff($end_date, $start_date);
@@ -127,6 +138,9 @@
 		<div class="section policy_summary">
 			<div class="s_header" style="background: #e5e5e5;font-size: 16px;padding: 10px 15px;color: #ca9f03;"><?php print t("Policy Summary");?></div>
 			<div class="s_content" style="background: white;padding: 10px 15px;font-size: 14px;line-height: 150%;margin-bottom: 10px;overflow: hidden;">
+				<div class="item insurance_product" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;width: 100%; padding: 10px;">
+					<span class="label" style="width: 45%;float: left;margin-right: 1.69492%;"><?php print ("Insurance");?></span><span class="value" style="width: 45%;float: right;margin-right: 0;font-weight: bold;"><?php print $insurance;?></span>
+				</div>
 				<div class="item application_date" style="margin: 5px 0;border: 1px solid #e5e5e5;overflow: hidden;width: 100%; padding: 10px;">
 					<span class="label" style="width: 45%;float: left;margin-right: 1.69492%;"><?php print ("Application Date");?></span><span class="value" style="width: 45%;float: right;margin-right: 0;font-weight: bold;"><?php print date("Y-m-d");?></span>
 				</div>
@@ -164,7 +178,7 @@
 			<div class="s_content" style="background: white;padding: 10px 15px;font-size: 14px;line-height: 150%;margin-bottom: 10px;overflow: hidden;">
 				<div class="item i_header" style="margin: 5px 0;font-weight: bold;overflow: hidden;">
 					<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print t("Name (Gender)");?></div>
-					<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print t("Birthday");?></div>
+					<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print t("Birthday (Age)");?></div>
 					<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print t("SPMCC");?></div>
 					<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><?php print t("Premium");?></div>
 				</div>
@@ -173,7 +187,7 @@
 				?>
 				<div class="item " id="insured_person_1" style="margin: 5px 0;overflow: hidden;">
 						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_1']['given_name']." ".$summary['insured_1']['surname']." (".$summary['insured_1']['gender'].")";?></div>
-						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_1']['birthday'];?></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_1']['birthday']." (".$summary['insured_1']['age'].")";?></div>
 						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_1']['spmcc'];?></div>
 						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="premium_amount"><?php print $summary['insured_1']['premium'];?></span></div>
 					</div>
@@ -186,7 +200,7 @@
 				?>
 				<div class="item " id="insured_person_2" style="margin: 5px 0;overflow: hidden;">
 						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_2']['given_name']." ".$summary['insured_2']['surname']." (".$summary['insured_2']['gender'].")";?></div>
-						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_2']['birthday'];?></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_2']['birthday']." (".$summary['insured_2']['age'].")";?></div>
 						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_2']['spmcc'];?></div>
 						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="premium_amount"><?php print $summary['insured_2']['premium'];?></span></div>
 					</div>
@@ -199,7 +213,7 @@
 				?>
 				<div class="item " id="insured_person_3" style="margin: 5px 0;overflow: hidden;">
 						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_3']['given_name']." ".$summary['insured_3']['surname']." (".$summary['insured_3']['gender'].")";?></div>
-						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_3']['birthday'];?></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_3']['birthday']." (".$summary['insured_3']['age'].")";?></div>
 						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_3']['spmcc'];?></div>
 						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="premium_amount"><?php print $summary['insured_3']['premium'];?></span></div>
 					</div>
@@ -212,7 +226,7 @@
 				?>
 				<div class="item " id="insured_person_4" style="margin: 5px 0;overflow: hidden;">
 						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_4']['given_name']." ".$summary['insured_4']['surname']." (".$summary['insured_4']['gender'].")";?></div>
-						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_4']['birthday'];?></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_4']['birthday']." (".$summary['insured_4']['age'].")";?></div>
 						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_4']['spmcc'];?></div>
 						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="premium_amount"><?php print $summary['insured_4']['premium'];?></span></div>
 					</div>
@@ -225,7 +239,7 @@
 				?>
 				<div class="item " id="insured_person_5" style="margin: 5px 0;overflow: hidden;">
 						<div class="name" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_5']['given_name']." ".$summary['insured_5']['surname']." (".$summary['insured_5']['gender'].")";?></div>
-						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_5']['birthday'];?></div>
+						<div class="birthday" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_5']['birthday']." (".$summary['insured_5']['age'].")";?></div>
 						<div class="spmcc" style="width: 23.72881%;float: left;margin-right: 1.69492%;"><?php print $summary['insured_5']['spmcc'];?></div>
 						<div class="premium" style="width: 23.72881%;float: left;margin-right: 0;"><span class="dollar_sign">$</span><span class="premium_amount"><?php print $summary['insured_5']['premium'];?></span></div>
 					</div>

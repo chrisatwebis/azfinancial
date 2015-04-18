@@ -264,6 +264,11 @@ input.webform-calendar{
 											display: none;
 										}
 									}
+									.name {
+										.gender {
+											display: none;
+										}
+									}
 									.premium {
 								    @include span-columns(3 omega, 12);
 									}
@@ -508,6 +513,12 @@ input.webform-calendar{
 												display: inline-block;
 											}
 										}
+										.name {
+											.gender {
+												margin-left: 5px;
+												display: inline-block;
+											}
+										}										
 										.premium {
 									    @include span-columns(3 omega, 12);
 										}
@@ -520,6 +531,17 @@ input.webform-calendar{
 									  @include span-columns(6, 12);
 									  &.arrival_date, &.expiry_date, &.family_plan, &.deductible, &.total_premium {
 										  @include span-columns(6 omega, 12);								  
+									  }
+									  &.insurance_product {
+										  width: 100%;
+										  margin-right: 0px;
+										  .label {
+										  	width: 24%;
+										  	margin-right: 0px;
+										  }
+										  .value {
+										  	float: left;
+										  }
 									  }
 									}
 								}
