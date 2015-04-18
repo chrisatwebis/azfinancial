@@ -25,8 +25,6 @@
 	setlocale(LC_MONETARY, 'en_US.UTF-8');
 	$submission_data = $submission->data;
 	$submission_def = $node->webform['components'];
-	dpm($submission_data);
-	dpm($submission_def);
 	$summary = array(
 		'insurance_nid'		=> $submission_data[7][0],
 		'arrival_date' 		=> $submission_data[9][0],
