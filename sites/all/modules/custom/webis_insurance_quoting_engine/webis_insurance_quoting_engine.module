@@ -424,7 +424,7 @@ function webis_insurance_quoting_engine_render_price_search_horizontal($plan_pri
 *	Helper function - calculate the age bases on the dob and policy_start_date(optional).
 * @Arguments
 * dob - birthday
-* 
+* policy_start_date - start date
 **/
 function webis_insurance_quoting_engine_age_from_dob($dob, $policy_start_date = null) {
   $birthday_time = strtotime($dob);

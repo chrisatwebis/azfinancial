@@ -137,7 +137,7 @@ function webis_insurance_quoting_engine_wapi_vtc_cal_premium () {
   switch ($which_age) {
     case 'effective_date_age':
       //get age from birthday and start time
-      $age = webis_insurance_quoting_engine_age_from_dob($dob, $start_time);
+      $age = webis_insurance_quoting_engine_age_from_dob($dob, $query['effective']);
       break;
     case 'purchase_date_age':
     default:
@@ -145,12 +145,14 @@ function webis_insurance_quoting_engine_wapi_vtc_cal_premium () {
       $age = webis_insurance_quoting_engine_age_from_dob($dob);
       break;
   }
+  $response['query']['age'] = $age;
   $coverage = $query['coverage'];
   $deductible = $query['deductible'];
 
   //total days
   $days = (($end_time - $start_time)/(60*60*24))+1;
   $days = round($days);
+  $response['query']['days'] = $days;
   $premium['spmcc'] = webis_insurance_quoting_engine_get_tip_total_price_by_deductible($plan, $age, $coverage, TRUE, $days, $deductible);
   $premium['no_spmcc'] = webis_insurance_quoting_engine_get_tip_total_price_by_deductible($plan, $age, $coverage, FALSE, $days, $deductible);
   if (!empty($premium['spmcc'])) {
