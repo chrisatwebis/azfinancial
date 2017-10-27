@@ -5,9 +5,9 @@ core = 7.x
 dependencies[] = webform
 dependencies[] = date_api
 
-; Information added by Drupal.org packaging script on 2014-04-10
-version = "7.x-1.0-beta8"
+; Information added by Drupal.org packaging script on 2015-09-27
+version = "7.x-1.0-beta9"
 core = "7.x"
 project = "webform_scheduler"
-datestamp = "1397166931"
+datestamp = "1443372243"
 

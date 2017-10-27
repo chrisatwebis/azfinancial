@@ -1,11 +1,22 @@
 <?php
+
 /**
+ * @file
  * Webform exporter for creating CSV/TSV delimited files.
  */
+
+/**
+ *
+ */
 class webform_exporter_delimited extends webform_exporter {
+  public $line_ending;
   public $delimiter;
 
-  function __construct($options) {
+  /**
+   *
+   */
+  public function __construct($options) {
+    $this->line_ending = webform_variable_get('webform_csv_line_ending');
     $this->delimiter = isset($options['delimiter']) ? $options['delimiter'] : ',';
     // Convert tabs.
     if ($this->delimiter == '\t') {
@@ -15,7 +26,10 @@ class webform_exporter_delimited extends webform_exporter {
     parent::__construct($options);
   }
 
-  function add_row(&$file_handle, $data, $row_count) {
+  /**
+   *
+   */
+  public function add_row(&$file_handle, $data, $row_count) {
     foreach ($data as $key => $value) {
       // Escape inner quotes and wrap all contents in new quotes.
       $data[$key] = '"' . str_replace('"', '""', $data[$key]) . '"';
@@ -23,12 +37,15 @@ class webform_exporter_delimited extends webform_exporter {
       // Remove <script> tags, which mysteriously cause Excel not to import.
       $data[$key] = preg_replace('!<(/?script.*?)>!', '[$1]', $data[$key]);
     }
-    $row = implode($this->delimiter, $data) . "\n";
+    $row = implode($this->delimiter, $data) . $this->line_ending;
 
     @fwrite($file_handle, $row);
   }
 
-  function set_headers($filename) {
+  /**
+   *
+   */
+  public function set_headers($filename) {
     parent::set_headers($filename);
 
     // Convert tabs.
@@ -44,4 +61,5 @@ class webform_exporter_delimited extends webform_exporter {
     drupal_add_http_header('Content-Type', $content_type);
     drupal_add_http_header('Content-Disposition', "attachment; filename=$filename.$extension");
   }
+
 }

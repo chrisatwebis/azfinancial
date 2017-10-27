@@ -42,6 +42,16 @@ function webform_scheduler_schema() {
         'default' => 1,
         'not null' => TRUE,
       ),
+      'msg_before' => array(
+        'description' => 'Message to display before the webform is scheduled to begin.',
+        'type' => 'varchar',
+        'length' => 128,
+      ),
+      'msg_after' => array(
+        'description' => 'Message to display after the webform is scheduled to end.',
+        'type' => 'varchar',
+        'length' => 128,
+      ),
     ),
     'primary key' => array('nid'),
   );
@@ -115,4 +125,28 @@ function webform_scheduler_update_7003() {
       'default' => 0,
     )
   );
+}
+
+/**
+ * Add column for custom message.
+ */
+function webform_scheduler_update_7004() {
+  if (!db_field_exists('webform_scheduler', 'msg_before')) {
+    db_add_field('webform_scheduler', 'msg_before', array(
+      'description' => 'Message to display before the webform is scheduled to begin.',
+      'type' => 'varchar',
+      'length' => '128',
+      'not null' => false,
+	 'default' => null,
+    ));
+  }
+  if (!db_field_exists('webform_scheduler', 'msg_after')) {
+    db_add_field('webform_scheduler', 'msg_after', array(
+      'description' => 'Message to display after the webform is scheduled to end.',
+      'type' => 'varchar',
+      'length' => '128',
+      'not null' => false,
+	 'default' => null,
+    ));
+  }
 }

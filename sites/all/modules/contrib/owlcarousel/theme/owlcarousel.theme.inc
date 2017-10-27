@@ -16,6 +16,15 @@ function template_process_owlcarousel(&$vars) {
 }
 
 /**
+ * Template preprocess carousel wrapper.
+ */
+function template_preprocess_owlcarousel_wrapper(&$variables) {
+  if (count($variables['output']['#items']) < 2) {
+    $variables['output']['#settings']['attributes']['class'][] = 'disabled';
+  }
+}
+
+/**
  * Theme declaration for Owl Carousel wrapper.
  */
 function theme_owlcarousel_wrapper($variables) {
@@ -64,6 +73,10 @@ function owlcarousel_pre_render_cache($element) {
 
   // Element output /w attached.
   $element['#markup'] = owlcarousel_build($output);
+  
+  // Provide alter before carousel is rendered.
+  drupal_alter('owlcarousel_pre_render', $element);
+
   $element['#children'] = drupal_render($element['#markup']);
   $element['#attached'] = array(
     'js' => array(
@@ -92,9 +105,6 @@ function owlcarousel_pre_render_cache($element) {
     ),
   );
 
-  // Provide alter before carousel is rendered.
-  drupal_alter('owlcarousel_pre_render', $element);
-
   return $element;
 }
 
@@ -117,19 +127,24 @@ function theme_owlcarousel_list(&$vars) {
 
   if (!empty($items)) {
     foreach ($items as $i => $item) {
-      $output .= theme('owlcarousel_list_item', array(
-        'item' => $item['row'],
-        'class' => drupal_html_class('item-' . $i),
-      ));
+      if ($item['row']) {
+        $striping = $i % 2 == 0 ? 'item-odd' : 'item-even';
+        $output .= theme('owlcarousel_list_item', array(
+          'item' => $item['row'],
+          'class' => drupal_html_class('item-' . $i). ' ' . drupal_html_class($striping),
+          'group' => $vars['settings']['instance']
+        ));
+      }
     }
   }
 
   return $output;
 }
 
+
 /**
  * Default theme implementation for carousel items
  */
 function theme_owlcarousel_list_item(&$vars) {
-  return '<div class="' . $vars['class'] . '">' . $vars['item'] . "</div>";
+  return '<div class="' . $vars['class'] . '">' . $vars['item'] . '</div>';
 }
