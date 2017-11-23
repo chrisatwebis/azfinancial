@@ -7,22 +7,21 @@ CONTENTS OF THIS FILE
  * Credits
 
 
-INTRODUCTION
+INTRODUCTION 2.x
 ------------
 Font Awesome (http://fontawesome.io) is the iconic font designed for use with
-Bootstrap (http://getbootstrap.com). 1.x version of this module supports 
-Font Awesome v3.2.1 library (http://fortawesome.github.io/Font-Awesome/3.2.1)
+Bootstrap (http://getbootstrap.com).
 
-"fontawesome" module provides integration of "Font Awesome" with Drupal. Once enabled
+"fontawesome" provides integration of "Font Awesome" with Drupal. Once enabled
 "Font Awesome" icon fonts could be used as:
 
 1. Directly inside of any HTML (node/block/view/panel). Inside HTML you can
-   place Font Awesome icons just about anywhere with an <i> or a <span> tag.
+   place Font Awesome icons just about anywhere with an <i> tag.
 
-   Example for an info icon: <i class="icon icon-flag"></i>
+   Example for an info icon: <i class="fa fa-info-circle"></i>
 
    See more examples of using "Font Awesome" within HTML at:
-   http://fortawesome.github.io/Font-Awesome/3.2.1/examples/
+   http://fontawesome.io/whats-new/examples/
 
 2. Icon API (https://drupal.org/project/icon) integration:
    This module provides easy to use interfaces that quickly allow you to inject
@@ -43,7 +42,7 @@ INSTALLATION
 
     $ drush cc drush
 
-    and then using:-
+    and then using another drush command:-
 
     $ drush fa-download
 
@@ -56,8 +55,8 @@ INSTALLATION
          (http://fontawesome.io) and place inside 
          "sites/all/libraries/fontawesome" directory. The CSS file should
          be sites/all/libraries/fontawesome/css/font-awesome.css
-         Direct link for downloading version 3.2.1 is: 
-         http://fortawesome.github.io/Font-Awesome/3.2.1/assets/font-awesome.zip
+         Direct link for downloading latest version (current is v4.2.0) is: 
+         https://github.com/FortAwesome/Font-Awesome/archive/master.zip
     b. Enable the module at Administer >> Site building >> Modules.
 
 CREDITS
