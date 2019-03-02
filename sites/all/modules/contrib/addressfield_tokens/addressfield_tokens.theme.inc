@@ -16,7 +16,7 @@ function theme_addressfield_formatter($vars) {
   }
   $handlers = $vars['handlers'];
   if (empty($handlers)) {
-    $handlers = ['address'];
+    $handlers = array('address');
   }
   
   $out = addressfield_generate($address, $handlers, array('mode' => 'render'));

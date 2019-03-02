@@ -160,7 +160,6 @@ function addressfield_tokens_tokens($type, $tokens, array $data = array(), array
         if (is_string($address)) {
           $address = unserialize($address);
         }
-        $address = $address['addressfield'];
         $address_tokens = token_find_with_prefix($value_tokens, $component['form_key']);
         foreach ($address_tokens as $token => $original) {
           if (isset($address[$token])) {
