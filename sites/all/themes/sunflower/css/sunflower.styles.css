@@ -2765,10 +2765,13 @@ input.webform-calendar {
     background-color: #666666; }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/www\/sites\/all\/themes\/sunflower\/sass\/components\/_webform\.scss}line{font-family:\00003336}}
 .node-type-webform .webform-client-form #duration_days, .node-type-webform .webform-client-form .insured_information {
-  display: inline-block;
+  /* display: inline-block;
   position: absolute;
   top: 10px;
-  right: 0px; }
+  right: 0px;  */
+  display: block;
+  text-align: right;
+}
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/chenc\/Sites\/github\/azfinancial\/www\/sites\/all\/themes\/sunflower\/sass\/components\/_webform\.scss}line{font-family:\00003341}}
   .node-type-webform .webform-client-form #duration_days #duration, .node-type-webform .webform-client-form .insured_information #duration {
     background: url('../images/duration_icon_24.png?1509140370') no-repeat 10px center #ca9f03;
