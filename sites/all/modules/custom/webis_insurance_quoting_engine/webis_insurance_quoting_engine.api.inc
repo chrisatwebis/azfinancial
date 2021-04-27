@@ -116,14 +116,19 @@ function webis_insurance_quoting_engine_get_tip_rate_adjustment($entity){
 function webis_insurance_quoting_engine_get_tip_rate_schedule($entity, $field_name){
   $field_tip_rate_schedule = field_get_items(INSURANCE_PRICE_ENTITY_NAME, $entity, $field_name);
   $rate =  $field_tip_rate_schedule[0]['value'];
-  $rate = unserialize($rate);  
+  $rate = unserialize($rate);
   unset($rate['rebuild']);
   unset($rate['import']);
   $new_rate = array();
-  foreach ($rate as $key => $val) {
+  foreach ($rate['tabledata'] as $row_key => $row) {
     //rebuild the arrary from 1 dimension array to 2 dimension array.
-    $key_arr = explode("_",$key);
-    $new_rate[$key_arr[1]][$key_arr[2]] = $val;
+    $row_key_arr = explode("_",$row_key);
+    $row_number = $row_key_arr[1];
+    foreach($row as $col_key => $col) {
+      $col_key_arr = explode("_",$col_key);
+      $col_number = $col_key_arr[1];
+      $new_rate[$row_number][$col_number] = $col;
+    }
   }
   return $new_rate;
 }
