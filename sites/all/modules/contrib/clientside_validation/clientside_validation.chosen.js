@@ -13,7 +13,7 @@
               $(this).trigger('click');
             })
             var chosen = $select.data('chosen');
-            if(!chosen.container.is(':hidden')) {
+            if (typeof chosen !== 'undefined' && !chosen.container.is(':hidden')) {
               options.ignore = fixIgnore(options.ignore, $select.attr('id'));
             }
           });

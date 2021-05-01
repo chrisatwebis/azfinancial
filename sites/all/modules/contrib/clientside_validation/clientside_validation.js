@@ -985,7 +985,7 @@
             // Only allow supported modifiers
             var modraw = reg.substr(delim + 1) || '';
             var mod = '';
-            if (mod !== '') {
+            if (modraw !== '') {
               for (var l = 0; l < 6; l++) {
                 if (modraw.indexOf('gimnsx'[l]) !== -1) {
                   mod += 'gimnsx'[l];
@@ -1476,7 +1476,12 @@
       if (!$(element).data("being_validated")) {
         $fields.data("being_validated", true);
         $fields.each(function() {
-          validator.element(this);
+          if (jQuery.data(this, 'clientside_validation_validated')) {
+            return;
+          } else {
+            jQuery.data(this, 'clientside_validation_validated', true);
+            validator.element(this);
+          }
         });
         $fields.data("being_validated", false);
       }

@@ -1,7 +1,18 @@
 
+if (typeof CKEDITOR === 'undefined') {
+  var CKEDITOR = null;
+}
+
 (function (Drupal, $, CKEDITOR) {
   Drupal.behaviors.cvCKEDITOR = {
     attach: function () {
+      // Some custom or contrib module might trick the code by using ckeditor
+      // in file name or ckeditor js might not be loaded properly.
+      // Do nothing if that's the case.
+      if (typeof CKEDITOR === 'undefined' || CKEDITOR === null) {
+        return;
+      }
+
       $(document).bind('clientsideValidationAlterOptions', function (e, options, form_id) {
         if (!Drupal.settings.clientsideValidation.forms[form_id].includeHidden) {
           // Do not validate hidden fields. Fix ckeditor instances.
@@ -76,5 +87,3 @@
     }
   };
 })(Drupal, jQuery, CKEDITOR);
-
-
