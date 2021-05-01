@@ -2,11 +2,16 @@
 
 /**
  * @file
- * Drupal hooks
- *
- * @author Stijn De Meyere
+ * Drupal hooks.
  */
 
+define('IFE_MESSAGE_DEFAULT', -1);
+define('IFE_MESSAGE_LEAVE', 0);
+define('IFE_MESSAGE_ALTERNATE', 1);
+define('IFE_MESSAGE_REMOVE', 2);
+define('IFE_POSITION_INLINE_MESSAGE_BEFORE', 0);
+define('IFE_POSITION_INLINE_MESSAGE_AFTER', 1);
+define('IFE_POSITION_INLINE_MESSAGE_CUSTOM', 2);
 
 /**
  * Implements hook_menu().
@@ -42,7 +47,7 @@ function ife_permission() {
   return array(
     'administer inline form errors' => array(
       'title' => t('administer inline form errors'),
-      'description' => t('TODO Add a description for \'administer inline form errors\''),
+      'description' => t('Administer global Inline Form Errors settings and individual form conversions'),
     ),
   );
 }
@@ -53,9 +58,9 @@ function ife_permission() {
 function ife_help($path, $arg) {
   switch ($path) {
     case 'admin/help#ife':
-      $output = '<p>' . t('IFE or Inline Form Errors allows you to place form submission error inline with the form elements. Three options are provided for setting your inline error behaviour. You can configure the default behaviour or override the behaviour on a per form basis. You can add as many forms as you like.') . '</p>';
+      $output = '<p>' . t('IFE or Inline Form Errors allows you to place form submission error inline with the form elements. Three options are provided for setting your inline error behavior. You can configure the default behavior or override the behavior on a per form basis. You can add as many forms as you like.') . '</p>';
 
-      $output .= '<p>' . t('IFE provides three behaviours for the configured forms') . '</p>';
+      $output .= '<p>' . t('IFE provides three behaviors for the configured forms') . '</p>';
 
       $output .= '<ul>';
       $output .= '<li>' . t('<strong>Leave the messages in place</strong>, this option will copy the error messages and place them inline. The original error messages set by Drupal will remain in place') . '</li>';
@@ -75,10 +80,10 @@ function ife_help($path, $arg) {
 /**
  * Menu loader function to fetch a form id.
  */
-function ife_form_id_load($form_id) {
-  $form_ids = ife_load_form_ids();
+function ife_form_id_load($form_id, $reset = FALSE) {
+  $form_ids = ife_load_form_ids($reset);
 
-  foreach((array) $form_ids as $form_id_pattern => $form_settings) {
+  foreach ($form_ids as $form_id_pattern => $form_settings) {
     if (ife_match_form_id($form_id, $form_id_pattern)) {
       return $form_settings;
     }
@@ -95,7 +100,7 @@ function ife_form_id_load($form_id) {
  * @param string $form_id_pattern
  *   A form ID pattern. Ex. webform_*.
  *
- * @return boolean
+ * @return bool
  *   TRUE if the pattern matches the form_id, FALSE otherwise.
  */
 function ife_match_form_id($form_id, $form_id_pattern) {
@@ -129,45 +134,33 @@ function ife_theme() {
 }
 
 /**
- *  Load all form ids from the data base
+ * Load all form ids from the data base.
  */
-function ife_load_form_ids() {
-  static $ife_form_ids;
+function ife_load_form_ids($reset = FALSE) {
+  ctools_include('export');
+  static $form_ids;
 
-  if ($ife_form_ids) {
-    $form_ids = $ife_form_ids;
-  }
-  else {
-    $cache = cache_get('ife_form_ids', 'cache');
-    if ($cache) {
-      $form_ids = $cache->data;
-    }
+  // Ensure that the schema cache is not stale when trying to load.
+  $schema = drupal_get_schema('ife');
+  if (!isset($schema['export']) || $reset) {
+    ctools_export_load_object_reset('ife');
+    drupal_get_schema('ife', TRUE);
   }
 
-  if (empty($form_ids)) {
-
-    $result = db_select('ife')
-      ->fields('ife', array('form_id', 'field_types', 'status', 'display'))
-      ->orderBy('form_id')
-      ->execute();
-
-    $form_ids = array();
-    foreach ($result as $row) {
-      $form_ids[$row->form_id] = $row;
-    }
-    cache_set('ife_form_ids', $form_ids, 'cache');
+  // Load form settings.
+  if (!isset($form_ids) || $reset) {
+    $form_ids = ctools_export_load_object('ife');
   }
 
-  $ife_form_ids = $form_ids;
-  return $ife_form_ids;
+  return $form_ids;
 }
 
 /**
- * Helper function to determine the display settings of a form
+ * Helper function to determine the display settings of a form.
  */
 function ife_form_id_display($form_id) {
-  if ($form_id->display == -1) {
-    $display = variable_get('ife_display', 1);
+  if ($form_id->display == IFE_MESSAGE_DEFAULT) {
+    $display = variable_get('ife_display', IFE_MESSAGE_ALTERNATE);
   }
   else {
     $display = $form_id->display;
@@ -179,21 +172,31 @@ function ife_form_id_display($form_id) {
 /**
  * Implements hook_form_alter().
  */
-function ife_form_alter(&$form, $form_state, $form_id) {
-  $ife_options = ife_form_id_load($form_id);
+function ife_form_alter(&$form, &$form_state, $form_id) {
+  $status = variable_get('ife_show_everywhere', 0);
+  if ($status && !in_array($form_id, _ife_blacklist())) {
+    $ife_options = new stdClass();
+    $ife_options->status = TRUE;
+    $ife_options->display = -1;
+  }
+  else {
+    $ife_options = ife_form_id_load($form_id);
+  }
+
   if ($ife_options && $ife_options->status) {
     $display = ife_form_id_display($ife_options);
 
     $form['#ife_display'] = $display;
-    $form['#validate'][] = 'ife_form_validator';
+    // Commerce checkout.
+    if (strpos($form_id, 'commerce_checkout_form') !== FALSE) {
+      $form['buttons']['continue']['#validate'][] = 'ife_form_validator';
+    }
+    else {
+      $form['#validate'][] = 'ife_form_validator';
+    }
   }
 
-  // webform support
-  if ($ife_options && substr($form_id, 0, 19  ) == 'webform_client_form') {
-    ife_webform_recurse($form['submitted']);
-  }
-
-  //print form_ids
+  // Print form_ids.
   if (variable_get('ife_show_form_ids', 0)) {
     $form['ife_form_id'] = array(
       '#markup' => t('Form ID: @form_id', array('@form_id' => $form_id)),
@@ -204,31 +207,38 @@ function ife_form_alter(&$form, $form_state, $form_id) {
 }
 
 /**
- * Ugly function to recurse through a webform to add our theme_wrapper
- * Curse you webform for doing it your way
+ * Return an array of core form ids that are not compatible with ife
  */
-function ife_webform_recurse(&$form) {
-  foreach (element_children($form) as $key) {
-    if (isset($form[$key], $form[$key]['#theme_wrappers']) && in_array('webform_element', $form[$key]['#theme_wrappers'])) {
-      $form[$key]['#theme_wrappers'][] = 'ife_form_element';
-    }
-    else {
-      ife_webform_recurse($form[$key]);
-    }
-  }
+function _ife_blacklist() {
+  return array(
+    'menu_overview_form',
+    'block_admin_display_form',
+    'book_admin_edit',
+    'filter_admin_order',
+    'profile_admin_overview',
+    'taxonomy_overview_terms',
+    'node_form', // attachment upload has tabledrag
+  );
 }
 
 /**
- * Function to set the general error mesage if set
+ * Custom form validation handler.
  */
-function ife_form_validator($form, &$form_state) {
+function ife_form_validator(&$form, &$form_state) {
   static $global_error_processed = FALSE;
 
+  // Commerce checkout.
+  if (strpos($form['#form_id'], 'commerce_checkout_form') !== FALSE && isset($form_state['storage']['errors'])) {
+    foreach ($form_state['storage']['errors'] as $name => $message) {
+      form_set_error($name, $message);
+    }
+    unset($form_state['storage']['messages']);
+  }
   $form_errors = form_get_errors();
   if (!empty($form_errors)) {
     ife_element_errors_set($form, $form['#ife_display']);
 
-    if ($form['#ife_display'] == 1 && !$global_error_processed) {
+    if ($form['#ife_display'] == IFE_MESSAGE_ALTERNATE && !$global_error_processed) {
       $message = filter_xss_admin(variable_get('ife_general_message', 'Please correct all highlighted errors and try again.'));
       drupal_set_message($message, 'error');
 
@@ -241,46 +251,32 @@ function ife_form_validator($form, &$form_state) {
   return TRUE;
 }
 
-
-function ife_errors($op = 'get', $id = NULL, $message = NULL) {
-  static $errors = array();
-
-  switch ($op) {
-    case 'get':
-      // Return given element error if id is provided.
-      if (isset($id) && isset($errors[$id])) {
-        return $errors[$id];
-      }
-      break;
-    case 'set';
-      $errors[$id] = $message;
-      break;
-  }
-}
-
-function ife_element_errors_set($element, $display) {
-  if (!isset($_SESSION['messages'])) {
+/**
+ * General function to check if a form element has an error.
+ * This function will then set the error on the element to be later used
+ * by our theming function theme_ife_form_element().
+ */
+function ife_element_errors_set(&$element, $display, $carry_down = FALSE) {
+  if (!isset($_SESSION['messages']['error'])) {
     return;
   }
 
-  // Recurse through all children.
-  foreach (element_children($element) as $key) {
-    if (isset($element[$key]) && $element[$key]) {
-      ife_element_errors_set($element[$key], $display);
-    }
+  // Check for errors and settings.
+  $errors = form_get_errors();
+
+  if (empty($element['#parents'])) {
+    return;
   }
 
-  // Check for errors and settings
-  $errors = form_get_errors();
   $element_id = implode('][', $element['#parents']);
   if (!empty($errors[$element_id])) {
     $error_message = $errors[$element_id];
 
-    // Get error id
+    // Get error id.
     $error_id = array_search($error_message, $_SESSION['messages']['error']);
 
     if ($error_id !== FALSE) {
-      if (isset($display) && $display != 0) {
+      if (isset($display) && $display != IFE_MESSAGE_LEAVE) {
         unset($_SESSION['messages']['error'][$error_id]);
         $_SESSION['messages']['error'] = array_values($_SESSION['messages']['error']);
       }
@@ -289,38 +285,49 @@ function ife_element_errors_set($element, $display) {
         unset($_SESSION['messages']['error']);
       }
 
-      // Set error message in session, so it can be used in our theming.
-      ife_errors('set', $element['#id'], $error_message);
+      // Add error message to the element.
+      $element['#ife_error'] = $error_message;
+
+      // Add the position for the inline error message.
+      $element['#ife_error_position'] = variable_get('ife_position_inline_message', IFE_POSITION_INLINE_MESSAGE_AFTER);
+
+      // Add in our theme wrapper on the fly if it's not custom placement.
+      if ($element['#ife_error_position'] != IFE_POSITION_INLINE_MESSAGE_CUSTOM) {
+        if (!isset($element['#theme_wrappers']) || !in_array('ife_form_element', $element['#theme_wrappers'])) {
+          $element['#theme_wrappers'][] = 'ife_form_element';
+        }
+      }
+
+      // Found a matching error, no need to continue.
+      return;
+    }
+  }
+
+  // Recurse through all children.
+  foreach (element_children($element) as $key) {
+    if (isset($element[$key]) && $element[$key]) {
+      ife_element_errors_set($element[$key], $display, $carry_down);
     }
   }
 }
 
 /**
- * Implements hook_commerce_checkout_pane_info_alter().
+ * Implements hook_schema_alter().
+ *
+ * Makes the ife table usable by ctools' export.inc.
  */
-function ife_commerce_checkout_pane_info_alter(&$panes) {
-  foreach ((array) $panes as $key => $pane) {
-    if (!isset($panes[$key]['callbacks'])) {
-      $panes[$key]['callbacks'] = array(
-          'checkout_form_validate' => 'ife_form_validator',
-      );
-    }
-  }
-}
-
-function ife_element_info_alter(&$types) {
-  // List of form elements which are childs or don't have a need form inline errors
-  $excluded_fields = array('radio', 'hidden', 'token', 'value');
-
-  foreach($types as $key => $value) {
-    // Element with input, aka FAPI field.
-    if (isset($value['#input']) && $value['#input'] && !in_array($value['#type'], $excluded_fields)) {
-      if (!isset($types[$key]['#theme_wrappers'])) {
-        $types[$key]['#theme_wrappers'] = array('ife_form_element');
-      }
-      else {
-        $types[$key]['#theme_wrappers'][] = 'ife_form_element';
-      }
-    }
-  }
+function ife_schema_alter(&$schema) {
+  $schema['ife']['export'] = array(
+    'key' => 'form_id',
+    'primary key' => 'form_id',
+    'identifier' => 'ife',
+    'default hook' => 'ife_default_settings',
+    'can disable' => FALSE,
+    'api' => array(
+      'owner' => 'ife',
+      'api' => 'ife',
+      'minimum_version' => 1,
+      'current_version' => 1,
+    ),
+  );
 }

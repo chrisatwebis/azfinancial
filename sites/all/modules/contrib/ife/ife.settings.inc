@@ -2,18 +2,18 @@
 
 /**
  * @file
- * Admin settings pages
- *
- * @author Stijn De Meyere
+ * Admin settings pages.
  */
 
 /**
- * IFE settings form
+ * IFE settings form.
  */
 function ife_settings_form($form, $form_state) {
   $form = array();
 
-  //general options
+  $form['#variable_edit_form'] = TRUE;
+
+  // General options.
   $form['general_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('General options'),
@@ -28,17 +28,37 @@ function ife_settings_form($form, $form_state) {
     '#default_value' => variable_get('ife_show_form_ids', 0),
   );
 
+  $form['general_settings']['ife_show_everywhere'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show everywhere'),
+    '#description' => t('This option will show inline form errors on all forms. You can ignore all settings in the form conversion fieldset.'),
+    '#default_value' => variable_get('ife_show_everywhere', 0)
+  );
+
   $form['general_settings']['ife_display'] = array(
     '#type' => 'select',
     '#title' => t('Default display settings'),
     '#description' => t('What do you want to do with the original messages block at the top of the page?'),
     '#options' => array(
-      t('Leave the messages in place (default Drupal behaviour)'),
+      t('Leave the messages in place (default Drupal behavior)'),
       t('Show an alternate error message (a general error message of your choice)'),
       t('Remove all messages (Show nothing)'),
     ),
-    '#default_value' => variable_get('ife_display', 1),
+    '#default_value' => variable_get('ife_display', IFE_MESSAGE_ALTERNATE),
   );
+
+  $form['general_settings']['ife_position_inline_message'] = array(
+    '#type' => 'radios',
+    '#title' => t('Inline error message position'),
+    '#description' => t('The position of the inline error message is relative to the element. Custom type imply that developer is responsible for the output of an error in the right place.'),
+    '#default_value' => variable_get('ife_position_inline_message', IFE_POSITION_INLINE_MESSAGE_AFTER),
+    '#options' => array(
+      IFE_POSITION_INLINE_MESSAGE_BEFORE => t('Before'),
+      IFE_POSITION_INLINE_MESSAGE_AFTER => t('After'),
+      IFE_POSITION_INLINE_MESSAGE_CUSTOM => t('Custom'),
+    ),
+  );
+
   $form['general_settings']['ife_general_message'] = array(
     '#type' => 'textarea',
     '#title' => t('General error message'),
@@ -47,8 +67,7 @@ function ife_settings_form($form, $form_state) {
     '#required' => TRUE,
   );
 
-
-  //the form id's
+  // The form_id's.
   $form['form_ids'] = array(
     '#type' => 'fieldset',
     '#title' => t('Form conversion'),
@@ -58,7 +77,7 @@ function ife_settings_form($form, $form_state) {
     '#theme' => 'ife_settings_form_ids',
   );
 
-  $form_ids = ife_load_form_ids();
+  $form_ids = ife_load_form_ids(TRUE);
   foreach ($form_ids as $form_id) {
     $form['form_ids'][$form_id->form_id] = array();
     $form['form_ids'][$form_id->form_id]['form_id'] = array('#markup' => $form_id->form_id);
@@ -70,15 +89,14 @@ function ife_settings_form($form, $form_state) {
     );
     $form['form_ids'][$form_id->form_id]['display'] = array(
       '#type' => 'select',
-      '#options' => array(
-        '-1' => t('<default>'), t('Leave the messages in place'), t('Show an alternate error message'), t('Remove all messages'),
-      ),
+      '#options' => ife_message_display_options(),
       '#default_value' => $form_id->display,
     );
   }
 
   $form['form_ids']['new_form_id']['form_id'] = array(
     '#type' => 'textfield',
+    '#description' => t('The "*" character is a wildcard. Ex. webform_*.'),
     '#size' => 20,
   );
   $form['form_ids']['new_form_id']['status'] = array(
@@ -89,51 +107,52 @@ function ife_settings_form($form, $form_state) {
   $form['form_ids']['new_form_id']['field_types'] = array('#value' => t('All fields will be converted'));
   $form['form_ids']['new_form_id']['display'] = array(
     '#type' => 'select',
-    '#options' => array(
-      '-1' => t('<default>'), t('Leave the messages in place'), t('Show an alternate error messages'), t('Remove all message'),
-    ),
-    '#default_value' => -1,
+    '#options' => ife_message_display_options(),
+    '#default_value' => IFE_MESSAGE_DEFAULT,
   );
 
-  //submit button
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Save configuration'),
-  );
+  $form['#submit'][] = 'ife_settings_form_submit';
 
-  return $form;
+  return system_settings_form($form);
 }
 
 /**
- * IFE settings form validations
+ * Returns a list of display option for error messages.
+ */
+function ife_message_display_options() {
+  return array(
+    IFE_MESSAGE_DEFAULT => t('Default'),
+    IFE_MESSAGE_LEAVE => t('Leave the messages in place'),
+    IFE_MESSAGE_ALTERNATE => t('Show an alternate error messages'),
+    IFE_MESSAGE_REMOVE => t('Remove all message'),
+  );
+}
+
+/**
+ * IFE settings form validations.
  */
 function ife_settings_form_validate($form, &$form_state) {
   $values = $form_state['values'];
   $new_form_id = trim($values['form_ids']['new_form_id']['form_id']);
 
-  //check if form_id already exists
+  // Check if form_id already exists.
   if ($new_form_id && ife_form_id_load($new_form_id)) {
     form_set_error('form_ids][new_form_id][form_id', t('The form %form_id has already been added.', array('%form_id' => $new_form_id)));
   }
 
-  //check if the form_id is valid
+  // Check if the form_id is valid.
   if (!preg_match('/^[a-z0-9_*]*$/', $new_form_id)) {
     form_set_error('form_ids][new_form_id][form_id', t('The form_id %form_id is invalid.', array('%form_id' => $new_form_id)));
   }
 }
 
 /**
- * IFE settings form submit
+ * IFE settings form submit.
  */
 function ife_settings_form_submit($form, &$form_state) {
   $values = $form_state['values'];
 
-  //set general options
-  variable_set('ife_show_form_ids', $values['ife_show_form_ids']);
-  variable_set('ife_display', $values['ife_display']);
-  variable_set('ife_general_message', $values['ife_general_message']);
-
-  //write form_ids to the database
+  // Write form_ids to the database.
   $form_ids = $values['form_ids'];
   array_pop($form_ids);
 
@@ -144,7 +163,7 @@ function ife_settings_form_submit($form, &$form_state) {
     drupal_write_record('ife', $object, array('form_id'));
   }
 
-  //create new form_id
+  // Create new form_id.
   if ($values['form_ids']['new_form_id']['form_id']) {
     $values['form_ids']['new_form_id']['form_id'] = trim($values['form_ids']['new_form_id']['form_id']);
     drupal_write_record('ife', $values['form_ids']['new_form_id']);
@@ -152,11 +171,11 @@ function ife_settings_form_submit($form, &$form_state) {
   }
 
   drupal_set_message(t('The settings have been saved'));
-  cache_clear_all('ife_form_ids', 'cache');
+  ife_load_form_ids(TRUE);
 }
 
 /**
- * Confirm delete form for IFE form_ids
+ * Confirm delete form for IFE form_ids.
  */
 function ife_form_id_delete_form($form, $form_state, $form_id) {
   $form = array();
@@ -174,17 +193,17 @@ function ife_form_id_delete_form($form, $form_state, $form_id) {
 }
 
 /**
- * Submit for confirm delete form for IFE form_ids
+ * Submit for confirm delete form for IFE form_ids.
  */
 function ife_form_id_delete_form_submit($form, &$form_state) {
   $form_id = $form_state['values']['fid'];
-  // TODO Please review the conversion of this statement to the D7 database API syntax.
+  // @todo Please review the conversion of this statement to the D7 database API syntax.
   /* db_query("DELETE FROM {ife} WHERE form_id = '%s'", $form_id) */
   db_delete('ife')
-  ->condition('form_id', $form_id)
-  ->execute();
+    ->condition('form_id', $form_id)
+    ->execute();
   drupal_set_message(t('The form %form_id has been deleted.', array('%form_id' => $form_id)));
 
-  cache_clear_all('ife_form_ids', 'cache');
+  ife_load_form_ids(TRUE);
   drupal_goto('admin/config/user-interface/ife');
 }

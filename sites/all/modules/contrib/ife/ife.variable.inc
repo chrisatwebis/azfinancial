@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Set variables for translation.
+ */
+
+/**
  * Implements hook_variable_info().
  */
 function ife_variable_info($options) {
